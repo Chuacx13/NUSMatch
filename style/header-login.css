@@ -31,11 +31,12 @@
 }
 
 .middle-header:hover {
-    color:coral;
+    color:rgb(220, 125, 24);
 }
 
 .project-name {
     font-size: 60px;
+    font-weight: 900;
     margin-right: 20px;
 }
 
