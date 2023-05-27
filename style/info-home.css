@@ -4,7 +4,7 @@
     justify-content: space-between;
     width: 700px;
     position: fixed;
-    bottom: 100px;
+    bottom: 80px;
     left: 80px;
     z-index: 100;
 }
@@ -13,11 +13,11 @@
     display: flex; 
     flex-direction: row;
     color: white;
-    font-size: 80px;
-    font-weight: 900;
 }
 
-.project-name { 
+.project-name {
+    font-size: 80px;
+    font-weight: 900;
     margin-right: 30px;
 }
 
@@ -37,10 +37,12 @@
     padding: 20px 40px;
     cursor: pointer;
     margin-top: 20px;
-    transition: box-shadow 0.15s ;
+    transition: box-shadow 0.15s, underline 0.15s ;
+    text-align: center;
 }
 
 .register-form-button:hover {
+    text-decoration: underline;
     box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.2);
 }
 

@@ -55,6 +55,7 @@
     padding: 10px 20px;
     background-color: transparent;
     transition: background-color 0.15s, color 0.15s;
+    text-align: center;
 }
 
 .login-form-button:hover {
