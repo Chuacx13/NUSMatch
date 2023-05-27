@@ -25,19 +25,20 @@
             </header>
             <div class="overlay-background"></div>
             <div class="center-form">
-                <form class="register-form">
+                <div class="register-form">
                     <h2> Join Now! </h2>
+                    <div class="register-message js-message"></div>
                     <label for="username">Username:</label>
-                    <input type="text" name="first-name" required class="input-field">
+                    <input type="text" name="first-name" required class="input-field js-username-input">
                     <label for="email">Email:</label>
-                    <input type="email" name="email" required class="input-field">
+                    <input type="email" name="email" required class="input-field js-email-input">
                     <label for="password">Password:</label>
-                    <input type="password" name="password" required class="input-field">
+                    <input type="password" name="password" required class="input-field js-password-input">
                     <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required class="input-field">
-                    <button type="submit" class="register-button">Join</button>
+                    <input type="password" id="confirm-password" name="confirm-password" required class="input-field js-confirm-password-input">
+                    <button type="submit" class="register-button js-register-button">Join</button>
                     <p class="additional-instructions">Already have an account? <span class="login-link js-login-link">Get Connected Now!</span></p>
-                  </form>
+                </div>
             </div>
         </div>
         <script src="script/register.js"></script>

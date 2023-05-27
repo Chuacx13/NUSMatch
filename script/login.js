@@ -12,7 +12,9 @@ const initialUserList = [
     password: 'testpassword' }
 ];
 
-localStorage.setItem('userList', JSON.stringify(initialUserList));
+if (JSON.parse(localStorage.getItem('userList')).length === 0) {
+    localStorage.setItem('userList', JSON.stringify(initialUserList));
+}
 
 const userList = JSON.parse(localStorage.getItem('userList'));
 
@@ -28,12 +30,11 @@ function checkDetails(username, password) {
 function loginToAccount() {
     const inputUsername = document.querySelector('.js-username-input').value;
     const inputPassword = document.querySelector('.js-password-input').value;
-    if (inputUsername.trim() === '' || inputPassword.trim() === '') {
-        return;
-    }
-    if (checkDetails(inputUsername, inputPassword)) {
-        document.querySelector('.js-message').innerHTML = 'Success';
-    } else {
-        document.querySelector('.js-message').innerHTML = 'Failed';
+    if (!(inputUsername === '' || inputPassword === '')) {
+        if (checkDetails(inputUsername, inputPassword)) {
+            document.querySelector('.js-message').innerHTML = 'Login Successful';
+        } else {
+            document.querySelector('.js-message').innerHTML = 'Invalid username and/or password.';
+        }
     }
 }

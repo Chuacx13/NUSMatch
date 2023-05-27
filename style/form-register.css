@@ -75,3 +75,11 @@ label {
     text-decoration: underline;
     color: rgb(220, 125, 24);
 }
+
+.register-message {
+  color: red;
+  font-size: 20px;
+  font-weight: 900;;
+  margin-bottom: 20px;
+  text-align: center;
+}
