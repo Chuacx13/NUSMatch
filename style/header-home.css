@@ -41,11 +41,11 @@
 }
 
 .home-button {
-    transition: text-decoration 0.15s;
+    transition: color 0.15s;
 }
 
 .home-button:hover {
-    text-decoration: underline;
+    color:coral;
 }
 
 .login-form-button {
