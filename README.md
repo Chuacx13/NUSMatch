@@ -1,9 +1,11 @@
 # NUSMATCH
 NUS Orbital 2023
 
+
 # 1.	Proposed Level of Achievement
 
 Artemis
+
 
 # 2.	Motivation
 
@@ -58,92 +60,91 @@ Purpose:
 ## 5.2.	Profile (Not Done)
 
 Users would be able to update their Profile with information such as:
-Name
-Current year of study
-Degree 
-Current Modules
-Academic goals 
-Status 
-Active (Looking for new groups)
-Snooze (Not looking for new groups at the moment)
-Current Project and/or Study Groups
-Past Project and/or Study Groups(Optional to show)
-GPA (Optional to show)
-Personal Interest
-Ratings (Peer Review)
+* Name
+* Current year of study
+* Degree 
+* Current Modules
+* Academic goals 
+* Status 
+  * Active (Looking for new groups)
+  * Snooze (Not looking for new groups at the moment)
+* Current Project and/or Study Groups
+* Past Project and/or Study Groups(Optional to show)
+* GPA (Optional to show)
+* Personal Interest
+* Ratings (Peer Review)
 
 Purpose:
-To indicate personal information which are of interest to other users who are looking for project or study mates
+* To indicate personal information which are of interest to other users who are looking for project or study mates
 
 ## 5.3.	Groups (Not Done)
 
 Users can create Groups and will be appointed as the admin. As the admin, they are able to determine group settings such as:
-Group Status	
-Open	
-Private
-Group Name 
-Module Description
-Indicates some modules that the group focuses on (eg. BT4508)
-Group Description
-Indicate group’s dynamic (eg. Chill Study Group)
+* Group Status	
+  * Open	
+  * Private
+* Group Name 
+* Module Description
+  * Indicates some modules that the group focuses on (eg. BT4508)
+* Group Description
+  * Indicate group’s dynamic (eg. Chill Study Group)
 
 Additionally, admins are able to send invitations to other students. Students can also request to join an existing project/study group that is open.
 
 Purpose:
-To allow users to create groups to invite others that share common academic goals/modules
-To allow users to join groups that fit their academic goals 
+* To allow users to create groups to invite others that share common academic goals/modules
+* To allow users to join groups that fit their academic goals 
 
 ## 5.4.	Search Function (Not Done)
 
 Users can use the Search Function to find other users and groups that match to the keywords used. There will be tabs to swap between a person or a group that categorizes the results respectively. Users can search for either a name or a module.
 
 Under the ‘Users’ tab, the system would recommend a list of students that matches with the keywords searched. The words used in the search bar would be matched to:
-Other users’ Names 
-Other users’ Current Modules 
+* Other users’ Names 
+* Other users’ Current Modules 
 
 Moreover, users can swap to the ‘Group’ tab where the system would recommend a list of groups that matches with the keywords searched. The words used in the search bar would be matched to:
-Other groups’ Names
-Other groups’ Module Description
-Other groups’ Group Description
+* Other groups’ Names
+* Other groups’ Module Description
+* Other groups’ Group Description
 
 Purpose: 
-To allow users to find other users and groups that fit their criteria of interest
+* To allow users to find other users and groups that fit their criteria of interest
 
 ## 5.5.	Chat Function (Not Done)
 
 A Chat Function would be implemented for multiple uses within the website. 
 
 Purpose:
-To allow users to reach out and connect with other users 
-To allow users within groups to communicate with one another
+* To allow users to reach out and connect with other users 
+* To allow users within groups to communicate with one another
 
 ## 5.6.	Algorithm (Not Done)
 
 Moreover, based on the user's current groups as well as the user's search history, the website makes use of an Algorithm to recommend new users and groups to connect with.
 
 Purpose:
-To connect users with new people outside of their usual social circle 
-To allow users to develop soft skills such as communication skills and teamwork which will benefit them in the long run as they enter the workforce
+* To connect users with new people outside of their usual social circle 
+* To allow users to develop soft skills such as communication skills and teamwork which will benefit them in the long run as they enter the workforce
 
 ## 5.7.	Scheduling Interface (Not Done)
 
 A Scheduling Interface (Calendar) that allows groups to plan their meetups and set deadlines. Reminders can also be sent out to the user’s email to remind them of upcoming deadlines and meetups. 
 
 Purpose:
-To allow easy scheduling of meet-ups for groups 
-To ensure that users in the same group are kept on task
-
+* To allow easy scheduling of meet-ups for groups 
+* To ensure that users in the same group are kept on task
 
 ## 5.8. Database (Not Done)
 
 A Database will be created using mySQL to store:
-Users’ login details 
-User’s profile information
-Groups’ information
+* Users’ login details 
+* User’s profile information
+* Groups’ information
 
 Purpose: 
-To allow the search function to look up our database and find users/groups of their interest
-To support our authentication function by checking that input username/email and input password matches the ones in our database
+* To allow the search function to look up our database and find users/groups of their interest
+* To support our authentication function by checking that input username/email and input password matches the ones in our database
  
  
 # 6.	Timeline
@@ -218,53 +219,20 @@ Algorithm
 Scheduling Interface
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 # 7.	Tech Stack
 
-MySQL 
-Create Database
-Python/Pytorch/TensorFlow/Flask 
-Handle/Process database information
-Create algorithm feature
-HTML/CSS
-Web application frontend development
-JavaScript/React 
-Web application frontend development
+* MySQL 
+  * Create Database
+* Python/Pytorch/TensorFlow/Flask 
+  * Handle/Process database information
+  * Create algorithm feature
+* HTML/CSS
+  * Web application frontend development
+* JavaScript/React 
+  * Web application frontend development
 
 Potential programming language to be used
-Java
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+* Java
 
 
 # 9. Proof-of-Concept
