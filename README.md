@@ -25,19 +25,19 @@ Aim 2: Allow people who already have existing groups to expand their social circ
 # 4.	User Stories
 
 * As a student who does not stay on campus, I want to be able to connect with other students to form project and study groups.
- * Reason: To work with people with similar academic goals as me to achieve better results
+  * Reason: To work with people with similar academic goals as me to achieve better results
 
 * As a student who already has existing groups, I want to find new people to work with, to develop my soft skills and experience working with different kinds of people. 
- * Reason: To hone my soft skills and better prepare myself for the real-world workplace environment 
+  * Reason: To hone my soft skills and better prepare myself for the real-world workplace environment 
 
 * As a student, I want to forge lasting relationships with people with the same goals as me, which will be beneficial in the long run.
- * Reason: To build a supportive community with people who share the same goals as me 
+  * Reason: To build a supportive community with people who share the same goals as me 
 
 * As a student, I want to meet and learn from others taking similar courses and modules as me. 
- * Reason: To learn from others and achieve better understanding and results in my courses and modules
+  * Reason: To learn from others and achieve better understanding and results in my courses and modules
 
 * As a student, I want to help other students who are struggling with their work. 
- * Reason: To render support to struggling students and reaffirm my current knowledge 
+  * Reason: To render support to struggling students and reaffirm my current knowledge 
 
 
 # 5.	Features
