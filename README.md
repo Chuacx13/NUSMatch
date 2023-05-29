@@ -168,7 +168,7 @@ Purpose:
 |    |                 |           | Search Function                                                                     |
 | 3  | 1st July        | Ben       | Create a scheduling interface                                                      |
 |    |                 | CX        | Create a chat function                                                            |
-|    | 10th July       | Ben       | Creation of an algorithm to recommend new users and groups to connect with          |
+|    | 10th July       | Ben CX    | Creation of an algorithm to recommend new users and groups to connect with          |
 |    | 16th July       |           | Second Prototype (With enhanced functions)                                          |
 |    |                 |           | Chat Function                                                                      |
 |    |                 |           | Algorithm                                                                          |
