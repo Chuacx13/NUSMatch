@@ -155,10 +155,10 @@ Purpose:
 |    | 29th May, 2pm   | Ben CX    | Milestone 1 (Complete user authentication with an integrated frontend and backend) |
 | 2  | 1st June - 15th | CX        | Creating a profile for each user and their personal information                     |
 |    | June            | Ben       | Create groups function. Users will be able to join these groups                     |
-|    | 15th June       |           | First Prototype (With essential functions)                                         |
-|    |                 |           | Authentication Interface                                                           |
-|    |                 |           | Profile                                                                            |
-|    |                 |           | Groups                                                                             |
+|    | 15th June       |           | First Prototype (With essential functions)
+* Authentication Interface
+* Profile  
+* Groups                                                                   
 | 3  | 1st July        | Ben       | Create a scheduling interface                                                      |
 |    |                 | CX        | Create a chat function                                                            |
 |    | 10th July       | Ben       | Creation of an algorithm to recommend new users and groups to connect with          |
