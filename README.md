@@ -149,20 +149,10 @@ Purpose:
  
 # 6.	Timeline
 
-MS
-Deadline/Date
-In-Charge
-Description of Task
+| MS | Deadline/Date | In-Charge | Description of Task |
 
-1
-20th May
-Ben 
-Cx
-Familiarize with tech stack
-29th May, 2pm
-Ben
-CX
-Milestone 1(Complete user authentication with an integrated frontend and backend)
+| 1 | 20th May | Ben Cx | Familiarize with tech stack |
+| 1 | 29th May, 2pm | Ben CX | Milestone 1 * Complete user authentication with an integrated frontend and backend |
 2
 1st June -  15th June 
 CX
