@@ -149,64 +149,31 @@ Purpose:
  
 # 6.	Timeline
 
-| MS | Deadline/Date | In-Charge | Description of Task |
+| MS | Deadline/Date   | In-Charge | Description of Task                                                                |
+|----|-----------------|-----------|------------------------------------------------------------------------------------|
+| 1  | 20th May        | Ben       | Cx                                                                                 |
+|    |                 |           | Familiarize with tech stack                                                        |
+|    | 29th May, 2pm   | Ben       | CX                                                                                 |
+|    |                 |           | Milestone 1 (Complete user authentication with an integrated frontend and backend) |
+| 2  | 1st June - 15th | CX        | Creating a profile for each user and their personal information                     |
+|    | June            | Ben       | Create groups function. Users will be able to join these groups                     |
+|    | 15th June       |           | First Prototype (With essential functions)                                         |
+|    |                 |           | Authentication Interface                                                           |
+|    |                 |           | Profile                                                                            |
+|    |                 |           | Groups                                                                             |
+| 3  | 1st July        | Ben       | Create a scheduling interface                                                      |
+|    |                 | CX        | Create of chat function                                                            |
+|    | 10th July       | Ben       | Creation of an algorithm to recommend new users and groups to connect with          |
+|    | 16th July       |           | Second Prototype (With enhanced functions)                                          |
+|    |                 |           | Chat Function                                                                      |
+|    |                 |           | Algorithm                                                                          |
+|    |                 |           | Scheduling Interface                                                               |
+|    | 20th July       | Ben CX    | Testing of Second Prototype                                                        |
+|    | 24th July, 2pm  | Ben CX    | Evaluation Milestone 3: Final Website                                              |
+|    |                 |           | Chat Function                                                                      |
+|    |                 |           | Algorithm                                                                          |
+|    |                 |           | Scheduling Interface                                                               |
 
-| 1 | 20th May | Ben Cx | Familiarize with tech stack |
-| 1 | 29th May, 2pm | Ben CX | Milestone 1 * Complete user authentication with an integrated frontend and backend |
-2
-1st June -  15th June 
-CX
-Creating a profile for each user and their personal information 
-Ben
-Create groups function. Users will be able to join these groups
-15th June
--
-First Prototype (With essential functions)
-Authentication Interface
-Profile
-Groups
-20th June
-Ben/CX
-Create search function
-23th June
-Ben
-CX
-Testing and debugging
-26th June, 2pm
-Ben
-CX
-Evaluation Milestone 2: First Working Prototype
-Authentication interface
-User Profiles
-Creation of Groups
-Search Function
-3
-1st July 
-Ben
-Create a scheduling interface
-CX
-Create of chat function
-10th July
-Ben
-CX
-Creation of an algorithm to recommend new users and groups to connect with.
-16th July
--
-Second Prototype (With enhanced functions)
-Chat Function
-Algorithm
-Scheduling Interface
-20th July
-Ben
-CX
-Testing of Second Prototype
-24th July, 2pm
-Ben
-CX
-Evaluation Milestone 3: Final Website
-Chat Function
-Algorithm
-Scheduling Interface
 
 
 # 7.	Tech Stack
