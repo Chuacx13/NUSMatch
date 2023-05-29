@@ -156,16 +156,16 @@ Purpose:
 | 2  | 1st June - 15th | CX        | Creating a profile for each user and their personal information                     |
 |    | June            | Ben       | Create groups function. Users will be able to join these groups                     |
 |    | 15th June       |           | First Prototype (With essential functions)                                         |
-|    |                 |           | Authentication Interface                                                           |
-|    |                 |           | Profile                                                                            |
-|    |                 |           | Groups                                                                             | 
+|    |                 |           | * Authentication Interface                                                           |
+|    |                 |           | * Profile                                                                            |
+|    |                 |           | * Groups                                                                             | 
 |    | 20th June       | Ben CX    | Create Search Function                                                             |
 |    | 23rd June       | Ben CX    | Testing and debugging                                                              |
-|    | 26th June, 2pm  | Ben CX    | Evaluation Milestone 2: First Working Prototype
-Authentication interface
-User Profiles
-Creation of Groups
-Search Function
+|    | 26th June, 2pm  | Ben CX    | Evaluation Milestone 2: First Working Prototype                                    |
+|    |                 |           | * Authentication Interface                                                           |
+|    |                 |           | * Profile                                                                          |
+|    |                 |           | * Groups                                                                            | 
+|    |                 |           | * Search Function                                                                           | 
 |
 | 3  | 1st July        | Ben       | Create a scheduling interface                                                      |
 |    |                 | CX        | Create a chat function                                                            |
