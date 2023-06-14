@@ -1,4 +1,7 @@
 .home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -6,7 +9,7 @@
     width: 100%;
 }
 
-.info {
+.info-unauthenticated {
     color:white;
     display: flex;
     flex-direction: column;
@@ -18,13 +21,51 @@
     z-index: 2;
 }
 
+.info-authenticated {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    color: black;
+    background-color: rgba(255, 251, 251, 0.5);
+    padding: 50px;
+    z-index: 2;
+    border-radius: 14px;
+}
+
+.info-authenticated p {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 900;
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchbar {
+    position: relative;
+    width: 400px;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 4px;
+    border-color: black;
+    padding: 10px;
+    z-index: 2;
+}
+
 .home h1 {
     font-size: 100px;
     font-weight: 700;
     margin: 0px;
 }
 
-.home p {
+.info-unauthenticated p {
     font-size: 40px;
     margin-bottom: 30px;
     margin-top: 0px;
@@ -55,3 +96,4 @@
 .registerButton:active {
     opacity: 0.7;
 }
+
