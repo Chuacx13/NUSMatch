@@ -25,7 +25,7 @@ function Login() {
   
   const login = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/getUsers');
+      const response = await axios.get('http://localhost:3001/auth/users');
       const isEmailVerified = response.data
                                 .filter((user) => user.email === email + '@u.nus.edu' )
                                 .map((user) => user.emailVerified);

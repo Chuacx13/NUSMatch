@@ -65,7 +65,7 @@ export const AccountIcon = () => {
     };
 
     return (
-        <Link to='' ref={menuRef}>
+        <Link to='#' ref={menuRef}>
             <IconButton aria-label='Account' sx={iconButtonStyles} onClick={openMenu}> 
                 <AccountCircleIcon sx={individualButtonStyles}/> 
                 <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>

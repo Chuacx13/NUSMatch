@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export const UnauthenticatedInfo = () => {
+export const UnauthInfo = () => {
   return (
     <div className='info-unauthenticated'>
         <h1> NUSMatch </h1>

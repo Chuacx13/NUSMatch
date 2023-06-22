@@ -29,7 +29,7 @@ function App() {
   const [user] = useAuthState(auth);
   
   return (
-    <div> 
+    <> 
       {isLoading ? (
         <div id='loading-overlay'>
           <div id='spinner'></div>
@@ -54,7 +54,7 @@ function App() {
         </Routes>
       </Router>
       }
-    </div>
+    </>
   );
 };
 
