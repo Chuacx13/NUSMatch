@@ -46,13 +46,10 @@
     border-radius: 100px;
 }
 
-.profilePage a {
+.editProfileButton {
     position: absolute; 
     top: 0px;
     right: 80px;
-}
-
-.editProfileButton {
     padding: 10px 12px;
     font-size: 20px;
     border-radius: 4px;

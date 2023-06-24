@@ -2,11 +2,12 @@ import React from 'react';
 import axios from 'axios';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/editgroup.css';
 import '../styles/creategroup.css';
 
-function CreateGroup() {
+function EditGroup() {
 
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
@@ -21,6 +22,22 @@ function CreateGroup() {
   });
   const finalGroup = useRef({});
   const [createGroupStatus, setCreateGroupStatus] = useState('');
+
+  useEffect(() => {
+    const groupId = localStorage.getItem('resultId');
+
+      const fetchGroupDetails = async() => {
+          try {
+              const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
+              const updatedMembers = response.data['members'].filter((member) => member !== response.data.leader);
+              setGroup({...response.data, ['members']: updatedMembers});
+          } catch (err) {
+              console.error(err);
+          }
+      }
+
+    fetchGroupDetails();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +64,7 @@ function CreateGroup() {
     setGroup({ ...group, [name]: currentValue });
   }
 
-  async function isUserInDatabase(group) {
+  async function areMembersInDatabase(group) {
     const response = await axios.get('http://localhost:3001/auth/emails');
     for (const member of group.members) {
       if (response.data.includes(member)) {
@@ -59,12 +76,20 @@ function CreateGroup() {
     return true;
   };
 
-  const saveGroup = async(e) => {
+  async function isLeader() {
+    const groupId = localStorage.getItem('resultId');
+    const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
+    return userEmail === response.data.leader;
+  };
+
+  const updateGroup = async(e) => {
     e.preventDefault();
     try {
-      const isExistingUser = await isUserInDatabase(group);
-      if (isExistingUser) {
-        //Add self into list of users
+      const isExistingUser = await areMembersInDatabase(group);
+      const isGroupLeader = await isLeader();
+      const groupId = localStorage.getItem('resultId');
+      if (isExistingUser && isGroupLeader) {
+        //Add self to list of members
         const updatedMembers = [...group.members];
         updatedMembers.push(userEmail);
         //Capitalise all modules added
@@ -72,12 +97,12 @@ function CreateGroup() {
         updatedModules = updatedModules.map((module) => module.toUpperCase());
         //Final edits to the 'group' to be saved
         finalGroup.current.value = { ...group, members: updatedMembers, modules: updatedModules };
-        //Create group in mongodb
-        const response = await axios.post('http://localhost:3001/group/create', finalGroup.current.value );
+        //Update group properties in mongodb
+        const response = await axios.put(`http://localhost:3001/group/edit/${groupId}`, finalGroup.current.value);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {
-          navigate('/group');
+          navigate('/groupdetails');
         } 
       } else {
         setCreateGroupStatus('Ensure that your friends have signed up before adding them :)');
@@ -86,12 +111,19 @@ function CreateGroup() {
       console.error(err);
     }
   };
+  
+  const backtoGroupDetails = () => {
+    navigate('/groupdetails');
+  };
 
   return (
     <div className='createGroupPage'>
-      <form className='createGroupForm' onSubmit={saveGroup}>
-        <h1 className='groupFormHeader'> Create Your Very Own Group! </h1>
-        {createGroupStatus && <p className='createGroupStatus'>{createGroupStatus}</p>}
+      <form className='createGroupForm' onSubmit={updateGroup}>
+        <div className='profileHeaderContainer'> 
+          <h1 className='groupFormHeader_2'> Edit &lt; {group.groupName} &gt; </h1>
+          {createGroupStatus && <p className='createGroupStatus'>{createGroupStatus}</p>}
+          <button type='button' className='editGroupBackButton' onClick={backtoGroupDetails}> Back </button>
+        </div>
 
         <label className='groupFormLabel' htmlFor='groupName'>Group Name</label>
         <input className='editGroupInputs' type='text' id='groupName' name='groupName' value={group.groupName} onChange={handleChange} required />
@@ -127,7 +159,7 @@ function CreateGroup() {
         </button>
         
         <label className='groupFormLabel' htmlFor='members'>Add your friends!</label>
-        {group.members.map((member, index) => (
+        {group.members.filter((member) => member !== group.leader).map((member, index) => (
           <div key={index}>
             <input
               type='text'
@@ -145,10 +177,10 @@ function CreateGroup() {
         <button className='modifyListButton' type="button" name='members' onClick={handleAdd}>
           Add Member
         </button>
-        <button className='saveButton' onClick={saveGroup}>Create</button>
+        <button className='saveButton' onClick={updateGroup}>Save</button>
       </form>
     </div>
   )
 }
 
-export default CreateGroup
+export default EditGroup

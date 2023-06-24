@@ -1,0 +1,31 @@
+.groupPage {
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    background-color: white;
+    position: relative;
+    top: 200px;
+    z-index: 2;
+    width: 100%;
+}
+
+.individualGroupContainer {
+    flex-basis: 100%;
+    margin: 30px;
+    padding: 50px;
+    background-color: rgb(160, 157, 157, 0.8);
+    width: 400px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.individualGroupContainer:hover {
+    opacity: 0.8;
+}
+
+.modulesDescription { 
+    font-size: 20px;
+}

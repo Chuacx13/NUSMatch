@@ -10,8 +10,20 @@ admin.initializeApp({
 userRouter.get('/users', async (req, res) => {
   try {
     const listUsersResult = await admin.auth().listUsers();
-    const user = listUsersResult.users;
-    res.json(user);
+    const userList = listUsersResult.users;
+    res.json(userList);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch users' });
+  }
+});
+
+userRouter.get('/emails', async (req, res) => {
+  try {
+    const listUsersResult = await admin.auth().listUsers();
+    const userList = listUsersResult.users;
+    const userEmails = []
+    userList.forEach((user) => userEmails.push(user.email));
+    res.json(userEmails);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch users' });
   }

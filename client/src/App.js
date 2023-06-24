@@ -1,32 +1,35 @@
 import './App.css';
 import Navbar from './components/navbar';
+import ScrollToTop from './components/scrolltotop';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Group from './pages/Group';
 import CreateGroup from './pages/CreateGroup';
+import GroupDetails from './pages/GroupDetails';
+import EditGroup from './pages/EditGroup';
 import Profile from './pages/Profile';
+import ProfileDetails from './pages/ProfileDetails';
 import EditProfile from './pages/EditProfile';
 import SearchResults from './pages/SearchResults';
 import Chat from './pages/Chat';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
-import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function App() {
 
   const [isLoading, setIsLoading] = useState(true);
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false); 
-    }, 2000); 
-  }, []);
-
-  const [user] = useAuthState(auth);
+    if (!loading) {
+      setIsLoading(false);
+    }
+  }, [loading]);
   
   return (
     <> 
@@ -37,6 +40,7 @@ function App() {
       ) : 
       <Router>
         <Navbar />
+        <ScrollToTop /> 
         <Routes> 
           <Route path='/' exact element={<Home/>}/>
           <Route element={<PublicRoutes />}>
@@ -46,8 +50,11 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/editprofile' element={<EditProfile/>}/>
+            <Route path='/profiledetails' element={<ProfileDetails/>}/>
             <Route path='/group' element={<Group/>}/>
             <Route path='/creategroup' element={<CreateGroup/>}/>
+            <Route path='/groupdetails' element={<GroupDetails/>}/>
+            <Route path='/editgroup' element={<EditGroup/>}/>
             <Route path='/searchresults' element={<SearchResults/>}/>
             <Route path='/chat' element={<Chat/>}/>
           </Route>

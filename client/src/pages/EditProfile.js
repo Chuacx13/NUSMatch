@@ -39,8 +39,6 @@ function EditProfile() {
     fetchUserProfile();
   }, []);
 
-  console.log(profile);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProfile({ ...profile, [name]: value });
@@ -63,17 +61,19 @@ function EditProfile() {
     const { name, value } = e.target;
     const currentValue = [...profile[name]];
     currentValue[index] = value;
-    setProfile({ ...profile, [name]: currentValue});
+    setProfile({ ...profile, [name]: currentValue });
   }
 
   const saveProfile = async (e) => {
     e.preventDefault();
     try {
+      let updatedModules = [ ...profile.currentModules ];
+      updatedModules = updatedModules.map((module) => module.toUpperCase());
       if (!profileCreated) {
-        await axios.post('http://localhost:3001/profile/edit', { ...profile });
+        await axios.post('http://localhost:3001/profile/edit', { ...profile, currentModules: updatedModules });
         navigate('/profile');
       } else {
-        await axios.put(`http://localhost:3001/profile/edit/${userEmail}`, { ...profile });
+        await axios.put(`http://localhost:3001/profile/edit/${userEmail}`, { ...profile, currentModules: updatedModules });
         navigate('/profile');
       }
     } catch (err) {
@@ -82,12 +82,12 @@ function EditProfile() {
   };
   
   return (
-    <div className='editProfile'>
+    <div className='editProfilePage'>
       <form className='editProfileForm' onSubmit={saveProfile}>
-        <div className='headerContainer'> 
+        <div className='profileHeaderContainer'> 
           <h1 className='profileFormHeader'> Edit Profile </h1>
           <Link to='/profile'>
-            <button type='button' className='backButton'> Back </button> 
+            <button type='button' className='profileBackButton'> Back </button> 
           </Link>
         </div>
         <label className='profileFormLabel' htmlFor='name'>Name</label>
@@ -95,44 +95,6 @@ function EditProfile() {
 
         <label className='profileFormLabel' htmlFor='year'>Year</label>
         <input className='editProfileInputs' type='number' id='year' name='year' value={profile.year} onChange={handleChange}  min={1} required/>
-
-        <label className='profileFormLabel' htmlFor='degree'>Degree</label>
-        {profile.degree.map((degree, index) => (
-          <div key={index}>
-            <input
-              type='text'
-              name='degree'
-              className='editProfileInputs'
-              value={degree}
-              onChange={(e) => handleAddAndChange(e, index)}
-            /> 
-            <button className='modifyListButton' type='button' name='degree' onClick={(e) => handleDelete(e, index)}> 
-              Delete Degree
-            </button>
-          </div>
-        ))}
-        <button className='modifyListButton' type="button" name='degree' onClick={handleAdd}>
-          Add Degree
-        </button>
-
-        <label className='profileFormLabel' htmlFor='currentModules'>Current Modules</label>
-        {profile.currentModules.map((currentModules, index) => (
-          <div key={index}>
-            <input
-              type='text'
-              name='currentModules'
-              className='editProfileInputs'
-              value={currentModules}
-              onChange={(e) => handleAddAndChange(e, index)}
-            /> 
-            <button className='modifyListButton' type='button' name='currentModules' onClick={(e) => handleDelete(e, index)}> 
-                Delete Modules
-            </button>
-          </div>
-        ))}
-        <button className='modifyListButton' type="button" name='currentModules' onClick={handleAdd}>
-          Add Modules
-        </button>
 
         <label className='profileFormLabel' htmlFor='academicGoals'>Academic Goals</label>
         <select className='editProfileInputs' id='academicGoals' name='academicGoals' value={profile.academicGoals} onChange={handleChange} required>
@@ -151,6 +113,46 @@ function EditProfile() {
           <option value='Active'> Active </option>
           <option value='Snooze'> Snooze </option>
         </select>
+        
+        <label className='profileFormLabel' htmlFor='degree'>Degree</label>
+        {profile.degree.map((degree, index) => (
+          <div key={index}>
+            <input
+              type='text'
+              name='degree'
+              className='editProfileInputs'
+              value={degree}
+              onChange={(e) => handleAddAndChange(e, index)}
+              required
+            /> 
+            <button className='modifyListButton' type='button' name='degree' onClick={(e) => handleDelete(e, index)}> 
+              Delete Degree
+            </button>
+          </div>
+        ))}
+        <button className='modifyListButton' type="button" name='degree' onClick={handleAdd}>
+          Add Degree
+        </button>
+
+        <label className='profileFormLabel' htmlFor='currentModules'>Current Modules</label>
+        {profile.currentModules.map((currentModule, index) => (
+          <div key={index}>
+            <input
+              type='text'
+              name='currentModules'
+              className='editProfileInputs'
+              value={currentModule}
+              onChange={(e) => handleAddAndChange(e, index)}
+              required
+            /> 
+            <button className='modifyListButton' type='button' name='currentModules' onClick={(e) => handleDelete(e, index)}> 
+                Delete Module
+            </button>
+          </div>
+        ))}
+        <button className='modifyListButton' type="button" name='currentModules' onClick={handleAdd}>
+          Add Module
+        </button>
 
         <label className='profileFormLabel' htmlFor='personalInterest'>Personal Interest</label>
         {profile.personalInterest.map((personalInterest, index) => (
@@ -162,6 +164,7 @@ function EditProfile() {
               className='editProfileInputs'
               value={personalInterest}
               onChange={(e) => handleAddAndChange(e, index)}
+              required
             /> 
             <button className='modifyListButton' type='button' name='personalInterest' onClick={(e) => handleDelete(e, index)}> 
                   Delete Interest

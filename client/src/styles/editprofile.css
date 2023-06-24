@@ -1,4 +1,4 @@
-.editProfile {
+.editProfilePage {
   display: flex;
   justify-content: center;
   color: black;
@@ -17,7 +17,7 @@
   min-height: 100vh;
   width: 1000px;
   margin: 0px;
-  padding: 20px 0px 100px 0px;
+  padding: 20px 0px 80px 0px;
   border: 2px solid black;
   border-radius: 20px;
   margin: 50px;
@@ -27,6 +27,7 @@
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 4px;
+  margin-top: 20px;
 }
 
 .profileFormHeader {
@@ -51,7 +52,7 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.saveButton:hover, .modifyListButton:hover, .backButton:hover {
+.saveButton:hover, .modifyListButton:hover, .profileBackButton:hover {
   background-color: black;
   color: white;
 }
@@ -65,12 +66,12 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.headerContainer {
+.profileHeaderContainer {
   display: flex;
   align-items: center;
 }
 
-.backButton {
+.profileBackButton {
   position: relative;
   font-size: 22px;
   margin-left: 30px;

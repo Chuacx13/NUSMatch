@@ -11,7 +11,7 @@ import '../styles/overlay.css';
 
 function Login() {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

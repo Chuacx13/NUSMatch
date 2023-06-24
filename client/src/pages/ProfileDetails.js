@@ -1,23 +1,20 @@
 import React from 'react';
 import axios from 'axios';
 import DefaultProfileImage from '../assets/defaultprofileimg.jpg';
-import { auth } from '../config/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/profile.css';
 
-function Profile() {
+function ProfileDetails() {
 
   const [profile, setProfile] = useState({});
-  const [user] = useAuthState(auth);
-  const userEmail = user.email;
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
+        const userId = localStorage.getItem('resultId');
+        const response = await axios.get(`http://localhost:3001/profile/other/${userId}`);
         setProfile(response.data);
       } catch (err) {
         console.error(err);
@@ -35,7 +32,6 @@ function Profile() {
     <div className='profilePage'>
       {!profile ? navigate('/editprofile') :
       <>
-        <button className='editProfileButton' onClick={goToEditProfile}> Edit </button>
         <img src={DefaultProfileImage} alt='defaultProfileImage' className='profileImage'/>
         <div className='introContainer'>
           <h1 className='profileIntro'>{profile.name}</h1>
@@ -72,4 +68,4 @@ function Profile() {
   )
 }
 
-export default Profile;
+export default ProfileDetails;

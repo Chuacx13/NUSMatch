@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase';
@@ -6,7 +6,7 @@ import { auth } from '../config/firebase';
 //Prevent access to certain pages if users are already authenticated
 //Pages include Login and Register page
 
-const PublicRoutes = () => {
+function PublicRoutes() {
 
     const [user] = useAuthState(auth);
 
@@ -15,4 +15,4 @@ const PublicRoutes = () => {
     )
 };
 
-export default PublicRoutes
+export default PublicRoutes;
