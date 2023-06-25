@@ -29,12 +29,15 @@ function Login() {
       const isEmailVerified = response.data
                                 .filter((user) => user.email === email + '@u.nus.edu' )
                                 .map((user) => user.emailVerified);
-      await signInWithEmailAndPassword(auth, email + '@u.nus.edu', password);
-      setLoginStatus('');                          
-      if (!isEmailVerified[0]) {
-        signOut(auth);
+      const doesUserExist = response.data
+                                .filter((user) => user.email === email + '@u.nus.edu' );                       
+      
+      if (!doesUserExist[0]) {
+        setLoginStatus('User does not exist. Sign up first!');              
+      } else if (!isEmailVerified[0]) {
         setLoginStatus('Email not verified. Verify before logging in');
       } else {
+        await signInWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         navigate('/');
       }
     } catch (err) {

@@ -36,7 +36,7 @@ function Navbar() {
 
     const fetchUserProfile = async() => {
       try {
-        const userEmail = user.email;
+        const userEmail = user?.email;
         const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
         if (response.data) {
           setProfile(true);
@@ -47,7 +47,7 @@ function Navbar() {
     }
 
     fetchUserProfile();
-  }, []);
+  }, [user]);
 
   const searchIconStyle = {
     color: 'black',

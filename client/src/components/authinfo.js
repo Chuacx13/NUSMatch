@@ -73,7 +73,7 @@ export const AuthInfo = () => {
     <div className='info-authenticated'>
       {!profile ?
       <>
-        <p> Finish setting up your profile before you connect with others </p>\
+        <p> Finish setting up your profile before you connect with others </p>
         <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon />} onClick={goToEditProfile}>
           Set Up Profile  
         </Button>

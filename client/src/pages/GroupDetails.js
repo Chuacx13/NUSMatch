@@ -125,7 +125,6 @@ function GroupDetails() {
                         <p className='groupMembers' key={index}> {`${index + 1}. ${member}`} </p>
                     ))}
                 </div>
-                
             </div>
         </div>
     )
