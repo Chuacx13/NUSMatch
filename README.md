@@ -1,4 +1,4 @@
-# NUSMATCH (UPDATED FOR MILESTONE 1)
+# NUSMATCH 
 NUS Orbital 2023
 
 # 1.	Proposed Level of Achievement
