@@ -5,18 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "start": "nodemon ./src/index.js",
-    "build": "npm i"
-=======
     "start": "nodemon ./src/index.js"
->>>>>>> 77597b9c03aab07698dbcdca0cedfaa77f22615c
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "firebase-admin": "^11.9.0",
     "mongodb": "^5.6.0",

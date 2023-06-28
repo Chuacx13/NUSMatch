@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -13,8 +14,12 @@ app.use('/auth', userRouter);
 app.use('/profile', profileRouter);
 app.use('/group', groupRouter);
 
-mongoose.connect(
-    'mongodb+srv://Chuacx:Realpassword123@nusmatch.tsh5xhw.mongodb.net/nusmatch?retryWrites=true&w=majority'
-);
+mongoose.connect( process.env.MONGODB_API_KEY );
+
+app.get('/api/firebase-config', async (req, res) => {
+    const firebaseConfig = {
+        
+    }
+} )
 
 app.listen(3001, () => console.log('Server started'));
