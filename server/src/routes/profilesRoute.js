@@ -37,11 +37,19 @@ profileRouter.get('/other/:profileId', async (req, res) => {
 //Get search results based on profile's email, name, degree, currentModules, academicGoals, personalInterest
 profileRouter.get('/results/:queryId', async (req, res) => {
     try {
+<<<<<<< HEAD
         const responseForEmailQuery = await ProfileModel.find({email: req.params.queryId});
         const responseForNameQuery = await ProfileModel.find({ name: { $regex: '\\b' + req.params.queryId + '\\b', $options: 'i' }});
         const responseForDegreeQuery = await ProfileModel.find({degree:{ $in: [req.params.queryId] }});
         const responseForModulesQuery = await ProfileModel.find({currentModules:{ $in: [req.params.queryId] }});
         const responseForAcademicQuery = await ProfileModel.find({academicGoals: req.params.queryId});
+=======
+        const responseForEmailQuery = await ProfileModel.find({email: { $regex: '\\b' + req.params.queryId + '\\b', $options: 'i' }});
+        const responseForNameQuery = await ProfileModel.find({name: { $regex: '\\b' + req.params.queryId + '\\b', $options: 'i' }});
+        const responseForDegreeQuery = await ProfileModel.find({degree:{ $in: [req.params.queryId] }});
+        const responseForModulesQuery = await ProfileModel.find({currentModules:{ $in: [req.params.queryId] }});
+        const responseForAcademicQuery = await ProfileModel.find({academicGoals: { $regex: '\\b' + [req.params.queryId] + '\\b', $options: 'i' }});
+>>>>>>> 77597b9c03aab07698dbcdca0cedfaa77f22615c
         const responseForInterestQuery = await ProfileModel.find({personalInterest:{ $in: [req.params.queryId] }});
 
         let response = [];
