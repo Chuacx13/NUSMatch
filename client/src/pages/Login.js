@@ -50,8 +50,6 @@ function Login() {
     }
   };
 
-  //example
-  //hello
   return (
     <div className='loginPage' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
