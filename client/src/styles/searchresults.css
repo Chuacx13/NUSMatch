@@ -1,0 +1,54 @@
+.searchResultsPage {
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    background-color: white;
+    position: relative;
+    top: 200px;
+    z-index: 2;
+    width: 100%;
+}
+
+.individualResultsContainer {
+    flex-basis: 100%;
+    margin: 30px;
+    padding: 50px;
+    background-color: rgb(160, 157, 157, 0.8);
+    width: 400px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.individualResultsContainer:hover {
+    opacity: 0.8;
+}
+
+.inactiveButton {
+    position: relative;
+    top: 30px;
+    left: 30px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.activeButton {
+    position: relative;
+    top: 30px;
+    left: 30px;
+    margin-bottom: 30px;
+    margin-right: 20px;
+    background-color: rgb(220, 125, 24, 0.8);
+    border-radius: 20px;
+    padding: 10px 16px;
+    font-size: 20px;
+    color: black;
+    border: 2px solid black;
+    cursor: pointer;
+}

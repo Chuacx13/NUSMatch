@@ -1,0 +1,63 @@
+.profilePage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: 100vh;
+    background-color: white;
+    color: black;
+    position: relative;
+    top: 200px;
+    margin: 50px 0px 250px 0px;
+    z-index: 2;
+}
+
+.introContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profileIntro {
+    margin: 6px;
+    font-size: 40px;
+    font-weight: 900px;
+}
+
+.profileIntro_Less {
+    font-size: 26px;
+}
+
+.profileDetailsHeader {
+    font-size: 26px;
+    font-weight: 500px;
+    margin: 40px 0px 20px 0px;
+}
+
+.profileDetails {
+    margin: 0px;
+    font-size: 20px;
+}
+
+.profileImage {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+}
+
+.editProfileButton {
+    position: absolute; 
+    top: 0px;
+    right: 80px;
+    padding: 10px 12px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.editProfileButton:hover {
+    color: white;
+    background-color: black;
+}
