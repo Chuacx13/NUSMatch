@@ -1,2 +1,2 @@
 .env
-config/firebase-adminsdk.json
+src/config/firebase-adminsdk.json
