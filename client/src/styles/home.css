@@ -42,12 +42,14 @@
     margin-bottom: 10px;
 }
 
-.searchForm {
+/*applies to home.js navbar.js*/
+.search-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/*applies to home.js navbar.js*/
 .searchbar {
     position: relative;
     width: 400px;
@@ -71,11 +73,7 @@
     margin-top: 0px;
 }
 
-.home a {
-    text-decoration: none;
-}
-
-.registerButton {
+.register-button {
     border-width: 2px;
     border-color: white;
     border-radius: 4px;
@@ -88,12 +86,12 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.registerButton:hover {
+.register-button:hover {
     background-color: white;
     color: black;
 }
 
-.registerButton:active {
+.register-button:active {
     opacity: 0.7;
 }
 

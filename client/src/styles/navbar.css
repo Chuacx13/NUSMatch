@@ -11,15 +11,15 @@
   z-index: 3;
 } 
 
-.navbar .leftSide {
-  flex: 1;
+.navbar .left-side {
+  flex: 1; 
   height: 100%;
   display: flex;
   align-items: center;
   padding-left: 120px;
 }
 
-.navbar .leftSide img {
+.navbar .left-side img {
   width: 70px;
 }
 
@@ -31,7 +31,7 @@
   justify-content: center;
 }
 
-.navbar .rightSide {
+.navbar .right-side {
   flex: 1;
   height: 100%;
   display: flex;
@@ -40,7 +40,8 @@
   padding-right: 120px;
 }
 
-.navbar a {
+/*applies to navbar.js accounticon.js groupchaticon.js creategroup.js*/
+.navbar .link {
   color: white;
   text-decoration: none;
   margin: 30px;
@@ -48,37 +49,21 @@
   transition: color 0.3s;
 }
 
-.navbar a:hover {
+/*applies to navbar.js accounticon.js groupchaticon.js creategroup.js*/
+.navbar .link:hover {
   color:rgb(220, 125, 24);
 }
 
-.navbar a:active {
+/*applies to navbar.js accounticon.js groupchaticon.js creategroup.js*/
+.navbar .link:active {
   opacity: 0.7;
 }
 
-.tooltip {
-  font-size: 14px;
-  position: absolute;
-  background-color: gray;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 2px;
-  bottom: -50px;
-  opacity: 0;
-  transition: opacity 0.3s;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.tooltip-close {
-  display: none;
-}
-
-.navbar a:hover .tooltip {
+.navbar .link:hover .tooltip {
   opacity: 1;
 }
 
-.loginButton {
+.login-button {
   border-width: 2px;
   border-color: white;
   border-radius: 4px;
@@ -91,52 +76,18 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.loginButton:hover {
+.login-button:hover {
   background-color: white;
   color: black;
 }
 
-.loginButton:active {
+.login-button:active {
   opacity: 0.7;
 }
 
-.groupButton {
+.group-button {
   color: white;
   border-color: white;
   font-size: 16px;
   margin: 20px;
 }
-/*
-@media only screen and (max-width: 900px) {
-  .navbar .rightSide a {
-    width: 70px;
-  }
-  .navbar .leftSide {
-    padding-left: 50px;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .navbar .rightSide a {
-    display: none;
-  }
-
-  .navbar .rightSide {
-    justify-content: flex-end;
-    padding-right: 50px;
-  }
-
-  .navbar .rightSide button {
-    display: inherit;
-  }
-}
-
-@media only screen and (min-width: 600px) {
-  .navbar .rightSide button {
-    display: none;
-  }
-
-  .hiddenLinks {
-    display: none;
-  }
-}*/

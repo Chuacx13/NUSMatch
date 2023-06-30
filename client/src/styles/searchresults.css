@@ -1,4 +1,4 @@
-.searchResultsPage {
+.search-results-page {
     display: flex;
     flex-wrap: wrap;
     color: black;
@@ -9,24 +9,7 @@
     width: 100%;
 }
 
-.individualResultsContainer {
-    flex-basis: 100%;
-    margin: 30px;
-    padding: 50px;
-    background-color: rgb(160, 157, 157, 0.8);
-    width: 400px;
-    height: 200px;
-    border: 2px solid black;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-
-.individualResultsContainer:hover {
-    opacity: 0.8;
-}
-
-.inactiveButton {
+.inactive-button {
     position: relative;
     top: 30px;
     left: 30px;
@@ -38,7 +21,7 @@
     cursor: pointer;
 }
 
-.activeButton {
+.active-button {
     position: relative;
     top: 30px;
     left: 30px;

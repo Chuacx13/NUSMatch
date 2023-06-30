@@ -1,9 +1,11 @@
 import React from 'react';
 import GroupsIcon from '@mui/icons-material/Groups';
 import { IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const CreateGroupIcon = () => {
+
+  const navigate = useNavigate();
 
   const individualButtonStyles = {
     color: 'white', 
@@ -16,12 +18,16 @@ export const CreateGroupIcon = () => {
     '&:hover': { backgroundColor: 'transparent'}
   };
 
+  const goToCreateGroup = () => {
+    navigate('/creategroup');
+  };
+
   return (
-    <Link to='/creategroup'>
-        <IconButton arial-label='CreateGroup' sx={iconButtonStyles}>
+    <div className='link'>
+        <IconButton arial-label='CreateGroup' sx={iconButtonStyles} onClick={goToCreateGroup}>
           <GroupsIcon sx={individualButtonStyles}/>
           <div className='tooltip'> Create Group </div>
         </IconButton>
-    </Link>
+    </div>
   )
 }

@@ -34,13 +34,13 @@ function Group() {
   };
 
   return (
-    <div className='groupPage'>
+    <div className='group-page'>
       {groups.map((group, index) => 
-        <div key={index} className='individualGroupContainer' onClick={(e) => handleClickOnGroup(e, index)}>
+        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnGroup(e, index)}>
           <h1> {group.groupName} </h1>
           <h2> {group.groupStatus} </h2>
           <h2> Description: {group.groupDescription.length > 20 ? group.groupDescription.slice(0, 20) + '...' : group.groupDescription} </h2>
-          <p className='modulesDescription'> Common Modules: {group.modules.join('. ')} </p>
+          <p className='modules-description'> Common Modules: {group.modules.join('. ')} </p>
         </div>
       )}
     </div>

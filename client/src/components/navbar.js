@@ -69,13 +69,17 @@ function Navbar() {
     navigate('/searchresults');
   };
 
+  const goToLogin = () => {
+    navigate('/login');
+  };
+  
   return (
 
     <div className='navbar' style={isNoBackground ? null : { backgroundImage: `url(${Wallpaper})`}}>
       {!isNoBackground && <div className='overlay' style={{zIndex: -1}}/>}
-      <div className='leftSide'></div>
+      <div className='left-side'></div>
       <div className='middle'>
-        {isSearching && <form className='searchForm' onSubmit={queryResults} disabled={!profile}>
+        {isSearching && <form className='search-form' onSubmit={queryResults} disabled={!profile}>
           <input
             type='text'
             className='searchbar'
@@ -88,8 +92,8 @@ function Navbar() {
           </IconButton>
         </form>}
       </div>
-      <div className='rightSide'>
-        {!isHomePage && (<Link to='/'> Home </Link>)}
+      <div className='right-side'>
+        {!isHomePage && (<Link to='/' className='link'> Home </Link>)}
         {user ? 
           <>
             <CreateGroupIcon />
@@ -97,9 +101,7 @@ function Navbar() {
             <AccountIcon />
           </>
           : isHomePage ? 
-          (<Link to='/login'>
-            <button className='loginButton'> Login </button>
-          </Link>) 
+          (<button className='login-button' onClick={goToLogin}> Login </button>) 
             : null }
       </div>
     </div>

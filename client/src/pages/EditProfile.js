@@ -4,7 +4,7 @@ import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import '../styles/editprofile.css';
+import '../styles/editform.css';
 
 function EditProfile() {
 
@@ -82,22 +82,22 @@ function EditProfile() {
   };
   
   return (
-    <div className='editProfilePage'>
-      <form className='editProfileForm' onSubmit={saveProfile}>
-        <div className='profileHeaderContainer'> 
-          <h1 className='profileFormHeader'> Edit Profile </h1>
+    <div className='edit-form-page'>
+      <form className='edit-form' onSubmit={saveProfile}>
+        <div className='edit-form-header-container'> 
+          <h1 className='edit-form-header'> Edit Profile </h1>
           <Link to='/profile'>
-            <button type='button' className='profileBackButton'> Back </button> 
+            <button type='button' className='edit-form-back-button'> Back </button> 
           </Link>
         </div>
-        <label className='profileFormLabel' htmlFor='name'>Name</label>
-        <input className='editProfileInputs' type='text' id='name' name='name' value={profile.name} onChange={handleChange} required />
+        <label className='edit-form-label' htmlFor='name'>Name</label>
+        <input className='edit-form-inputs' type='text' id='name' name='name' value={profile.name} onChange={handleChange} required />
 
-        <label className='profileFormLabel' htmlFor='year'>Year</label>
-        <input className='editProfileInputs' type='number' id='year' name='year' value={profile.year} onChange={handleChange}  min={1} required/>
+        <label className='edit-form-label' htmlFor='year'>Year</label>
+        <input className='edit-form-inputs' type='number' id='year' name='year' value={profile.year} onChange={handleChange}  min={1} required/>
 
-        <label className='profileFormLabel' htmlFor='academicGoals'>Academic Goals</label>
-        <select className='editProfileInputs' id='academicGoals' name='academicGoals' value={profile.academicGoals} onChange={handleChange} required>
+        <label className='edit-form-label' htmlFor='academicGoals'>Academic Goals</label>
+        <select className='edit-form-inputs' id='academicGoals' name='academicGoals' value={profile.academicGoals} onChange={handleChange} required>
           <option value=''>Select a goal</option>
           <option value='Chill'>Chill</option>
           <option value="Dean's List">Dean's List</option>
@@ -107,74 +107,74 @@ function EditProfile() {
           <option value='Third Class'>Third Class</option>
         </select>
 
-        <label className='profileFormLabel' htmlFor='status'>Status</label>
-        <select className='editProfileInputs' id='status' name='status' value={profile.status} onChange={handleChange} required>
+        <label className='edit-form-label' htmlFor='status'>Status</label>
+        <select className='edit-form-inputs' id='status' name='status' value={profile.status} onChange={handleChange} required>
           <option value=''>Select a status</option>
           <option value='Active'> Active </option>
           <option value='Snooze'> Snooze </option>
         </select>
         
-        <label className='profileFormLabel' htmlFor='degree'>Degree</label>
+        <label className='edit-form-label' htmlFor='degree'>Degree</label>
         {profile.degree.map((degree, index) => (
           <div key={index}>
             <input
               type='text'
               name='degree'
-              className='editProfileInputs'
+              className='edit-form-inputs'
               value={degree}
               onChange={(e) => handleAddAndChange(e, index)}
               required
             /> 
-            <button className='modifyListButton' type='button' name='degree' onClick={(e) => handleDelete(e, index)}> 
+            <button className='modify-list-button' type='button' name='degree' onClick={(e) => handleDelete(e, index)}> 
               Delete Degree
             </button>
           </div>
         ))}
-        <button className='modifyListButton' type="button" name='degree' onClick={handleAdd}>
+        <button className='modify-list-button' type="button" name='degree' onClick={handleAdd}>
           Add Degree
         </button>
 
-        <label className='profileFormLabel' htmlFor='currentModules'>Current Modules</label>
+        <label className='edit-form-label' htmlFor='currentModules'>Current Modules</label>
         {profile.currentModules.map((currentModule, index) => (
           <div key={index}>
             <input
               type='text'
               name='currentModules'
-              className='editProfileInputs'
+              className='edit-form-inputs'
               value={currentModule}
               onChange={(e) => handleAddAndChange(e, index)}
               required
             /> 
-            <button className='modifyListButton' type='button' name='currentModules' onClick={(e) => handleDelete(e, index)}> 
+            <button className='modify-list-button' type='button' name='currentModules' onClick={(e) => handleDelete(e, index)}> 
                 Delete Module
             </button>
           </div>
         ))}
-        <button className='modifyListButton' type="button" name='currentModules' onClick={handleAdd}>
+        <button className='modify-list-button' type="button" name='currentModules' onClick={handleAdd}>
           Add Module
         </button>
 
-        <label className='profileFormLabel' htmlFor='personalInterest'>Personal Interest</label>
+        <label className='edit-form-label' htmlFor='personalInterest'>Personal Interest</label>
         {profile.personalInterest.map((personalInterest, index) => (
           <div key={index}>
             <input
               key={index}
               type='text'
               name='personalInterest'
-              className='editProfileInputs'
+              className='edit-form-inputs'
               value={personalInterest}
               onChange={(e) => handleAddAndChange(e, index)}
               required
             /> 
-            <button className='modifyListButton' type='button' name='personalInterest' onClick={(e) => handleDelete(e, index)}> 
+            <button className='modify-list-button' type='button' name='personalInterest' onClick={(e) => handleDelete(e, index)}> 
                   Delete Interest
             </button>
           </div>
         ))}
-        <button className='modifyListButton' type="button" name='personalInterest' onClick={handleAdd}>
+        <button className='modify-list-button' type="button" name='personalInterest' onClick={handleAdd}>
           Add Interest
         </button>
-        <button className='saveButton'>Save</button>
+        <button className='save-button'>Save</button>
       </form>
     </div>
   )

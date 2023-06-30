@@ -5,6 +5,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/searchresults.css';
+import '../styles/group.css';
 
 function SearchResults() {
 
@@ -57,27 +58,27 @@ function SearchResults() {
   }
 
   return (
-    <div className='searchResultsPage'>
-      <button className={isDefault() ? 'activeButton' : 'inactiveButton'} disabled={isDefault()} onClick={handleToggle}>
+    <div className='search-results-page'>
+      <button className={isDefault() ? 'active-button' : 'inactive-button'} disabled={isDefault()} onClick={handleToggle}>
         Profile
       </button>
-      <button className={isDefault() ? 'inactiveButton' : 'activeButton'} disabled={!isDefault()} onClick={handleToggle}>
+      <button className={isDefault() ? 'inactive-button' : 'active-button'} disabled={!isDefault()} onClick={handleToggle}>
         Group
       </button>
       {(isDefault()) && results.map((result, index) => 
-        <div key={index} className='individualResultsContainer' onClick={(e) => handleClickOnResults(e, index)}>
+        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.name} </h1>
           <h2> {result.status} </h2>
           <h2> Degree: {result?.degree?.join(', ')} </h2>
-          <p className='modulesDescription'> Modules: {result?.currentModules?.join(', ')} </p>
+          <p className='modules-description'> Modules: {result?.currentModules?.join(', ')} </p>
         </div>
       )}
       {(!isDefault()) && results.map((result, index) => 
-        <div key={index} className='individualResultsContainer' onClick={(e) => handleClickOnResults(e, index)}>
+        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.groupName} </h1>
           <h2> {result.groupStatus} </h2>
           <h2> Description: {result?.groupDescription?.length > 20 ? result?.groupDescription?.slice(0, 20) + '...' : result?.groupDescription} </h2>
-          <p className='modulesDescription'> Common Modules: {result?.modules?.join(', ')} </p>
+          <p className='modules-description'> Common Modules: {result?.modules?.join(', ')} </p>
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-.groupPage {
+.group-page {
     display: flex;
     flex-wrap: wrap;
     color: black;
@@ -9,7 +9,8 @@
     width: 100%;
 }
 
-.individualGroupContainer {
+/*applies to Group.js SearchResults.js */
+.individual-results-container {
     flex-basis: 100%;
     margin: 30px;
     padding: 50px;
@@ -22,10 +23,11 @@
     transition: opacity 0.3s;
 }
 
-.individualGroupContainer:hover {
+/*applies to Group.js SearchResults.js */
+.individual-group-container:hover {
     opacity: 0.8;
 }
 
-.modulesDescription { 
+.modules-description { 
     font-size: 20px;
 }

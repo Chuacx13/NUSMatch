@@ -51,10 +51,10 @@ function Login() {
   };
 
   return (
-    <div className='loginPage' style={{ backgroundImage: `url(${Wallpaper})`}}>
+    <div className='login-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
-      <form className='loginForm' onSubmit={noRefresh}>
-        {loginStatus && (<p className='loginStatus'> {loginStatus} </p>)}
+      <form className='login-form' onSubmit={noRefresh}>
+        {loginStatus && (<p className='login-status'> {loginStatus} </p>)}
         <h1> Start Connecting! </h1>
         <input 
           value={email}

@@ -32,40 +32,40 @@ function Profile() {
   };
 
   return (
-    <div className='profilePage'>
+    <div className='profile-page'>
       {!profile ? navigate('/editprofile') :
       <>
-        <button className='editProfileButton' onClick={goToEditProfile}> Edit </button>
-        <img src={DefaultProfileImage} alt='defaultProfileImage' className='profileImage'/>
-        <div className='introContainer'>
-          <h1 className='profileIntro'>{profile.name}</h1>
-          <p className='profileIntro profileIntro_Less'>{profile.email}</p>
-          <p className='profileIntro profileIntro_Less'
+        <button className='edit-profile-button' onClick={goToEditProfile}> Edit </button>
+        <img src={DefaultProfileImage} alt='defaultProfileImage' className='profile-image'/>
+        <div className='intro-container'>
+          <h1 className='profile-intro'>{profile.name}</h1>
+          <p className='profile-intro profile-intro-small'>{profile.email}</p>
+          <p className='profile-intro profile-intro-small'
             style={profile.status==='Active' ? {color:'green'} : {color:'red'}}>
             {profile.status==='Active' ? 'Let\'s Connect!' : 'Chilling Right Now'}
           </p>
         </div>
         
-        <h2 className='profileDetailsHeader'>Current Year of Study</h2>
-        <p className='profileDetails'>{profile.year}</p>
+        <h2 className='profile-details-header'>Current Year of Study</h2>
+        <p className='profile-details'>{profile.year}</p>
         
         
-        <h2 className='profileDetailsHeader'>Academic Goals</h2>
-        <p className='profileDetails'>{profile.academicGoals}</p>
+        <h2 className='profile-details-header'>Academic Goals</h2>
+        <p className='profile-details'>{profile.academicGoals}</p>
 
-        <h2 className='profileDetailsHeader'>Degree</h2>
+        <h2 className='profile-details-header'>Degree</h2>
         {profile.degree?.map((degree, index) => (
-          <p key={index} className='profileDetails'> {degree} </p>
+          <p key={index} className='profile-details'> {degree} </p>
         ))}
         
-        <h2 className='profileDetailsHeader'>Current Modules</h2>
+        <h2 className='profile-details-header'>Current Modules</h2>
         {profile.currentModules?.map((currentModules, index) => (
-          <p key={index} className='profileDetails'> {currentModules} </p>
+          <p key={index} className='profile-details'> {currentModules} </p>
         ))}
       
-        <h2 className='profileDetailsHeader'>Personal Interest</h2>
+        <h2 className='profile-details-header'>Personal Interest</h2>
         {profile.personalInterest?.map((personalInterest, index) => (
-          <p key={index} className='profileDetails'> {personalInterest} </p>
+          <p key={index} className='profile-details'> {personalInterest} </p>
         ))}
       </>}
     </div>

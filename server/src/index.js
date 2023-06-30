@@ -16,10 +16,4 @@ app.use('/group', groupRouter);
 
 mongoose.connect( process.env.MONGODB_API_KEY );
 
-app.get('/api/firebase-config', async (req, res) => {
-    const firebaseConfig = {
-        
-    }
-} )
-
 app.listen(3001, () => console.log('Server started'));

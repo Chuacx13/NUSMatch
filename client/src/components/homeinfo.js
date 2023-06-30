@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
 
@@ -79,7 +79,7 @@ export const AuthInfo = () => {
         </Button>
       </>
       : null}
-      <form className='searchForm' onSubmit={queryResults} disabled={!profile}>
+      <form className='search-form' onSubmit={queryResults} disabled={!profile}>
         <input
           type='text'
           className='searchbar'
@@ -91,6 +91,18 @@ export const AuthInfo = () => {
           <SearchIcon style={searchIconStyle} />
         </IconButton>
       </form>
+    </div>
+  )
+}
+
+export const UnauthInfo = () => {
+  return (
+    <div className='info-unauthenticated'>
+        <h1> NUSMatch </h1>
+        <p> Looking for project or studymates? Or just want to connect with new people? Look no further! </p>
+        <Link to='/register'>
+        <button className='register-button'> Register </button>
+        </Link> 
     </div>
   )
 }

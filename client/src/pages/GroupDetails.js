@@ -97,32 +97,32 @@ function GroupDetails() {
     };
 
     return (
-        <div className='groupDetailsPage'>
-            <div className='groupDetails'>
+        <div className='group-details-page'>
+            <div className='group-details'>
                 {(user.email === group.leader) && 
-                <button className='editGroupButton' onClick={goToEditGroup} disabled={!isLeader()}> Edit </button>}
-                <div className='groupIntro'>
-                    <h1 className='groupName'> {group.groupName} </h1>
-                    <button className={isMember() ? 'member' : 'joinGroup'} disabled={isMember()} onClick={joinGroup}> 
+                <button className='edit-group-button' onClick={goToEditGroup} disabled={!isLeader()}> Edit </button>}
+                <div className='group-intro'>
+                    <h1 className='group-name'> {group.groupName} </h1>
+                    <button className={isMember() ? 'member' : 'join-group'} disabled={isMember()} onClick={joinGroup}> 
                         {isMember() ? 'Joined' : group.groupStatus === 'Private' ? 'Request To Join' : 'Join'} 
                     </button>
-                    {isMember() && <button className='chatButton' disabled={!isMember()} onClick={goToChat}> Chat </button>}
-                    {isMember() && <button className='leaveButton' disabled={!isMember()} onClick={leaveGroup}> Leave </button>}
+                    {isMember() && <button className='chat-button' disabled={!isMember()} onClick={goToChat}> Chat </button>}
+                    {isMember() && <button className='leave-button' disabled={!isMember()} onClick={leaveGroup}> Leave </button>}
                 </div>
-                <p className='groupDescription'> {group.groupDescription} </p>
+                <p className='group-description'> {group.groupDescription} </p>
 
                
-                <h2 className='groupSubHeaders'> Common Modules </h2>
-                <div className='modulesContainer'>
+                <h2 className='group-subheaders'> Common Modules </h2>
+                <div className='modules-container'>
                     {group.modules?.map((module, index) => (
-                        <p className='groupModules' key={index}> {module} </p>
+                        <p className='group-modules' key={index}> {module} </p>
                     ))}
                 </div>
 
-                <div className='membersContainer'> 
-                    <h2 className='groupSubHeaders'> Members </h2>
+                <div className='members-container'> 
+                    <h2 className='group-subheaders'> Members </h2>
                     {memberList.map((member, index) => (
-                        <p className='groupMembers' key={index}> {`${index + 1}. ${member}`} </p>
+                        <p className='group-members' key={index}> {`${index + 1}. ${member}`} </p>
                     ))}
                 </div>
             </div>

@@ -1,4 +1,4 @@
-.registerPage {
+.register-page {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +9,7 @@
     height: 100vh;
 }
 
-.registerForm {
+.register-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,14 +23,14 @@
     background-color: white;
 }
 
-.registerForm h1 {
+.register-form h1 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 40px;
     font-weight: 900;
 }
 
-.registerForm input {
+.register-form input {
     display: block; 
     font-size: 16px;
     width: 100%;
@@ -42,7 +42,7 @@
 }
 
 
-.registerForm button {
+.register-form button {
     display: block;
     font-size: 16px;
     font-weight: 700;
@@ -57,23 +57,23 @@
     transition: background-color 0.3s;
 }
 
-.registerForm button:hover {
+.register-form button:hover {
     background-color: rgb(205, 114, 17);
 }
 
-.registerForm p {
+.register-form p {
     font-size: 20px;
     margin: 0px;
 }
 
-.registerForm a {
+.register-form a {
     text-decoration: none;
     color: black;
     cursor: pointer;
     transition: color 0.2s, text-decoration 0.2s;
 }
 
-.registerForm a:hover {
+.register-form a:hover {
     color: rgb(220, 125, 24);
     text-decoration: underline;
 }

@@ -1,4 +1,4 @@
-.profilePage {
+.profile-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -13,40 +13,40 @@
     z-index: 2;
 }
 
-.introContainer {
+.intro-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.profileIntro {
+.profile-intro {
     margin: 6px;
     font-size: 40px;
     font-weight: 900px;
 }
 
-.profileIntro_Less {
+.profile-intro-small {
     font-size: 26px;
 }
 
-.profileDetailsHeader {
+.profile-details-header {
     font-size: 26px;
     font-weight: 500px;
     margin: 40px 0px 20px 0px;
 }
 
-.profileDetails {
+.profile-details {
     margin: 0px;
     font-size: 20px;
 }
 
-.profileImage {
+.profile-image {
     height: 200px;
     width: 200px;
     border-radius: 100px;
 }
 
-.editProfileButton {
+.edit-profile-button {
     position: absolute; 
     top: 0px;
     right: 80px;
@@ -57,7 +57,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.editProfileButton:hover {
+.edit-profile-button:hover {
     color: white;
     background-color: black;
 }

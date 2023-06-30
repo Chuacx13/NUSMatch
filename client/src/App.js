@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from './components/navbar';
 import ScrollToTop from './components/scrolltotop';
 import Home from './pages/Home';
+import Loading from './pages/Loading';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Group from './pages/Group';
@@ -23,7 +24,7 @@ import { useState, useEffect } from 'react';
 function App() {
 
   const [isLoading, setIsLoading] = useState(true);
-  const [user, loading, error] = useAuthState(auth);
+  const [loading] = useAuthState(auth);
 
   useEffect(() => {
     if (!loading) {
@@ -34,9 +35,7 @@ function App() {
   return (
     <> 
       {isLoading ? (
-        <div id='loading-overlay'>
-          <div id='spinner'></div>
-        </div>
+        <Loading/>
       ) : 
       <Router>
         <Navbar />

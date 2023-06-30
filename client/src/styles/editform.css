@@ -1,4 +1,4 @@
-.createGroupPage {
+.edit-form-page {
     display: flex;
     justify-content: center;
     color: black;
@@ -8,7 +8,7 @@
     z-index: 2;
 }
 
-.createGroupForm {
+.edit-form {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -23,21 +23,20 @@
     margin: 50px;
 }
 
-.groupFormLabel {
+.edit-form-label {
     font-size: 30px;
     font-weight: 700;
     margin-bottom: 6px;
     margin-top: 20px;
-    text-align: center;
 }
 
-.groupFormHeader {
+.edit-form-header {
     font-size: 50px;
     font-weight: 900;
-    margin: 35px 0px 15px 0px;
+    margin: 35px 0px 35px 0px;
 }
 
-.editGroupInputs {
+.edit-form-inputs {
     margin-bottom: 20px;
     width: 300px;
     padding: 4px;
@@ -45,7 +44,7 @@
     border-radius: 6px;
 }
 
-.editGroupTextArea {
+.edit-form-text-area {
     width: 500px;
     height: 100px;
     max-height: 200px;
@@ -53,7 +52,7 @@
     resize: vertical;
 }
 
-.saveButton {
+.save-button {
     border-radius: 8px;
     padding: 10px 16px;
     font-size: 22px;
@@ -61,12 +60,12 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.saveButton:hover, .modifyListButton:hover {
+.save-button:hover, .modify-list-button:hover, .edit-form-back-button:hover {
     background-color: black;
     color: white;
 }
 
-.modifyListButton {
+.modify-list-button {
     padding: 4px 10px;
     font-size: 22px;
     margin-bottom: 20px;
@@ -75,7 +74,22 @@
     transition: background-color 0.3s, color 0.3s;
 }
   
-.createGroupStatus {
+.create-group-status {
     color: red;
     font-size: 22px;
+}
+
+.edit-form-back-button {
+    position: relative;
+    font-size: 22px;
+    margin-left: 30px;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-form-header-container {
+    display: flex;
+    align-items: center;
 }

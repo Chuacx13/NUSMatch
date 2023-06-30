@@ -1,8 +1,7 @@
 import React from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { Button } from '@mui/material';
-import { AuthInfo } from '../components/authinfo';
-import { UnauthInfo } from '../components/unauthinfo';
+import { AuthInfo, UnauthInfo } from '../components/homeinfo';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../styles/home.css';

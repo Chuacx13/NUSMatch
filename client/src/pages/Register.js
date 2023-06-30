@@ -40,9 +40,9 @@ function Register() {
   };
 
   return (
-    <div className='registerPage' style={{ backgroundImage: `url(${Wallpaper})`}}>
+    <div className='register-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
-      <form className='registerForm' onSubmit={noRefresh}>
+      <form className='register-form' onSubmit={noRefresh}>
         {registerStatus && 
           (<p 
           className={registerStatus==='Account successfully created. Verify your email before logging in.' ? 'success' : 'failure'}> {registerStatus} 

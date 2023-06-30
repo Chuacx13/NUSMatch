@@ -4,8 +4,7 @@ import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/editgroup.css';
-import '../styles/creategroup.css';
+import '../styles/editform.css';
 
 function EditGroup() {
 
@@ -117,67 +116,67 @@ function EditGroup() {
   };
 
   return (
-    <div className='createGroupPage'>
-      <form className='createGroupForm' onSubmit={updateGroup}>
-        <div className='profileHeaderContainer'> 
-          <h1 className='groupFormHeader_2'> Edit &lt; {group.groupName} &gt; </h1>
-          {createGroupStatus && <p className='createGroupStatus'>{createGroupStatus}</p>}
-          <button type='button' className='editGroupBackButton' onClick={backtoGroupDetails}> Back </button>
+    <div className='edit-form-page'>
+      <form className='edit-form' onSubmit={updateGroup}>
+        <div className='edit-form-header-container'> 
+          <h1 className='edit-form-header'> Edit &lt; {group.groupName} &gt; </h1>
+          {createGroupStatus && <p className='create-group-status'>{createGroupStatus}</p>}
+          <button type='button' className='edit-form-back-button' onClick={backtoGroupDetails}> Back </button>
         </div>
 
-        <label className='groupFormLabel' htmlFor='groupName'>Group Name</label>
-        <input className='editGroupInputs' type='text' id='groupName' name='groupName' value={group.groupName} onChange={handleChange} required />
+        <label className='edit-form-label' htmlFor='groupName'>Group Name</label>
+        <input className='edit-form-inputs' type='text' id='groupName' name='groupName' value={group.groupName} onChange={handleChange} required />
 
-        <label className='groupFormLabel' htmlFor='groupStatus'>Group Status</label>
-        <select className='editGroupInputs' id='groupStatus' name='groupStatus' value={group.groupStatus} onChange={handleChange} required>
+        <label className='edit-form-label' htmlFor='groupStatus'>Group Status</label>
+        <select className='edit-form-inputs' id='groupStatus' name='groupStatus' value={group.groupStatus} onChange={handleChange} requirformed>
           <option value=''>Select a status</option>
           <option value='Private'> Private </option>
           <option value='Public'> Public </option>
         </select>
 
-        <label className='groupFormLabel' htmlFor='groupDescription'>Group Description</label>
-        <textarea className='editGroupInputs editGroupTextArea' type='text' id='groupDescription' name='groupDescription' value={group.groupDescription} onChange={handleChange} required />
+        <label className='edit-form-label' htmlFor='groupDescription'>Group Description</label>
+        <textarea className='edit-form-inputs edit-form-text-area' type='text' id='groupDescription' name='groupDescription' value={group.groupDescription} onChange={handleChange} required />
 
-        <label className='groupFormLabel' htmlFor='modules'>Indicate the modules that your group would be focussing on</label>
+        <label className='edit-form-label' htmlFor='modules'>Indicate the modules that your group would be focussing on</label>
         {group.modules.map((modules, index) => (
           <div key={index}>
             <input
               type='text'
               name='modules'
-              className='editGroupInputs'
+              className='edit-form-inputs'
               value={modules}
               onChange={(e) => handleAddAndChange(e, index)}
               required
             /> 
-            <button className='modifyListButton' type='button' name='modules' onClick={(e) => handleDelete(e, index)}> 
+            <button className='modify-list-button' type='button' name='modules' onClick={(e) => handleDelete(e, index)}> 
                 Delete Module
             </button>
           </div>
         ))}
-        <button className='modifyListButton' type="button" name='modules' onClick={handleAdd}>
+        <button className='modify-list-button' type="button" name='modules' onClick={handleAdd}>
           Add Module
         </button>
         
-        <label className='groupFormLabel' htmlFor='members'>Add your friends!</label>
+        <label className='edit-form-label' htmlFor='members'>Add your friends!</label>
         {group.members.filter((member) => member !== group.leader).map((member, index) => (
           <div key={index}>
             <input
               type='text'
               name='members'
-              className='editGroupInputs'
+              className='edit-form-inputs'
               value={member}
               onChange={(e) => handleAddAndChange(e, index)}
               required
             /> 
-            <button className='modifyListButton' type='button' name='members' onClick={(e) => handleDelete(e, index)}> 
+            <button className='modify-list-button' type='button' name='members' onClick={(e) => handleDelete(e, index)}> 
                 Delete Member
             </button>
           </div>
         ))}
-        <button className='modifyListButton' type="button" name='members' onClick={handleAdd}>
+        <button className='modify-list-button' type="button" name='members' onClick={handleAdd}>
           Add Member
         </button>
-        <button className='saveButton' onClick={updateGroup}>Save</button>
+        <button className='save-button' onClick={updateGroup}>Save</button>
       </form>
     </div>
   )

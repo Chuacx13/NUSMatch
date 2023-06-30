@@ -4,13 +4,14 @@ import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import Logout from './logout';
 import { IconButton, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import '../styles/accounticon.css';
 
 export const AccountIcon = () => {
 
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const openMenu = () => {
         setIsOpen(!isOpen);
@@ -64,27 +65,35 @@ export const AccountIcon = () => {
         '&:hover':{ backgroundColor: 'black', color: 'white'}
     };
 
+    const goToProfile = () => {
+        navigate('/profile');
+    };
+
+    const goToGroup = () => {
+        navigate('/group');
+    };
+
     return (
-        <Link to='#' ref={menuRef}>
-            <IconButton aria-label='Account' sx={iconButtonStyles} onClick={openMenu}> 
+        <div className='link'>
+            <IconButton aria-label='Account' sx={iconButtonStyles} onClick={openMenu} ref={menuRef}> 
                 <AccountCircleIcon sx={individualButtonStyles}/> 
                 <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>
                 {isOpen && (
                 <div className='dropdown-menu'>
-                    <Link to='/profile' id="dropdown-option"> 
-                        <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon/>}>
+                    <div id="dropdown-option"> 
+                        <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon/>} onClick={goToProfile}>
                             Profile 
                         </Button>
-                    </Link>
-                    <Link to='/group' id='dropdown-option'> 
-                        <Button variant='text' sx={groupIconStyle} startIcon={<GroupIcon/>}>
+                    </div>
+                    <div id='dropdown-option'> 
+                        <Button variant='text' sx={groupIconStyle} startIcon={<GroupIcon/>} onClick={goToGroup}>
                             Group
                         </Button>
-                    </Link>
+                    </div>
                     <Logout />
                 </div>)}
             </IconButton>
-        </Link>
+        </div>
     )
 }
 

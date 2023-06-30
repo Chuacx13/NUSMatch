@@ -1,4 +1,4 @@
-.groupDetailsPage {
+.group-details-page {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +12,7 @@
     z-index: 2;
 }
 
-.groupDetails {
+.group-details {
     font-size: 22px;
     width: 1000px;
     padding: 80px;
@@ -23,7 +23,7 @@
     min-height: 100vh;
 }
 
-.editGroupButton {
+.edit-group-button {
     position: absolute; 
     top: 0px;
     right: 80px;
@@ -34,12 +34,12 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.groupName {
+.group-name {
     font-size: 60px;
     margin: 0px;
 }
 
-.joinGroup {
+.join-group {
     font-size: 30px;
     padding: 10px 16px;
     margin-left: 30px;
@@ -50,13 +50,13 @@
     transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
-.joinGroup:hover {
+.join-group:hover {
     background-color: rgb(220, 125, 24, 0.8);
     color: black;
     border: 2px solid black;
 }
 
-.leaveButton {
+.leave-button {
     font-size: 30px;
     padding: 10px 16px;
     margin-left: 30px;
@@ -67,13 +67,13 @@
     transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
-.leaveButton:hover {
+.leave-button:hover {
     background-color: rgb(180, 49, 49, 0.7);
     color: black;
     border: 2px solid black;
 }
 
-.chatButton {
+.chat-button {
     font-size: 30px;
     padding: 10px 16px;
     margin-left: 30px;
@@ -95,17 +95,17 @@
     opacity: 0.7;
 }
 
-.groupIntro {
+.group-intro {
     display: flex;
     align-items: center;
 }
 
-.groupDescription {
+.group-description {
     margin: 20px 0px 50px 0px;
     font-size: 40px;
 }
 
-.modulesContainer { 
+.modules-container { 
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -118,17 +118,17 @@
     height: 200px;
 }
 
-.groupSubHeaders {
+.group-subheaders {
     margin: 0px 0px 20px 0px;
     font-size: 40px;
 }
 
-.groupModules {
+.group-modules {
     font-size: 30px;
     text-align: center;
 }
 
-.groupMembers {
+.group-members {
     font-size: 24px;
     margin: 0px 0px 4px 0px;
 }
