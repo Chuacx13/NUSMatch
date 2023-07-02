@@ -74,26 +74,24 @@ export const AccountIcon = () => {
     };
 
     return (
-        <div className='link'>
-            <IconButton aria-label='Account' sx={iconButtonStyles} onClick={openMenu} ref={menuRef}> 
-                <AccountCircleIcon sx={individualButtonStyles}/> 
-                <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>
-                {isOpen && (
-                <div className='dropdown-menu'>
-                    <div id="dropdown-option"> 
-                        <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon/>} onClick={goToProfile}>
-                            Profile 
-                        </Button>
-                    </div>
-                    <div id='dropdown-option'> 
-                        <Button variant='text' sx={groupIconStyle} startIcon={<GroupIcon/>} onClick={goToGroup}>
-                            Group
-                        </Button>
-                    </div>
-                    <Logout />
-                </div>)}
-            </IconButton>
-        </div>
+        <IconButton className='link' aria-label='Account' sx={iconButtonStyles} onClick={openMenu} ref={menuRef}> 
+            <AccountCircleIcon sx={individualButtonStyles}/> 
+            <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>
+            {isOpen && (
+            <div className='dropdown-menu'>
+                <div id="dropdown-option"> 
+                    <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon/>} onClick={goToProfile}>
+                        Profile 
+                    </Button>
+                </div>
+                <div id='dropdown-option'> 
+                    <Button variant='text' sx={groupIconStyle} startIcon={<GroupIcon/>} onClick={goToGroup}>
+                        Group
+                    </Button>
+                </div>
+                <Logout />
+            </div>)}
+        </IconButton>
     )
 }
 

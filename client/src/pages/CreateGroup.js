@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/editform.css';
 
@@ -19,7 +19,6 @@ function CreateGroup() {
     modules: [],
     members: []
   });
-  const finalGroup = useRef({});
   const [createGroupStatus, setCreateGroupStatus] = useState('');
 
   const handleChange = (e) => {
@@ -48,15 +47,9 @@ function CreateGroup() {
   }
 
   async function isUserInDatabase(group) {
-    const response = await axios.get('http://localhost:3001/auth/emails');
-    for (const member of group.members) {
-      if (response.data.includes(member)) {
-        continue;
-      } else {
-        return false;
-      }
-    }
-    return true;
+    const emails = group.members.join(',');
+    const response = await axios.get(`http://localhost:3001/auth/users/${emails}`)
+    return response.data;
   };
 
   const saveGroup = async(e) => {
@@ -64,16 +57,11 @@ function CreateGroup() {
     try {
       const isExistingUser = await isUserInDatabase(group);
       if (isExistingUser) {
-        //Add self into list of users
-        const updatedMembers = [...group.members];
-        updatedMembers.push(userEmail);
-        //Capitalise all modules added
-        let updatedModules = [...group.modules];
-        updatedModules = updatedModules.map((module) => module.toUpperCase());
-        //Final edits to the 'group' to be saved
-        finalGroup.current.value = { ...group, members: updatedMembers, modules: updatedModules };
-        //Create group in mongodb
-        const response = await axios.post('http://localhost:3001/group/create', finalGroup.current.value );
+        const data = {
+          groupData: group,
+          userEmail: userEmail
+        }
+        const response = await axios.post('http://localhost:3001/group', data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {
@@ -126,7 +114,7 @@ function CreateGroup() {
           Add Module
         </button>
         
-        <label className='edit-form-label' htmlFor='members'>Add your friends!</label>
+        <label className='edit-form-label' htmlFor='members'>Add your friends by indicating their email addresses below!</label>
         {group.members.map((member, index) => (
           <div key={index}>
             <input

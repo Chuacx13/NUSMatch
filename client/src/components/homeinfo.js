@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
 
@@ -61,8 +61,8 @@ export const AuthInfo = () => {
     navigate('/searchresults');
   };
 
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
   };
 
   const goToEditProfile = () => {
@@ -96,13 +96,18 @@ export const AuthInfo = () => {
 }
 
 export const UnauthInfo = () => {
+
+  const navigate = useNavigate();
+
+  const goToRegister = () => {
+    navigate('/register');
+  };
+
   return (
     <div className='info-unauthenticated'>
         <h1> NUSMatch </h1>
         <p> Looking for project or studymates? Or just want to connect with new people? Look no further! </p>
-        <Link to='/register'>
-        <button className='register-button'> Register </button>
-        </Link> 
+        <button className='register-button' onClick={goToRegister}> Register </button>
     </div>
   )
 }

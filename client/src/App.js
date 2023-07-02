@@ -24,7 +24,7 @@ import { useState, useEffect } from 'react';
 function App() {
 
   const [isLoading, setIsLoading] = useState(true);
-  const [loading] = useAuthState(auth);
+  const [, loading] = useAuthState(auth);
 
   useEffect(() => {
     if (!loading) {

@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 
 function Logout() {
     
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
     const logout = async () => {
         await signOut(auth);

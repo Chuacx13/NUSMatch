@@ -67,13 +67,11 @@ function EditProfile() {
   const saveProfile = async (e) => {
     e.preventDefault();
     try {
-      let updatedModules = [ ...profile.currentModules ];
-      updatedModules = updatedModules.map((module) => module.toUpperCase());
       if (!profileCreated) {
-        await axios.post('http://localhost:3001/profile/edit', { ...profile, currentModules: updatedModules });
+        await axios.post('http://localhost:3001/profile', { ...profile });
         navigate('/profile');
       } else {
-        await axios.put(`http://localhost:3001/profile/edit/${userEmail}`, { ...profile, currentModules: updatedModules });
+        await axios.put(`http://localhost:3001/profile/${userEmail}`, { ...profile });
         navigate('/profile');
       }
     } catch (err) {
@@ -81,14 +79,16 @@ function EditProfile() {
     }
   };
   
+  const goToProfile = () => {
+    navigate('/profile');
+  };
+  
   return (
     <div className='edit-form-page'>
       <form className='edit-form' onSubmit={saveProfile}>
         <div className='edit-form-header-container'> 
           <h1 className='edit-form-header'> Edit Profile </h1>
-          <Link to='/profile'>
-            <button type='button' className='edit-form-back-button'> Back </button> 
-          </Link>
+          <button type='button' className='edit-form-back-button' onClick={goToProfile}> Back </button> 
         </div>
         <label className='edit-form-label' htmlFor='name'>Name</label>
         <input className='edit-form-inputs' type='text' id='name' name='name' value={profile.name} onChange={handleChange} required />

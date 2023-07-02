@@ -4,36 +4,43 @@ const ProfileModel = require('../models/Profiles.js');
 
 const profileRouter = express.Router();
 
+//GOOD
 //Get profile of current user
 profileRouter.get('/:email', async (req, res) => {
     try {
         const response = await ProfileModel.findOne({email: req.params.email});
         res.json(response);
     } catch (err) {
-        res.json(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
-//Get name of members
-profileRouter.get('/names/:email', async (req, res) => {
+//GOOD
+//Get list of name of members
+profileRouter.get('/names/:emails', async (req, res) => {
     try {
-        const response = await ProfileModel.findOne({email: req.params.email});
-        res.json(response.name);
+        const emailList = req.params.emails.split(',');
+        const userNamePromises = emailList.map((userEmail) => ProfileModel.findOne({email: userEmail}).select('name'));
+        const userNameList = await Promise.all(userNamePromises);
+        const response = userNameList.map((profile) => profile.name);
+        res.json(response);
     } catch (err) {
-        res.json(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
+//GOOD
 //Get other profiles
 profileRouter.get('/other/:profileId', async (req, res) => {
     try {
         const response = await ProfileModel.findById(req.params.profileId);
         res.json(response);
     } catch (err) {
-        res.json(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
+//GOOD
 //Get search results based on profile's email, name, degree, currentModules, academicGoals, personalInterest
 profileRouter.get('/results/:queryId', async (req, res) => {
     try {
@@ -76,22 +83,30 @@ profileRouter.get('/results/:queryId', async (req, res) => {
     }
 });
 
-profileRouter.post('/edit', async (req, res) => {
-    const profile = new ProfileModel(req.body);
+//GOOD
+profileRouter.post('/', async (req, res) => {
     try {
+        let updatedModules = [ ...req.body.currentModules ];
+        updatedModules = updatedModules.map((module) => module.toUpperCase());
+        const updatedProfile = { ...req.body, currentModules: updatedModules };
+        const profile = new ProfileModel(updatedProfile);
         const response = await profile.save();
         res.json(response);
     } catch (err) {
-        res.json(err);
+        res.status(500).json({ error: err.message });
     }
 });
 
-profileRouter.put('/edit/:email', async (req, res) => {
+//GOOD
+profileRouter.put('/:email', async (req, res) => {
     try {
-        const response = await ProfileModel.findOneAndUpdate({email: req.params.email}, req.body, { new: true });
+        let updatedModules = [ ...req.body.currentModules ];
+        updatedModules = updatedModules.map((module) => module.toUpperCase());
+        const updatedProfile = { ...req.body, currentModules: updatedModules };
+        const response = await ProfileModel.findOneAndUpdate({email: req.params.email}, updatedProfile, { new: true });
         res.json(response);
     } catch (err) {
-        res.json(err);
+        res.status(500).json({ error: err.message });
     }
 });
 

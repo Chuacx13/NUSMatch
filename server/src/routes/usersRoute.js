@@ -7,25 +7,41 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
-userRouter.get('/users', async (req, res) => {
+//GOOD
+//Check whether email is verified
+userRouter.get('/:email', async (req, res) => {
   try {
-    const listUsersResult = await admin.auth().listUsers();
-    const userList = listUsersResult.users;
-    res.json(userList);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch users' });
+    const response = (await admin.auth().getUserByEmail(req.params.email)).emailVerified;
+    res.json(response);
+  } catch (err) {
+    if (err.code === 'auth/user-not-found') {
+      res.status(404).json({ error: 'auth/user-not-found' });
+    } else {
+      res.status(500).json({ error: err.message });
+    }
   }
 });
 
-userRouter.get('/emails', async (req, res) => {
+//GOOD
+//Check if users are registered
+userRouter.get('/users/:emails', async (req, res) => {
   try {
+    let isUserInDatabase = true; 
     const listUsersResult = await admin.auth().listUsers();
     const userList = listUsersResult.users;
-    const userEmails = []
-    userList.forEach((user) => userEmails.push(user.email));
-    res.json(userEmails);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch users' });
+    const userEmailList = userList.map((user) => user.email);
+    const emailList = req.params.emails.split(',');
+    for (const member of emailList) {
+      if (userEmailList.includes(member)) {
+        continue;
+      } else {
+        isUserInDatabase = false;
+        break;
+      }
+    };
+    res.json(isUserInDatabase);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

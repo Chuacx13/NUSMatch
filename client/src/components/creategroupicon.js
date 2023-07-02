@@ -23,11 +23,9 @@ export const CreateGroupIcon = () => {
   };
 
   return (
-    <div className='link'>
-        <IconButton arial-label='CreateGroup' sx={iconButtonStyles} onClick={goToCreateGroup}>
-          <GroupsIcon sx={individualButtonStyles}/>
-          <div className='tooltip'> Create Group </div>
-        </IconButton>
-    </div>
+    <IconButton className='link' arial-label='CreateGroup' sx={iconButtonStyles} onClick={goToCreateGroup}>
+      <GroupsIcon sx={individualButtonStyles}/>
+      <div className='tooltip'> Create Group </div>
+    </IconButton>
   )
 }

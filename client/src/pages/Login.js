@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { auth } from '../config/firebase';
-import { signInWithEmailAndPassword, signOut } from 'firebase/auth'; 
+import { signInWithEmailAndPassword } from 'firebase/auth'; 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -22,30 +22,26 @@ function Login() {
     setEmail('');
     setPassword('');
   }
-  
+
   const login = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/auth/users');
-      const isEmailVerified = response.data
-                                .filter((user) => user.email === email + '@u.nus.edu' )
-                                .map((user) => user.emailVerified);
-      const doesUserExist = response.data
-                                .filter((user) => user.email === email + '@u.nus.edu' );                       
-      
-      if (!doesUserExist[0]) {
-        setLoginStatus('User does not exist. Sign up first!');              
-      } else if (!isEmailVerified[0]) {
-        setLoginStatus('Email not verified. Verify before logging in');
-      } else {
+      const userEmail = email + '@u.nus.edu';
+      const response = await axios.get(`http://localhost:3001/auth/${userEmail}`);
+      if (response.data) {
+        console.log(response.data);
+        console.log('help');
         await signInWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         navigate('/');
+      } else {
+        setLoginStatus('Email not verified. Verify before logging in');
       }
     } catch (err) {
-      console.error(err);
       if (err.code === 'auth/wrong-password') {
         setLoginStatus('NUSNET ID and Password does not match.');
-      } else if (err.code === 'auth/user-not-found') {
+      } else if (err.code === 'auth/user-not-found' || err.response.status === 404) {
         setLoginStatus('User does not exist. Sign up first!');
+      } else {
+        console.error(err);
       }
     }
   };

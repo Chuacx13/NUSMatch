@@ -3,17 +3,25 @@ import axios from 'axios';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/groupdetails.css';
 
 function GroupDetails() {
     
     const navigate = useNavigate();
-    const updatedGroup = useRef({});
-    const [group, setGroup] = useState({});
-    const [memberList, setMemberList] = useState([]);
     const [user] = useAuthState(auth);
     const userEmail = user.email;
+
+    const [group, setGroup] = useState({
+        groupName: '',
+        groupStatus: '',
+        groupDescription: '',
+        leader: userEmail,
+        modules: [],
+        members: []
+    });
+    const [nameList, setNameList] = useState([]);
+    
 
     useEffect(() => {
         const groupId = localStorage.getItem('resultId');
@@ -21,22 +29,18 @@ function GroupDetails() {
         const fetchGroupDetails = async() => {
             try {
                 const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
-                updatedGroup.current.value = response.data;
-                fetchMemberList(updatedGroup.current.value.members);
-                setGroup(updatedGroup.current.value);
+                await fetchNameList(response.data.members);
+                setGroup(response.data);
             } catch (err) {
                 console.error(err);
             }
         }
 
-        const fetchMemberList = async(emailList) => {
+        const fetchNameList = async(emailList) => {
             try {
-                const tempMemberList = [];
-                for (const email of emailList) {
-                    const response = await axios.get(`http://localhost:3001/profile/names/${email}`);
-                    tempMemberList.push(response.data);
-                }
-                setMemberList(tempMemberList);
+                const emails = emailList.join(',');
+                const response = await axios.get(`http://localhost:3001/profile/names/${emails}`);
+                setNameList(response.data);
             } catch (err) {
                 console.error(err);
             }
@@ -45,26 +49,27 @@ function GroupDetails() {
         fetchGroupDetails();
     }, [group.members]);
 
-    const goToEditGroup = () => {
-        navigate('/editgroup');
-    };
-
     const isLeader = () => {
         return group.leader === userEmail;
     };
 
     const isMember = () => {
-        return group?.members?.includes(userEmail);
+        return group.members.includes(userEmail);
     };
 
     const isPrivateGroup = () => {
         return group.groupStatus === 'Private';
     };
 
+    const goToEditGroup = () => {
+        navigate('/editgroup');
+    };
+
     const goToChat = () => {
         navigate('/groupchat');
     };
 
+    //ATTENTION!
     const joinGroup = async() => {
         const groupId = localStorage.getItem('resultId');
         if (isPrivateGroup()) {
@@ -72,10 +77,11 @@ function GroupDetails() {
             return;
         } else {
             try {
-                const updatedMembers = [...group.members];
-                updatedMembers.push(userEmail);
-                updatedGroup.current.value = { ...group, members: updatedMembers};
-                const response = await axios.put(`http://localhost:3001/group/edit/${groupId}`, updatedGroup.current.value);
+                const data = {
+                    groupData: group,
+                    userEmail: userEmail
+                }
+                await axios.put(`http://localhost:3001/group/join/${groupId}`, data);
             } catch (err) {
                 console.error(err);
             }
@@ -85,12 +91,14 @@ function GroupDetails() {
     const leaveGroup = async() => {
         const groupId = localStorage.getItem('resultId');
         try {
-            let updatedMembers = [...group.members];
-            updatedMembers = updatedMembers.filter((member) => member !== userEmail);
-            const updatedLeader = updatedMembers[0];
-            //TO DO: If updateLeader is null, delete the group from database
-            updatedGroup.current.value = { ...group, leader: updatedLeader, members: updatedMembers};
-            const response = await axios.put(`http://localhost:3001/group/edit/${groupId}`, updatedGroup.current.value);
+            const data = {
+                groupData: group,
+                userEmail: userEmail
+            }
+            const response = await axios.put(`http://localhost:3001/group/leave/${groupId}`, data);
+            if (response.data.message === 'Group deleted successfully') {
+                navigate('/group');
+            }
         } catch (err) {
             console.error(err);
         }
@@ -111,17 +119,16 @@ function GroupDetails() {
                 </div>
                 <p className='group-description'> {group.groupDescription} </p>
 
-               
                 <h2 className='group-subheaders'> Common Modules </h2>
                 <div className='modules-container'>
                     {group.modules?.map((module, index) => (
                         <p className='group-modules' key={index}> {module} </p>
                     ))}
                 </div>
-
+            
                 <div className='members-container'> 
                     <h2 className='group-subheaders'> Members </h2>
-                    {memberList.map((member, index) => (
+                    {nameList.map((member, index) => (
                         <p className='group-members' key={index}> {`${index + 1}. ${member}`} </p>
                     ))}
                 </div>

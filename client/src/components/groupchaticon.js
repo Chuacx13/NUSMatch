@@ -23,11 +23,9 @@ export const GroupChatIcon = () => {
   };
 
   return (
-    <div className='link'>
-        <IconButton arial-label='Chat' sx={iconButtonStyles} onClick={goToChat}>
-          <ChatIcon style={individualButtonStyles}/>
-          <div className='tooltip'> Group Chats </div>
-        </IconButton>
-    </div>
+    <IconButton className='link' arial-label='Chat' sx={iconButtonStyles} onClick={goToChat}>
+      <ChatIcon style={individualButtonStyles}/>
+      <div className='tooltip'> Group Chats </div>
+    </IconButton>
   )
 }

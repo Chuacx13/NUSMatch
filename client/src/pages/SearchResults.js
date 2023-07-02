@@ -10,7 +10,8 @@ import '../styles/group.css';
 function SearchResults() {
 
   const navigate = useNavigate();
-  const [results, setResults] = useState([]); //Default state ('Profile) is where user will see profiles related to their search query
+  const [results, setResults] = useState([]); 
+  //Default state ('Profile) is where user will see profiles related to their search query
   //By toggling the button to set default state to 'Group' will allow users to see groups related to their search query
   const [defaultState, setDefaultState] = useState('profile');
 
@@ -27,7 +28,6 @@ function SearchResults() {
           setResults(response.data.filter((result)=>result.email !== userEmail));
         } else {
           const response = await axios.get(`http://localhost:3001/group/results/${queryId}`);
-          console.log(results.groupDescription);
           setResults(response.data);
         }         
       } catch (err) {

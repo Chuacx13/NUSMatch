@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/editform.css';
 
@@ -19,7 +19,6 @@ function EditGroup() {
     modules: [],
     members: []
   });
-  const finalGroup = useRef({});
   const [createGroupStatus, setCreateGroupStatus] = useState('');
 
   useEffect(() => {
@@ -27,9 +26,8 @@ function EditGroup() {
 
       const fetchGroupDetails = async() => {
           try {
-              const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
-              const updatedMembers = response.data['members'].filter((member) => member !== response.data.leader);
-              setGroup({...response.data, ['members']: updatedMembers});
+              const response = await axios.get(`http://localhost:3001/group/edits/${groupId}`);
+              setGroup(response.data);
           } catch (err) {
               console.error(err);
           }
@@ -64,15 +62,9 @@ function EditGroup() {
   }
 
   async function areMembersInDatabase(group) {
-    const response = await axios.get('http://localhost:3001/auth/emails');
-    for (const member of group.members) {
-      if (response.data.includes(member)) {
-        continue;
-      } else {
-        return false;
-      }
-    }
-    return true;
+    const emails = group.members.join(',');
+    const response = await axios.get(`http://localhost:3001/auth/users/${emails}`)
+    return response.data;
   };
 
   async function isLeader() {
@@ -88,16 +80,11 @@ function EditGroup() {
       const isGroupLeader = await isLeader();
       const groupId = localStorage.getItem('resultId');
       if (isExistingUser && isGroupLeader) {
-        //Add self to list of members
-        const updatedMembers = [...group.members];
-        updatedMembers.push(userEmail);
-        //Capitalise all modules added
-        let updatedModules = [...group.modules];
-        updatedModules = updatedModules.map((module) => module.toUpperCase());
-        //Final edits to the 'group' to be saved
-        finalGroup.current.value = { ...group, members: updatedMembers, modules: updatedModules };
-        //Update group properties in mongodb
-        const response = await axios.put(`http://localhost:3001/group/edit/${groupId}`, finalGroup.current.value);
+        const data = {
+          groupData: group,
+          userEmail: userEmail
+        }
+        const response = await axios.put(`http://localhost:3001/group/${groupId}`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {
@@ -120,9 +107,9 @@ function EditGroup() {
       <form className='edit-form' onSubmit={updateGroup}>
         <div className='edit-form-header-container'> 
           <h1 className='edit-form-header'> Edit &lt; {group.groupName} &gt; </h1>
-          {createGroupStatus && <p className='create-group-status'>{createGroupStatus}</p>}
           <button type='button' className='edit-form-back-button' onClick={backtoGroupDetails}> Back </button>
         </div>
+        {createGroupStatus && <p className='create-group-status'>{createGroupStatus}</p>}
 
         <label className='edit-form-label' htmlFor='groupName'>Group Name</label>
         <input className='edit-form-inputs' type='text' id='groupName' name='groupName' value={group.groupName} onChange={handleChange} required />
@@ -157,8 +144,8 @@ function EditGroup() {
           Add Module
         </button>
         
-        <label className='edit-form-label' htmlFor='members'>Add your friends!</label>
-        {group.members.filter((member) => member !== group.leader).map((member, index) => (
+        <label className='edit-form-label' htmlFor='members'>Add your friends by indicating their email addresses below!</label>
+        {group.members.map((member, index) => (
           <div key={index}>
             <input
               type='text'

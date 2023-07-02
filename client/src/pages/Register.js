@@ -3,7 +3,7 @@ import Wallpaper from '../assets/wallpaper.jpg';
 import { auth } from '../config/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth'; 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/register.css';
 import '../styles/overlay.css';
 
@@ -13,6 +13,8 @@ function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [registerStatus, setRegisterStatus] = useState('');
+
+  const navigate = useNavigate();
 
   const noRefresh = async (e) => {
     e.preventDefault();
@@ -25,9 +27,9 @@ function Register() {
     try {
       if (password === confirmPassword) {
         await createUserWithEmailAndPassword(auth, email + '@u.nus.edu', password);
-        await sendEmailVerification(auth.currentUser);
-        await signOut(auth);
-        setRegisterStatus('Account successfully created. Verify your email before logging in.');
+        sendEmailVerification(auth.currentUser);
+        signOut(auth);
+        navigate('/');
       } else {
         setRegisterStatus('Ensure that you keyed in the same password.');
       }

@@ -79,7 +79,8 @@ function Navbar() {
       {!isNoBackground && <div className='overlay' style={{zIndex: -1}}/>}
       <div className='left-side'></div>
       <div className='middle'>
-        {isSearching && <form className='search-form' onSubmit={queryResults} disabled={!profile}>
+        {isSearching && 
+        <form className='search-form' onSubmit={queryResults} disabled={!profile}>
           <input
             type='text'
             className='searchbar'

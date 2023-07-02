@@ -24,10 +24,6 @@ function ProfileDetails() {
     fetchUserProfile();
   }, []);
 
-  const goToEditProfile = () => {
-    navigate('/editprofile');
-  };
-
   return (
     <div className='profile-page'>
       {!profile ? navigate('/editprofile') :
