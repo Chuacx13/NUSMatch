@@ -1,6 +1,6 @@
 const express = require('express');
 const admin = require('firebase-admin');
-const serviceAccount = require(process.env.FIREBASE_ADMIN_SDK_KEY_PATH);
+const serviceAccount = JSON.parse(process.env.FIREBASE_ADMIN_SDK_KEY_PATH);
 const userRouter = express.Router();
 
 admin.initializeApp({
