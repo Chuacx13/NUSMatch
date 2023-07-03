@@ -48,7 +48,7 @@ function CreateGroup() {
 
   async function isUserInDatabase(group) {
     const emails = group.members.join(',');
-    const response = await axios.get(`http://localhost:3001/auth/users/${emails}`)
+    const response = await axios.get(`https://nusmatch-api.onrender.com/auth/users/${emails}`)
     return response.data;
   };
 
@@ -61,7 +61,7 @@ function CreateGroup() {
           groupData: group,
           userEmail: userEmail
         }
-        const response = await axios.post('http://localhost:3001/group', data);
+        const response = await axios.post('https://nusmatch-api.onrender.com/group', data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {

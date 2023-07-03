@@ -23,7 +23,7 @@ export const AuthInfo = () => {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
         if (response.data) {
           setProfile(true);
         }

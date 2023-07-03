@@ -28,7 +28,7 @@ function GroupDetails() {
 
         const fetchGroupDetails = async() => {
             try {
-                const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
+                const response = await axios.get(`https://nusmatch-api.onrender.com/group/other/${groupId}`);
                 await fetchNameList(response.data.members);
                 setGroup(response.data);
             } catch (err) {
@@ -39,7 +39,7 @@ function GroupDetails() {
         const fetchNameList = async(emailList) => {
             try {
                 const emails = emailList.join(',');
-                const response = await axios.get(`http://localhost:3001/profile/names/${emails}`);
+                const response = await axios.get(`https://nusmatch-api.onrender.com/profile/names/${emails}`);
                 setNameList(response.data);
             } catch (err) {
                 console.error(err);

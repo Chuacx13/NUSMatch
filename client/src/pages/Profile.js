@@ -17,7 +17,7 @@ function Profile() {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
         setProfile(response.data);
       } catch (err) {
         console.error(err);

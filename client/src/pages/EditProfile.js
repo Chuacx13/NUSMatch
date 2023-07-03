@@ -26,7 +26,7 @@ function EditProfile() {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
         if (response.data) {
           setProfile(response.data);
           setProfileCreated(true);
@@ -68,10 +68,10 @@ function EditProfile() {
     e.preventDefault();
     try {
       if (!profileCreated) {
-        await axios.post('http://localhost:3001/profile', { ...profile });
+        await axios.post('https://nusmatch-api.onrender.com/profile', { ...profile });
         navigate('/profile');
       } else {
-        await axios.put(`http://localhost:3001/profile/${userEmail}`, { ...profile });
+        await axios.put(`https://nusmatch-api.onrender.com/profile/${userEmail}`, { ...profile });
         navigate('/profile');
       }
     } catch (err) {

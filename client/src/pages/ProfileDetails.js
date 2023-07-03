@@ -14,7 +14,7 @@ function ProfileDetails() {
     const fetchUserProfile = async() => {
       try {
         const userId = localStorage.getItem('resultId');
-        const response = await axios.get(`http://localhost:3001/profile/other/${userId}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/other/${userId}`);
         setProfile(response.data);
       } catch (err) {
         console.error(err);

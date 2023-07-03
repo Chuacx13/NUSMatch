@@ -26,7 +26,7 @@ function EditGroup() {
 
       const fetchGroupDetails = async() => {
           try {
-              const response = await axios.get(`http://localhost:3001/group/edits/${groupId}`);
+              const response = await axios.get(`https://nusmatch-api.onrender.com/group/edits/${groupId}`);
               setGroup(response.data);
           } catch (err) {
               console.error(err);
@@ -63,13 +63,13 @@ function EditGroup() {
 
   async function areMembersInDatabase(group) {
     const emails = group.members.join(',');
-    const response = await axios.get(`http://localhost:3001/auth/users/${emails}`)
+    const response = await axios.get(`https://nusmatch-api.onrender.com/auth/users/${emails}`)
     return response.data;
   };
 
   async function isLeader() {
     const groupId = localStorage.getItem('resultId');
-    const response = await axios.get(`http://localhost:3001/group/other/${groupId}`);
+    const response = await axios.get(`https://nusmatch-api.onrender.com/group/other/${groupId}`);
     return userEmail === response.data.leader;
   };
 
@@ -84,7 +84,7 @@ function EditGroup() {
           groupData: group,
           userEmail: userEmail
         }
-        const response = await axios.put(`http://localhost:3001/group/${groupId}`, data);
+        const response = await axios.put(`https://nusmatch-api.onrender.com/group/${groupId}`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {

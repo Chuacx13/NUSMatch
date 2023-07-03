@@ -24,10 +24,10 @@ function SearchResults() {
     const fetchSearchResults = async () => {
       try {
         if (isDefault()) {
-          const response = await axios.get(`http://localhost:3001/profile/results/${queryId}`);
+          const response = await axios.get(`https://nusmatch-api.onrender.com/profile/results/${queryId}`);
           setResults(response.data.filter((result)=>result.email !== userEmail));
         } else {
-          const response = await axios.get(`http://localhost:3001/group/results/${queryId}`);
+          const response = await axios.get(`https://nusmatch-api.onrender.com/group/results/${queryId}`);
           setResults(response.data);
         }         
       } catch (err) {

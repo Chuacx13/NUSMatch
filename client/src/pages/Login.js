@@ -26,7 +26,7 @@ function Login() {
   const login = async () => {
     try {
       const userEmail = email + '@u.nus.edu';
-      const response = await axios.get(`http://localhost:3001/auth/${userEmail}`);
+      const response = await axios.get(`https://nusmatch-api.onrender.com/auth/${userEmail}`);
       if (response.data) {
         console.log(response.data);
         console.log('help');

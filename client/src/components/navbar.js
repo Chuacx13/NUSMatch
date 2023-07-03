@@ -37,7 +37,7 @@ function Navbar() {
     const fetchUserProfile = async() => {
       try {
         const userEmail = user?.email;
-        const response = await axios.get(`http://localhost:3001/profile/${userEmail}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
         if (response.data) {
           setProfile(true);
         }

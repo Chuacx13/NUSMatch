@@ -16,7 +16,7 @@ function Group() {
   useEffect(() => {
     const fetchUserGroups = async() => {
       try {
-        const response = await axios.get(`http://localhost:3001/group/${userEmail}`);
+        const response = await axios.get(`https://nusmatch-api.onrender.com/group/${userEmail}`);
         setGroups(response.data);
       } catch (err) {
         console.error(err);
