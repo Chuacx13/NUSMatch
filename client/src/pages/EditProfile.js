@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/editform.css';
 
