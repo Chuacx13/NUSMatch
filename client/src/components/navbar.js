@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Wallpaper from '../assets/wallpaper.jpg';
 import SearchIcon from '@mui/icons-material/Search';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { CreateGroupIcon } from './creategroupicon';
 import { AccountIcon } from './accounticon';
 import { GroupChatIcon } from './groupchaticon';
@@ -16,6 +17,7 @@ import '../styles/overlay.css';
 
 function Navbar() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
 
@@ -37,7 +39,7 @@ function Navbar() {
     const fetchUserProfile = async() => {
       try {
         const userEmail = user?.email;
-        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
+        const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
         if (response.data) {
           setProfile(true);
         }

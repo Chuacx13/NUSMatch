@@ -16,6 +16,7 @@ import SearchResults from './pages/SearchResults';
 import Chat from './pages/Chat';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
+import EditProfileRoute from './utils/EditProfileRoute';
 import { auth } from './config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -48,7 +49,6 @@ function App() {
           </Route>
           <Route element={<PrivateRoutes />}>
             <Route path='/profile' element={<Profile/>}/>
-            <Route path='/editprofile' element={<EditProfile/>}/>
             <Route path='/profiledetails' element={<ProfileDetails/>}/>
             <Route path='/group' element={<Group/>}/>
             <Route path='/creategroup' element={<CreateGroup/>}/>
@@ -56,6 +56,9 @@ function App() {
             <Route path='/editgroup' element={<EditGroup/>}/>
             <Route path='/searchresults' element={<SearchResults/>}/>
             <Route path='/chat' element={<Chat/>}/>
+          </Route>
+          <Route element={<EditProfileRoute />}>
+            <Route path='/editprofile' element={<EditProfile/>}/>
           </Route>
         </Routes>
       </Router>

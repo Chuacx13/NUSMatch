@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ import '../styles/groupdetails.css';
 
 function GroupDetails() {
     
+    const apiUrl = useApiUrl();
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
     const userEmail = user.email;
@@ -28,7 +30,7 @@ function GroupDetails() {
 
         const fetchGroupDetails = async() => {
             try {
-                const response = await axios.get(`https://nusmatch-api.onrender.com/group/other/${groupId}`);
+                const response = await axios.get(`${apiUrl}/group/other/${groupId}`);
                 await fetchNameList(response.data.members);
                 setGroup(response.data);
             } catch (err) {
@@ -39,13 +41,13 @@ function GroupDetails() {
         const fetchNameList = async(emailList) => {
             try {
                 const emails = emailList.join(',');
-                const response = await axios.get(`https://nusmatch-api.onrender.com/profile/names/${emails}`);
+                const response = await axios.get(`${apiUrl}/profile/names/${emails}`);
                 setNameList(response.data);
             } catch (err) {
                 console.error(err);
             }
         };
-
+        
         fetchGroupDetails();
     }, [group.members]);
 
@@ -81,7 +83,7 @@ function GroupDetails() {
                     groupData: group,
                     userEmail: userEmail
                 }
-                await axios.put(`http://localhost:3001/group/join/${groupId}`, data);
+                await axios.put(`${apiUrl}/group/join/${groupId}`, data);
             } catch (err) {
                 console.error(err);
             }
@@ -95,7 +97,7 @@ function GroupDetails() {
                 groupData: group,
                 userEmail: userEmail
             }
-            const response = await axios.put(`http://localhost:3001/group/leave/${groupId}`, data);
+            const response = await axios.put(`${apiUrl}/group/leave/${groupId}`, data);
             if (response.data.message === 'Group deleted successfully') {
                 navigate('/group');
             }

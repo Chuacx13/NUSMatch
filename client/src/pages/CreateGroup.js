@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState } from 'react';
@@ -8,6 +9,7 @@ import '../styles/editform.css';
 
 function CreateGroup() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -46,29 +48,46 @@ function CreateGroup() {
     setGroup({ ...group, [name]: currentValue });
   }
 
-  async function isUserInDatabase(group) {
-    const emails = group.members.join(',');
-    const response = await axios.get(`https://nusmatch-api.onrender.com/auth/users/${emails}`)
-    return response.data;
+  async function areMembersProfileCreated(group) {
+    if (group.members.length === 0) {
+      return true;
+    } else {
+      const emails = group.members.join(',');
+      const response = await axios.get(`${apiUrl}/profile/users/${emails}`)
+      return response.data;
+    }
+  };
+
+  async function areMembersRegistered(group) {
+    if (group.members.length === 0) {
+      return true;
+    } else {
+      const emails = group.members.join(',');
+      const response = await axios.get(`${apiUrl}/auth/users/${emails}`)
+      return response.data;
+    }
   };
 
   const saveGroup = async(e) => {
     e.preventDefault();
     try {
-      const isExistingUser = await isUserInDatabase(group);
-      if (isExistingUser) {
+      const membersProfileCreated = await areMembersProfileCreated(group);
+      const membersRegistered = await areMembersRegistered(group);
+      if (membersProfileCreated) {
         const data = {
           groupData: group,
           userEmail: userEmail
         }
-        const response = await axios.post('https://nusmatch-api.onrender.com/group', data);
+        const response = await axios.post(`${apiUrl}/group`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {
           navigate('/group');
         } 
+      } else if (!membersRegistered) {
+        setCreateGroupStatus('Ensure that your friends have registered before adding them :)');
       } else {
-        setCreateGroupStatus('Ensure that your friends have signed up before adding them :)');
+        setCreateGroupStatus('Ensure that your friends have set up their profile before adding them :)');
       }
     } catch (err) {
       console.error(err);

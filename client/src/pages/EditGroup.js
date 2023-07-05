@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import '../styles/editform.css';
 
 function EditGroup() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -26,7 +28,7 @@ function EditGroup() {
 
       const fetchGroupDetails = async() => {
           try {
-              const response = await axios.get(`https://nusmatch-api.onrender.com/group/edits/${groupId}`);
+              const response = await axios.get(`${apiUrl}/group/edits/${groupId}`);
               setGroup(response.data);
           } catch (err) {
               console.error(err);
@@ -61,37 +63,54 @@ function EditGroup() {
     setGroup({ ...group, [name]: currentValue });
   }
 
-  async function areMembersInDatabase(group) {
-    const emails = group.members.join(',');
-    const response = await axios.get(`https://nusmatch-api.onrender.com/auth/users/${emails}`)
-    return response.data;
+  async function areMembersProfileCreated(group) {
+    if (group.members.length === 0) {
+      return true;
+    } else {
+      const emails = group.members.join(',');
+      const response = await axios.get(`${apiUrl}/profile/users/${emails}`)
+      return response.data;
+    }
+  };
+
+  async function areMembersRegistered(group) {
+    if (group.members.length === 0) {
+      return true;
+    } else {
+      const emails = group.members.join(',');
+      const response = await axios.get(`${apiUrl}/auth/users/${emails}`)
+      return response.data;
+    }
   };
 
   async function isLeader() {
     const groupId = localStorage.getItem('resultId');
-    const response = await axios.get(`https://nusmatch-api.onrender.com/group/other/${groupId}`);
+    const response = await axios.get(`${apiUrl}/group/other/${groupId}`);
     return userEmail === response.data.leader;
   };
 
   const updateGroup = async(e) => {
     e.preventDefault();
     try {
-      const isExistingUser = await areMembersInDatabase(group);
+      const membersProfileCreated = await areMembersProfileCreated(group);
+      const membersRegistered = await areMembersRegistered(group);
       const isGroupLeader = await isLeader();
       const groupId = localStorage.getItem('resultId');
-      if (isExistingUser && isGroupLeader) {
+      if (membersProfileCreated && isGroupLeader) {
         const data = {
           groupData: group,
           userEmail: userEmail
         }
-        const response = await axios.put(`https://nusmatch-api.onrender.com/group/${groupId}`, data);
+        const response = await axios.put(`${apiUrl}/group/${groupId}`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
         } else {
           navigate('/groupdetails');
         } 
+      } else if (!membersRegistered) {
+        setCreateGroupStatus('Ensure that your friends have registered before adding them :)');
       } else {
-        setCreateGroupStatus('Ensure that your friends have signed up before adding them :)');
+        setCreateGroupStatus('Ensure that your friends have set up their profile before adding them :)');
       }
     } catch (err) {
       console.error(err);
@@ -115,7 +134,7 @@ function EditGroup() {
         <input className='edit-form-inputs' type='text' id='groupName' name='groupName' value={group.groupName} onChange={handleChange} required />
 
         <label className='edit-form-label' htmlFor='groupStatus'>Group Status</label>
-        <select className='edit-form-inputs' id='groupStatus' name='groupStatus' value={group.groupStatus} onChange={handleChange} requirformed>
+        <select className='edit-form-inputs' id='groupStatus' name='groupStatus' value={group.groupStatus} onChange={handleChange} required>
           <option value=''>Select a status</option>
           <option value='Private'> Private </option>
           <option value='Public'> Public </option>

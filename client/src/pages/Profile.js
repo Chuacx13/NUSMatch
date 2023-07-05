@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import DefaultProfileImage from '../assets/defaultprofileimg.jpg';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +10,7 @@ import '../styles/profile.css';
 
 function Profile() {
 
+  const apiUrl = useApiUrl();
   const [profile, setProfile] = useState({});
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -17,7 +19,7 @@ function Profile() {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
+        const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
         setProfile(response.data);
       } catch (err) {
         console.error(err);

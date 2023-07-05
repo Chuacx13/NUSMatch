@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PersonIcon from '@mui/icons-material/Person';
 import SearchIcon from '@mui/icons-material/Search';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ import { useState, useEffect } from 'react';
 
 export const AuthInfo = () => {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   
   //If profile not set up, users cannot connect with other users
@@ -23,7 +25,7 @@ export const AuthInfo = () => {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
+        const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
         if (response.data) {
           setProfile(true);
         }

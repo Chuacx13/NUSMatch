@@ -1,35 +1,31 @@
 import React from 'react';
 import axios from 'axios';
 import Wallpaper from '../assets/wallpaper.jpg';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth'; 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/login.css';
 import '../styles/overlay.css';
 
 function Login() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState('');
 
-  const noRefresh = async (e) => {
-    e.preventDefault();
-    setEmail('');
-    setPassword('');
-  }
-
-  const login = async () => {
+  const login = async (e) => {
     try {
+      e.preventDefault();
+      setEmail('');
+      setPassword('');
       const userEmail = email + '@u.nus.edu';
-      const response = await axios.get(`https://nusmatch-api.onrender.com/auth/${userEmail}`);
+      const response = await axios.get(`${apiUrl}/auth/${userEmail}`);
       if (response.data) {
-        console.log(response.data);
-        console.log('help');
         await signInWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         navigate('/');
       } else {
@@ -49,7 +45,7 @@ function Login() {
   return (
     <div className='login-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
-      <form className='login-form' onSubmit={noRefresh}>
+      <form className='login-form' onSubmit={login}>
         {loginStatus && (<p className='login-status'> {loginStatus} </p>)}
         <h1> Start Connecting! </h1>
         <input 
@@ -65,7 +61,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button onClick={login}> Log In </button>
+        <button> Log In </button>
         <p> New to NUSMatch? <Link to='/register'> Join Us! </Link> </p>
       </form>
     </div>

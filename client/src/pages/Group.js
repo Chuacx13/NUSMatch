@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
@@ -8,6 +9,7 @@ import '../styles/group.css';
 
 function Group() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -16,7 +18,7 @@ function Group() {
   useEffect(() => {
     const fetchUserGroups = async() => {
       try {
-        const response = await axios.get(`https://nusmatch-api.onrender.com/group/${userEmail}`);
+        const response = await axios.get(`${apiUrl}/group/${userEmail}`);
         setGroups(response.data);
       } catch (err) {
         console.error(err);

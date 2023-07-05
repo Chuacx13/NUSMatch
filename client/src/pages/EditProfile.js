@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +9,7 @@ import '../styles/editform.css';
 
 function EditProfile() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -26,7 +28,7 @@ function EditProfile() {
   useEffect(() => {
     const fetchUserProfile = async() => {
       try {
-        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/${userEmail}`);
+        const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
         if (response.data) {
           setProfile(response.data);
           setProfileCreated(true);
@@ -68,10 +70,10 @@ function EditProfile() {
     e.preventDefault();
     try {
       if (!profileCreated) {
-        await axios.post('https://nusmatch-api.onrender.com/profile', { ...profile });
+        await axios.post(`${apiUrl}/profile`, { ...profile });
         navigate('/profile');
       } else {
-        await axios.put(`https://nusmatch-api.onrender.com/profile/${userEmail}`, { ...profile });
+        await axios.put(`${apiUrl}/profile/${userEmail}`, { ...profile });
         navigate('/profile');
       }
     } catch (err) {

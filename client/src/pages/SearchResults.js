@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
@@ -9,6 +10,7 @@ import '../styles/group.css';
 
 function SearchResults() {
 
+  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [results, setResults] = useState([]); 
   //Default state ('Profile) is where user will see profiles related to their search query
@@ -24,10 +26,10 @@ function SearchResults() {
     const fetchSearchResults = async () => {
       try {
         if (isDefault()) {
-          const response = await axios.get(`https://nusmatch-api.onrender.com/profile/results/${queryId}`);
+          const response = await axios.get(`${apiUrl}/profile/results/${queryId}`);
           setResults(response.data.filter((result)=>result.email !== userEmail));
         } else {
-          const response = await axios.get(`https://nusmatch-api.onrender.com/group/results/${queryId}`);
+          const response = await axios.get(`${apiUrl}/group/results/${queryId}`);
           setResults(response.data);
         }         
       } catch (err) {

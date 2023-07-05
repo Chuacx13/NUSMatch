@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { auth } from '../config/firebase';
-import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth'; 
-import { useState } from 'react';
+import { createUserWithEmailAndPassword, sendEmailVerification, signOut } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/register.css';
 import '../styles/overlay.css';
@@ -16,15 +15,9 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const noRefresh = async (e) => {
-    e.preventDefault();
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-  }
-
-  const register = async () => {  
+  const register = async (e) => {  
     try {
+      e.preventDefault();
       if (password === confirmPassword) {
         await createUserWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         sendEmailVerification(auth.currentUser);
@@ -44,7 +37,7 @@ function Register() {
   return (
     <div className='register-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
-      <form className='register-form' onSubmit={noRefresh}>
+      <form className='register-form' onSubmit={register}>
         {registerStatus && 
           (<p 
           className={registerStatus==='Account successfully created. Verify your email before logging in.' ? 'success' : 'failure'}> {registerStatus} 
@@ -70,7 +63,7 @@ function Register() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button onClick={register}> Register </button>
+        <button> Register </button>
         <p> Already have an account? <Link to='/login'> Get Connected Now! </Link> </p>
       </form>
     </div>

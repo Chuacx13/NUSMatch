@@ -29,6 +29,26 @@ profileRouter.get('/names/:emails', async (req, res) => {
     }
 });
 
+//Check if users have set up their profile
+profileRouter.get('/users/:emails', async (req, res) => {
+  try {
+    let isUserInDatabase = true; 
+    const emailList = req.params.emails.split(',');
+    for (const email of emailList) {
+        const response = await ProfileModel.findOne({email: email});
+        if (response) {
+            continue;
+        } else {
+            isUserInDatabase = false;
+            break;
+        }
+    };
+    res.json(isUserInDatabase);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 //GOOD
 //Get other profiles
 profileRouter.get('/other/:profileId', async (req, res) => {

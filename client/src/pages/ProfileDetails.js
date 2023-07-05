@@ -1,12 +1,14 @@
 import React from 'react';
 import axios from 'axios';
 import DefaultProfileImage from '../assets/defaultprofileimg.jpg';
+import { useApiUrl } from '../hooks/useApiUrl';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/profile.css';
 
 function ProfileDetails() {
 
+  const apiUrl = useApiUrl();
   const [profile, setProfile] = useState({});
   const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ function ProfileDetails() {
     const fetchUserProfile = async() => {
       try {
         const userId = localStorage.getItem('resultId');
-        const response = await axios.get(`https://nusmatch-api.onrender.com/profile/other/${userId}`);
+        const response = await axios.get(`${apiUrl}/profile/other/${userId}`);
         setProfile(response.data);
       } catch (err) {
         console.error(err);
