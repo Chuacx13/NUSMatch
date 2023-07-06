@@ -31,7 +31,7 @@
     background-color: rgba(255, 251, 251, 0.5);
     padding: 50px;
     z-index: 2;
-    border-radius: 14px;
+    border-radius: 30px;
 }
 
 .info-authenticated p {
@@ -47,18 +47,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
 }
 
 /*applies to home.js navbar.js*/
-.searchbar {
+.search-bar {
     position: relative;
-    width: 400px;
+    width: 460px;
     height: 30px;
     font-size: 20px;
-    border-radius: 10px;
-    border-color: black;
-    padding: 10px;
-    z-index: 2;
+    border: none;
+    outline: none;
+    padding-left: 6px;
+}
+
+/*applies to home.js navbar.js*/
+.search-icon {
+    font-size: 20px;
+}
+
+/*applies to home.js navbar.js*/
+.search-button {
+    border: none;
+    cursor: pointer;
 }
 
 .home h1 {

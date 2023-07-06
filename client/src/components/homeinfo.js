@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import PersonIcon from '@mui/icons-material/Person';
-import SearchIcon from '@mui/icons-material/Search';
 import { useApiUrl } from '../hooks/useApiUrl';
+import { FaSearch } from 'react-icons/fa';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
-import { Button, IconButton } from '@mui/material';
+import { Button } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 export const AuthInfo = () => {
@@ -18,6 +19,7 @@ export const AuthInfo = () => {
   //Search Button would be disabled
   const [profile, setProfile] = useState(false);
   const [query, setQuery] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const [user] = useAuthState(auth);
   const userEmail = user.email;
@@ -31,6 +33,8 @@ export const AuthInfo = () => {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -42,21 +46,10 @@ export const AuthInfo = () => {
     fontSize: 20,
     fontFamily: 'Arial', 
     backgroundColor: 'gray',
-    borderRadius: 10,
+    borderRadius: 20,
     padding: 2,
     marginBottom: 2
   };
-
-  const searchIconStyle = {
-    color: 'black',
-    fontSize: 46,
-    backgroundColor: 'gray',
-    padding: 3,
-    paddingLeft: 8,
-    margin: -12,
-    borderRadius: 10,
-    opacity: profile ? 1 : 0.3
-  }
 
   const queryResults = () => {
     localStorage.setItem('queryId', query);
@@ -71,27 +64,31 @@ export const AuthInfo = () => {
     navigate('/editprofile');
   };
 
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
     <div className='info-authenticated'>
       {!profile ?
       <>
-        <p> Finish setting up your profile before you connect with others </p>
+        <p> Finish setting up your profile before you can gain access to our features! </p>
         <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon />} onClick={goToEditProfile}>
           Set Up Profile  
         </Button>
       </>
       : null}
-      <form className='search-form' onSubmit={queryResults} disabled={!profile}>
+      <form className='search-form' onSubmit={queryResults}>
+        <button className='search-button' disabled={!profile}>
+          <FaSearch className='search-icon'/>
+        </button>
         <input
           type='text'
-          className='searchbar'
+          className='search-bar'
           value={query}
           onChange={handleInputChange}
           placeholder='Search'
         />
-        <IconButton arial-label='SearchButton' disabled={!profile}> 
-          <SearchIcon style={searchIconStyle} />
-        </IconButton>
       </form>
     </div>
   )

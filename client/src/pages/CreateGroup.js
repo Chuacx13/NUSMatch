@@ -81,13 +81,16 @@ function CreateGroup() {
         const response = await axios.post(`${apiUrl}/group`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
+          window.scrollTo(0, 0);
         } else {
           navigate('/group');
         } 
       } else if (!membersRegistered) {
         setCreateGroupStatus('Ensure that your friends have registered before adding them :)');
+        window.scrollTo(0, 0);
       } else {
         setCreateGroupStatus('Ensure that your friends have set up their profile before adding them :)');
+        window.scrollTo(0, 0);
       }
     } catch (err) {
       console.error(err);

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,6 +15,7 @@ function Group() {
   const [user] = useAuthState(auth);
   const userEmail = user.email;
   const [groups, setGroups] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserGroups = async() => {
@@ -22,6 +24,8 @@ function Group() {
         setGroups(response.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }; 
 
@@ -34,6 +38,10 @@ function Group() {
     localStorage.setItem('resultId', groupDetail._id );
     navigate('/groupdetails');
   };
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className='group-page'>

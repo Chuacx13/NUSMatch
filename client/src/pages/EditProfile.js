@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -24,6 +25,7 @@ function EditProfile() {
     status: '',
     personalInterest: []
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserProfile = async() => {
@@ -35,6 +37,8 @@ function EditProfile() {
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -81,16 +85,24 @@ function EditProfile() {
     }
   };
   
-  const goToProfile = () => {
-    navigate('/profile');
+  const goToPreviousPage = () => {
+    if (!profileCreated) {
+      navigate('/');
+    } else {
+      navigate('/profile')
+    }
   };
+
+  if (isLoading) {
+    return <Loading />
+  }
   
   return (
     <div className='edit-form-page'>
       <form className='edit-form' onSubmit={saveProfile}>
         <div className='edit-form-header-container'> 
           <h1 className='edit-form-header'> Edit Profile </h1>
-          <button type='button' className='edit-form-back-button' onClick={goToProfile}> Back </button> 
+          <button type='button' className='edit-form-back-button' onClick={goToPreviousPage}> Back </button> 
         </div>
         <label className='edit-form-label' htmlFor='name'>Name</label>
         <input className='edit-form-inputs' type='text' id='name' name='name' value={profile.name} onChange={handleChange} required />

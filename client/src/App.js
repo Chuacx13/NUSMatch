@@ -20,22 +20,14 @@ import EditProfileRoute from './utils/EditProfileRoute';
 import { auth } from './config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 
 function App() {
 
-  const [isLoading, setIsLoading] = useState(true);
   const [, loading] = useAuthState(auth);
 
-  useEffect(() => {
-    if (!loading) {
-      setIsLoading(false);
-    }
-  }, [loading]);
-  
   return (
     <> 
-      {isLoading ? (
+      {loading ? (
         <Loading/>
       ) : 
       <Router>

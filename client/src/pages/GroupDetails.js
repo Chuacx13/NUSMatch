@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -23,8 +24,8 @@ function GroupDetails() {
         members: []
     });
     const [nameList, setNameList] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     
-
     useEffect(() => {
         const groupId = localStorage.getItem('resultId');
 
@@ -35,6 +36,8 @@ function GroupDetails() {
                 setGroup(response.data);
             } catch (err) {
                 console.error(err);
+            } finally {
+                setIsLoading(false);
             }
         }
 
@@ -105,6 +108,10 @@ function GroupDetails() {
             console.error(err);
         }
     };
+
+    if (isLoading) {
+        return <Loading />
+    }
 
     return (
         <div className='group-details-page'>

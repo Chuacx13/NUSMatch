@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -16,12 +17,14 @@ function SearchResults() {
   //Default state ('Profile) is where user will see profiles related to their search query
   //By toggling the button to set default state to 'Group' will allow users to see groups related to their search query
   const [defaultState, setDefaultState] = useState('profile');
+  const [isLoading, setIsLoading] = useState(true);
 
   const [user] = useAuthState(auth);
   const userEmail = user.email;
 
   useEffect(() => {
     const queryId = localStorage.getItem('queryId');
+    setIsLoading(true);
 
     const fetchSearchResults = async () => {
       try {
@@ -34,7 +37,9 @@ function SearchResults() {
         }         
       } catch (err) {
         console.error(err);
-      }   
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchSearchResults();
@@ -57,6 +62,10 @@ function SearchResults() {
 
   const isDefault = () => {
     return defaultState === 'profile';
+  }
+
+  if (isLoading) {
+    return <Loading />
   }
 
   return (

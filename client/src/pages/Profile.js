@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from './Loading';
 import DefaultProfileImage from '../assets/defaultprofileimg.jpg';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
@@ -11,10 +12,12 @@ import '../styles/profile.css';
 function Profile() {
 
   const apiUrl = useApiUrl();
-  const [profile, setProfile] = useState({});
   const [user] = useAuthState(auth);
   const userEmail = user.email;
   const navigate = useNavigate();
+  
+  const [profile, setProfile] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserProfile = async() => {
@@ -23,6 +26,8 @@ function Profile() {
         setProfile(response.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -32,6 +37,10 @@ function Profile() {
   const goToEditProfile = () => {
     navigate('/editprofile');
   };
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <div className='profile-page'>

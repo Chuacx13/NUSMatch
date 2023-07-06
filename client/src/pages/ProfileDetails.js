@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from './Loading';
 import DefaultProfileImage from '../assets/defaultprofileimg.jpg';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ function ProfileDetails() {
 
   const apiUrl = useApiUrl();
   const [profile, setProfile] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,12 +22,18 @@ function ProfileDetails() {
         setProfile(response.data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
     fetchUserProfile();
   }, []);
 
+  if (isLoading) {
+    return <Loading />
+  }
+  
   return (
     <div className='profile-page'>
       {!profile ? navigate('/editprofile') :

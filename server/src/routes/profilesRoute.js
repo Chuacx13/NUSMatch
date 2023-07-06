@@ -97,7 +97,19 @@ profileRouter.get('/results/:queryId', async (req, res) => {
             response = response.concat(responseForInterestQuery);
         };
 
-        res.json(response);
+        const updatedResponse = [];
+        const uniqueIds = [];
+        for (const profile of response) {
+            const stringId = profile._id.toString();
+            if (uniqueIds.includes(stringId)) {
+                continue;
+            } else {
+                updatedResponse.push(profile);
+                uniqueIds.push(stringId);
+            }
+        }
+
+        res.json(updatedResponse);
     } catch (err) {
         res.json(err);
     }

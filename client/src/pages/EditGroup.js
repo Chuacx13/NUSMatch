@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from './Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -22,6 +23,7 @@ function EditGroup() {
     members: []
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const groupId = localStorage.getItem('resultId');
@@ -32,6 +34,8 @@ function EditGroup() {
               setGroup(response.data);
           } catch (err) {
               console.error(err);
+          } finally {
+            setIsLoading(false);
           }
       }
 
@@ -104,13 +108,16 @@ function EditGroup() {
         const response = await axios.put(`${apiUrl}/group/${groupId}`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
+          window.scrollTo(0, 0);
         } else {
           navigate('/groupdetails');
         } 
       } else if (!membersRegistered) {
         setCreateGroupStatus('Ensure that your friends have registered before adding them :)');
+        window.scrollTo(0, 0);
       } else {
         setCreateGroupStatus('Ensure that your friends have set up their profile before adding them :)');
+        window.scrollTo(0, 0);
       }
     } catch (err) {
       console.error(err);
@@ -121,6 +128,10 @@ function EditGroup() {
     navigate('/groupdetails');
   };
 
+  if (isLoading) {
+    return <Loading />
+  }
+  
   return (
     <div className='edit-form-page'>
       <form className='edit-form' onSubmit={updateGroup}>

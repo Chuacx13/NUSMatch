@@ -1,17 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import Loading from '../pages/Loading';
 import Wallpaper from '../assets/wallpaper.jpg';
-import SearchIcon from '@mui/icons-material/Search';
 import { useApiUrl } from '../hooks/useApiUrl';
+import { FaSearch } from 'react-icons/fa';
 import { CreateGroupIcon } from './creategroupicon';
 import { AccountIcon } from './accounticon';
 import { GroupChatIcon } from './groupchaticon';
-import { IconButton } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import '../styles/navbar.css';
 import '../styles/overlay.css';
 
@@ -29,8 +28,8 @@ function Navbar() {
 
   const [query, setQuery] = useState('');
   const [profile, setProfile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
-
   useEffect(() => {
 
     const queryId = localStorage.getItem('queryId');
@@ -39,28 +38,21 @@ function Navbar() {
     const fetchUserProfile = async() => {
       try {
         const userEmail = user?.email;
-        const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
-        if (response.data) {
-          setProfile(true);
+        if (userEmail) {
+          const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
+          if (response.data) {
+            setProfile(true);
+          }
         }
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     }
 
     fetchUserProfile();
-  }, [user]);
-
-  const searchIconStyle = {
-    color: 'black',
-    fontSize: 46,
-    backgroundColor: 'gray',
-    padding: 3,
-    paddingLeft: 8,
-    margin: -12,
-    borderRadius: 10,
-    opacity: profile ? 1 : 0.3
-  }
+  }, []);
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -75,24 +67,27 @@ function Navbar() {
     navigate('/login');
   };
   
-  return (
+  if (isLoading) {
+    return <Loading />
+  }
 
+  return (
     <div className='navbar' style={isNoBackground ? null : { backgroundImage: `url(${Wallpaper})`}}>
       {!isNoBackground && <div className='overlay' style={{zIndex: -1}}/>}
       <div className='left-side'></div>
       <div className='middle'>
         {isSearching && 
-        <form className='search-form' onSubmit={queryResults} disabled={!profile}>
+        <form className='search-form' onSubmit={queryResults}>
+          <button className='search-button' disabled={!profile}>
+            <FaSearch className='search-icon'/>
+          </button>
           <input
             type='text'
-            className='searchbar'
+            className='search-bar'
             value={query}
             onChange={handleInputChange}
             placeholder='Search'
           />
-          <IconButton arial-label='SearchButton' disabled={!profile}> 
-            <SearchIcon style={searchIconStyle} />
-          </IconButton>
         </form>}
       </div>
       <div className='right-side'>
