@@ -23,20 +23,89 @@
     min-height: 100vh;
 }
 
-.edit-group-button {
-    position: absolute; 
-    top: 0px;
-    right: 80px;
-    padding: 10px 12px;
-    font-size: 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+.group-intro {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.group-intro .app-icon {
+    position: absolute;
+    right: 0px;
+}
+
+.group-functions {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background-color: rgb(160, 157, 157, 0.7);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .group-name {
     font-size: 60px;
     margin: 0px;
+}
+
+.member-or-requested {
+    font-size: 30px;
+    padding: 10px 16px;
+    margin-left: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: gray;
+    border: 1px solid gray;
+    opacity: 0.7;
+    cursor: auto;
+}
+
+.group-description {
+    margin: 20px 0px 50px 0px;
+    font-size: 40px;
+}
+
+.modules-container { 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin: 0px 0px 50px 0px;
+    background-color: rgb(160, 157, 157, 0.7);
+    padding: 20px;
+    border-radius: 20px;
+    width: 960px;
+    height: 200px;
+}
+
+.group-subheaders {
+    margin: 0px 0px 20px 0px;
+    font-size: 40px;
+}
+
+.group-modules {
+    font-size: 30px;
+    text-align: center;
+}
+
+.group-members {
+    font-size: 24px;
+    margin: 0px 0px 4px 0px;
+}
+
+/*
+.edit-group-button {
+    font-size: 30px;
+    padding: 10px 16px;
+    margin-left: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-group-button:hover {
+    background-color: black;
+    color: white;
 }
 
 .join-group {
@@ -84,51 +153,8 @@
     transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
-.member {
-    font-size: 30px;
-    padding: 10px 16px;
-    margin-left: 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: gray;
-    border: 1px solid gray;
-    opacity: 0.7;
+.chat-button:hover {
+    background-color: black;
+    color: white;
 }
-
-.group-intro {
-    display: flex;
-    align-items: center;
-}
-
-.group-description {
-    margin: 20px 0px 50px 0px;
-    font-size: 40px;
-}
-
-.modules-container { 
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 10px;
-    margin: 0px 0px 50px 0px;
-    background-color: rgb(160, 157, 157, 0.7);
-    padding: 20px;
-    border-radius: 20px;
-    width: 960px;
-    height: 200px;
-}
-
-.group-subheaders {
-    margin: 0px 0px 20px 0px;
-    font-size: 40px;
-}
-
-.group-modules {
-    font-size: 30px;
-    text-align: center;
-}
-
-.group-members {
-    font-size: 24px;
-    margin: 0px 0px 4px 0px;
-}
+*/

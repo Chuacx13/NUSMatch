@@ -3,13 +3,15 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export const GroupChatIcon = () => {
+export const GroupChatsIcon = () => {
 
   const navigate = useNavigate();
 
   const individualButtonStyles = {
-      color: 'white', 
-      fontSize: 50
+    color: 'white', 
+    fontSize: 50,
+    transition: 'color 0.3s',
+    '&:hover': { color: 'rgb(220, 125, 24)'}
   };
 
   const iconButtonStyles = {
@@ -19,12 +21,12 @@ export const GroupChatIcon = () => {
   };
 
   const goToChat = () => {
-    navigate('/chat');
+    navigate('/groupchats');
   };
 
   return (
     <IconButton className='link' arial-label='Chat' sx={iconButtonStyles} onClick={goToChat}>
-      <ChatIcon style={individualButtonStyles}/>
+      <ChatIcon sx={individualButtonStyles}/>
       <div className='tooltip'> Group Chats </div>
     </IconButton>
   )

@@ -20,13 +20,14 @@ function EditGroup() {
     groupDescription: '',
     leader: userEmail,
     modules: [],
-    members: []
+    members: [],
+    userRequests: []
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const groupId = localStorage.getItem('resultId');
+    const groupId = localStorage.getItem('groupId');
 
       const fetchGroupDetails = async() => {
           try {
@@ -88,9 +89,13 @@ function EditGroup() {
   };
 
   async function isLeader() {
-    const groupId = localStorage.getItem('resultId');
+    const groupId = localStorage.getItem('groupId');
     const response = await axios.get(`${apiUrl}/group/other/${groupId}`);
     return userEmail === response.data.leader;
+  };
+
+  async function isMoreThanSixModulesAdded(group) {
+    return group.modules.length > 6;
   };
 
   const updateGroup = async(e) => {
@@ -99,8 +104,12 @@ function EditGroup() {
       const membersProfileCreated = await areMembersProfileCreated(group);
       const membersRegistered = await areMembersRegistered(group);
       const isGroupLeader = await isLeader();
-      const groupId = localStorage.getItem('resultId');
-      if (membersProfileCreated && isGroupLeader) {
+      const moreThanSixModulesAdded = await isMoreThanSixModulesAdded(group);
+      const groupId = localStorage.getItem('groupId');
+      if (moreThanSixModulesAdded) {
+        setCreateGroupStatus('Only 6 modules can be added!');
+        window.scrollTo(0, 0);
+      } else if (membersProfileCreated && isGroupLeader) {
         const data = {
           groupData: group,
           userEmail: userEmail
@@ -108,6 +117,9 @@ function EditGroup() {
         const response = await axios.put(`${apiUrl}/group/${groupId}`, data);
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
+          window.scrollTo(0, 0);
+        } else if (response.data.message === 'Members may not wish to be added') {
+          setCreateGroupStatus(`Check that ${response.data.name} have set their account\'s status to \'Active\'`);
           window.scrollTo(0, 0);
         } else {
           navigate('/groupdetails');

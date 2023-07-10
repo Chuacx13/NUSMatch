@@ -14,7 +14,7 @@ function Logout() {
         navigate('/');
     }
 
-    const dropDownStyle = {
+    const logoutStyle = {
         color: 'black',
         width: '100%',
         height: '100%',
@@ -26,7 +26,7 @@ function Logout() {
     };
 
     return (
-    <Button variant='text' sx={dropDownStyle} startIcon={<LogoutIcon/>} onClick={logout}> 
+    <Button variant='text' sx={logoutStyle} startIcon={<LogoutIcon/>} onClick={logout}> 
         Log Out
     </Button>
     );

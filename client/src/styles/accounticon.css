@@ -35,20 +35,6 @@
 #dropdown-option:hover {
     color: white
 }
-
-.tooltip {
-    font-size: 14px;
-    position: absolute;
-    background-color: gray;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 2px;
-    bottom: -50px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    white-space: nowrap;
-    pointer-events: none;
-}
   
 .tooltip-close {
     display: none;

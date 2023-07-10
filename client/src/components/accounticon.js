@@ -36,7 +36,9 @@ export const AccountIcon = () => {
 
     const individualButtonStyles = {
         color: 'white', 
-        fontSize: 50
+        fontSize: 50,
+        transition: 'color 0.3s',
+        '&:hover': { color: 'rgb(220, 125, 24)'}
     };
 
     const iconButtonStyles = {

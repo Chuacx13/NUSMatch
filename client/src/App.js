@@ -9,11 +9,13 @@ import Group from './pages/Group';
 import CreateGroup from './pages/CreateGroup';
 import GroupDetails from './pages/GroupDetails';
 import EditGroup from './pages/EditGroup';
+import GroupRequests from './pages/GroupRequests';
 import Profile from './pages/Profile';
 import ProfileDetails from './pages/ProfileDetails';
 import EditProfile from './pages/EditProfile';
 import SearchResults from './pages/SearchResults';
-import Chat from './pages/Chat';
+import GroupChats from './pages/GroupChats';
+import ChatHistory from './pages/ChatHistory';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
 import EditProfileRoute from './utils/EditProfileRoute';
@@ -46,8 +48,10 @@ function App() {
             <Route path='/creategroup' element={<CreateGroup/>}/>
             <Route path='/groupdetails' element={<GroupDetails/>}/>
             <Route path='/editgroup' element={<EditGroup/>}/>
+            <Route path='/requests' element={<GroupRequests/>}/>
             <Route path='/searchresults' element={<SearchResults/>}/>
-            <Route path='/chat' element={<Chat/>}/>
+            <Route path='/groupchats' element={<GroupChats/>}/>
+            <Route path='/chathistory' element={<ChatHistory/>}/>
           </Route>
           <Route element={<EditProfileRoute />}>
             <Route path='/editprofile' element={<EditProfile/>}/>

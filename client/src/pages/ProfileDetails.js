@@ -15,9 +15,11 @@ function ProfileDetails() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    
+    const userId = localStorage.getItem('profileId');
+    
     const fetchUserProfile = async() => {
       try {
-        const userId = localStorage.getItem('resultId');
         const response = await axios.get(`${apiUrl}/profile/other/${userId}`);
         setProfile(response.data);
       } catch (err) {

@@ -22,13 +22,18 @@ function Register() {
         await createUserWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         sendEmailVerification(auth.currentUser);
         signOut(auth);
-        navigate('/');
+        setRegisterStatus('Email verification sent! Verify your email before logging in.');
       } else {
+        setPassword('');
+        setConfirmPassword('');
         setRegisterStatus('Ensure that you keyed in the same password.');
       }
     } catch (err) {
         console.error(err);
         if (err.code === 'auth/email-already-in-use') {
+          setEmail('');
+          setPassword('');
+          setConfirmPassword('');
           setRegisterStatus('Account already exist.');
         }
     }
@@ -63,7 +68,7 @@ function Register() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button> Register </button>
+        <button onClick={register}> Register </button>
         <p> Already have an account? <Link to='/login'> Get Connected Now! </Link> </p>
       </form>
     </div>

@@ -1,0 +1,59 @@
+.group-requests-page {
+    display: flex;
+    flex-wrap: wrap;
+    color: black;
+    background-color: white;
+    position: relative;
+    top: 200px;
+    z-index: 2;
+    width: 100%;
+}
+
+.individual-request-container {
+    position: relative;
+    flex-basis: 100%;
+    margin: 30px;
+    width: 400px;
+    height: 60px;
+}
+
+.profile-container {
+    padding: 10px 20px;
+    background-color: rgb(160, 157, 157, 0.8);
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.profile-container:hover, .accept-button:hover, .reject-button:hover {
+    opacity: 0.8;
+}
+
+.request-buttons {
+    position: absolute;
+    right: 45px;
+    top: 27px;
+}
+
+.accept-button {
+    font-size: 20px;
+    background-color: rgb(95, 189, 95);
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+.reject-button {
+    font-size: 20px;
+    background-color: rgb(180, 49, 49, 0.7);
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+

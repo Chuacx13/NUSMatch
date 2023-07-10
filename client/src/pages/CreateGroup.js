@@ -19,7 +19,8 @@ function CreateGroup() {
     groupDescription: '',
     leader: userEmail,
     modules: [],
-    members: []
+    members: [],
+    userRequests: []
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
 
@@ -68,12 +69,20 @@ function CreateGroup() {
     }
   };
 
+  async function isMoreThanSixModulesAdded(group) {
+    return group.modules.length > 6;
+  };
+
   const saveGroup = async(e) => {
     e.preventDefault();
     try {
       const membersProfileCreated = await areMembersProfileCreated(group);
       const membersRegistered = await areMembersRegistered(group);
-      if (membersProfileCreated) {
+      const moreThanSixModulesAdded = await isMoreThanSixModulesAdded(group);
+      if (moreThanSixModulesAdded) {
+        setCreateGroupStatus('Only 6 modules can be added!');
+        window.scrollTo(0, 0);
+      } else if (membersProfileCreated) {
         const data = {
           groupData: group,
           userEmail: userEmail
@@ -82,8 +91,12 @@ function CreateGroup() {
         if (response.data.message === 'There is a duplicate member') {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
           window.scrollTo(0, 0);
+        } else if (response.data.message === 'Members may not wish to be added') {
+          setCreateGroupStatus('Check that your friends have set their account\'s status to \'Active\' before adding them');
+          window.scrollTo(0, 0);
         } else {
-          navigate('/group');
+          localStorage.setItem('resultId', response.data._id);
+          navigate('/groupDetails');
         } 
       } else if (!membersRegistered) {
         setCreateGroupStatus('Ensure that your friends have registered before adding them :)');

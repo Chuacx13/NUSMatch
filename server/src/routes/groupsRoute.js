@@ -1,5 +1,6 @@
 const express = require('express');
 const GroupModel = require('../models/Groups.js');
+const ProfileModel = require('../models/Profiles.js');
 
 const groupRouter = express.Router();
 
@@ -80,11 +81,36 @@ groupRouter.get('/results/:queryId', async (req, res) => {
 });
 
 //GOOD
+//Get group's requests
+groupRouter.get('/requests/:groupId', async (req, res) => {
+    try {
+        const group = await GroupModel.findById(req.params.groupId);
+        const requests = group.userRequests;
+        const profilePromises = requests.map((email) => ProfileModel.findOne({ email: email }));
+        const profiles = await Promise.all(profilePromises);
+        res.json(profiles); 
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+//GOOD
+//User create group
 groupRouter.post('/', async (req, res) => {
     try {
         const { groupData, userEmail } = req.body;
-        //Add self into list of users
+
+        //Check if members' account are set to public
         const updatedMembers = [...groupData.members];
+        for (const email of updatedMembers) {
+            const profile = await ProfileModel.findOne({ email: email });
+            if (profile.status === 'Snooze') {
+                res.json({ message: 'Members may not wish to be added'});
+                return;
+            }
+        };
+
+        //Add self into list of members
         updatedMembers.push(userEmail);
 
         //Capitalise all modules added
@@ -106,7 +132,9 @@ groupRouter.post('/', async (req, res) => {
         };
     
         const response = await group.save();
+
         res.json(response);
+
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -118,8 +146,30 @@ groupRouter.put('/:groupId', async (req, res) => {
     try {
         const { groupData, userEmail } = req.body;
 
-        //Add self into list of members
+        const group = await GroupModel.findOne({ _id: req.params.groupId });
+        const currentMembers = [ ...group.members];
         const updatedMembers = [...groupData.members];
+        const newMembers = [];
+        for (let i = 0; i < updatedMembers.length; i++) {
+            if (currentMembers.includes(updatedMembers[i])) {
+                continue;
+            } else {
+                newMembers.push(updatedMembers[i]);
+            }
+        }
+
+        //Check if members' account are set to public
+        if (newMembers) {
+            for (const email of newMembers) {
+                const profile = await ProfileModel.findOne({ email: email });
+                if (profile.status === 'Snooze') {
+                    res.json({ message: 'Members may not wish to be added', name: profile.name });
+                    return;
+                }
+            }
+        }
+
+        //Add self into list of members
         updatedMembers.push(userEmail);
 
         //Capitalise all modules added
@@ -127,11 +177,11 @@ groupRouter.put('/:groupId', async (req, res) => {
         updatedModules = updatedModules.map((module) => module.toUpperCase());
 
         //Final group to be saved
-        const group = { ...groupData, members: updatedMembers, modules: updatedModules };
+        const finalGroup = { ...groupData, members: updatedMembers, modules: updatedModules };
 
         //Check for duplicate members 
         const uniqueMembers = new Set();
-        for (const member of group.members) {
+        for (const member of finalGroup.members) {
             if (uniqueMembers.has(member)) {
                 res.json({ message: 'There is a duplicate member' });
                 return;
@@ -139,7 +189,7 @@ groupRouter.put('/:groupId', async (req, res) => {
             uniqueMembers.add(member);
         };
 
-        const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, group, { new: true });
+        const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, finalGroup, { new: true });
         res.json(response);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -170,9 +220,9 @@ groupRouter.put('/leave/:groupId', async (req, res) => {
         } else {
 
             //Final group to be saved
-            const group = { ...groupData, leader: updatedLeader, members: updatedMembers };
+            const finalGroup = { ...groupData, leader: updatedLeader, members: updatedMembers };
 
-            const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, group, { new: true });
+            const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, finalGroup, { new: true });
             res.json(response);
 
         }
@@ -181,6 +231,8 @@ groupRouter.put('/leave/:groupId', async (req, res) => {
     }
 });
 
+//GOOD
+//Join the group
 groupRouter.put('/join/:groupId', async (req, res) => {
     try {
         const { groupData, userEmail } = req.body;
@@ -190,9 +242,9 @@ groupRouter.put('/join/:groupId', async (req, res) => {
         updatedMembers.push(userEmail);
 
         //Final group to be saved
-        const group = { ...groupData, members: updatedMembers };
+        const finalGroup = { ...groupData, members: updatedMembers };
 
-        const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, group, { new: true });
+        const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, finalGroup, { new: true });
         res.json(response);
 
     } catch (err) {
@@ -200,5 +252,58 @@ groupRouter.put('/join/:groupId', async (req, res) => {
     }
 });
 
+//GOOD
+//Send request to the group
+groupRouter.put('/request/:groupId', async (req, res) => {
+    try {
+        const { groupData, userEmail } = req.body;
+
+        //Update requests
+        const updatedRequests = [ ...groupData.userRequests]; 
+        updatedRequests.push(userEmail);
+
+        //Final group to be saved
+        const finalGroup = { ...groupData, userRequests: updatedRequests };
+
+        const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, finalGroup, { new: true });
+        res.json(response);
+    } catch (err) {
+        res.status(500).json({ error: err.mesasge });
+    }
+});
+
+//GOOD
+//Accept request to the group
+groupRouter.put('/accept/:groupId', async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+        const email = req.body.email;
+
+        const updatedGroup = await GroupModel.findByIdAndUpdate(groupId, 
+            { $push: { members: email }, $pull: { userRequests: email } }, 
+            { new: true });
+
+        res.json(updatedGroup);
+    } catch (err) {
+        res.status(500).json({ error: err.mesasge });
+    }
+})
+
+//GOOD
+//Accept request to the group
+groupRouter.put('/reject/:groupId', async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+        const email = req.body.email;
+
+        const updatedGroup = await GroupModel.findByIdAndUpdate(groupId, 
+            { $pull: { userRequests: email } }, 
+            { new: true });
+
+        res.json(updatedGroup);
+    } catch (err) {
+        res.status(500).json({ error: err.mesasge });
+    }
+})
 
 module.exports = groupRouter;

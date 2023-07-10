@@ -61,7 +61,7 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button> Log In </button>
+        <button onClick={login}> Log In </button>
         <p> New to NUSMatch? <Link to='/register'> Join Us! </Link> </p>
       </form>
     </div>

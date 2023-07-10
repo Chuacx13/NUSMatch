@@ -14,7 +14,8 @@ function Home() {
     const clearLocalStorage = async() => {
       try {
           localStorage.removeItem('queryId');
-          localStorage.removeItem('resultId');
+          localStorage.removeItem('groupId');
+          localStorage.removeItem('profileId');
       } catch (err) {
         console.error(err);
       }

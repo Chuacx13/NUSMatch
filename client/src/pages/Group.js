@@ -35,8 +35,12 @@ function Group() {
   const handleClickOnGroup = (e, index) => {
     e.stopPropagation(); 
     const groupDetail = groups[index];
-    localStorage.setItem('resultId', groupDetail._id );
+    localStorage.setItem('groupId', groupDetail._id );
     navigate('/groupdetails');
+  };
+
+  const goToCreateGroup = () => {
+    navigate('/creategroup');
   };
 
   if (isLoading) {
@@ -44,16 +48,22 @@ function Group() {
   }
 
   return (
-    <div className='group-page'>
-      {groups.map((group, index) => 
-        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnGroup(e, index)}>
-          <h1> {group.groupName} </h1>
-          <h2> {group.groupStatus} </h2>
-          <h2> Description: {group.groupDescription.length > 20 ? group.groupDescription.slice(0, 20) + '...' : group.groupDescription} </h2>
-          <p className='modules-description'> Common Modules: {group.modules.join('. ')} </p>
-        </div>
-      )}
-    </div>
+    <>
+      <div className='create-group-container'>
+        <button className='create-group-button' onClick={goToCreateGroup}> + </button>
+        <div className='create-group-tooltip'> Create Group </div>
+      </div>
+      <div className='group-page'>
+        {groups.map((group, index) => 
+          <div key={index} className='individual-group-container' onClick={(e) => handleClickOnGroup(e, index)}>
+            <h1> {group.groupName} </h1>
+            <h2> {group.groupStatus} </h2>
+            <h2> Description: {group.groupDescription.length > 20 ? group.groupDescription.slice(0, 20) + '...' : group.groupDescription} </h2>
+            <p className='modules-description'> Common Modules: {group.modules.join('. ')} </p>
+          </div>
+        )}
+      </div>
+    </>
   )
 }
 

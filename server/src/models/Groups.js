@@ -6,7 +6,8 @@ const GroupSchema = new mongoose.Schema({
     groupDescription: { type: String, required: true },
     leader: { type: String, ref: 'users', required: true },
     modules: [{ type: String, required: true }],
-    members: [{ type: String, ref: 'users', required: true }]
+    members: [{ type: String, ref: 'users', required: true }],
+    userRequests: [{ type: String, required: true }]
 });
 
 const GroupModel = mongoose.model('groups', GroupSchema);

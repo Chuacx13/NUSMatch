@@ -78,6 +78,7 @@ export const AuthInfo = () => {
         </Button>
       </>
       : null}
+      <p> Start Connecting! </p>
       <form className='search-form' onSubmit={queryResults}>
         <button className='search-button' disabled={!profile}>
           <FaSearch className='search-icon'/>

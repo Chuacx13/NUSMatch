@@ -4,6 +4,11 @@ import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { AppIcon } from '../components/appicon';
+import { RequestButton } from '../components/requestbutton';
+import { EditGroupButton } from '../components/editgroupbutton';
+import { GroupChatButton } from '../components/groupchatbutton';
+import { LeaveButton } from '../components/leavebutton';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../styles/groupdetails.css';
@@ -21,13 +26,15 @@ function GroupDetails() {
         groupDescription: '',
         leader: userEmail,
         modules: [],
-        members: []
+        members: [],
+        userRequests: []
     });
     const [nameList, setNameList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [groupFunction, setGroupFunction] = useState(false);
     
     useEffect(() => {
-        const groupId = localStorage.getItem('resultId');
+        const groupId = localStorage.getItem('groupId');
 
         const fetchGroupDetails = async() => {
             try {
@@ -52,7 +59,7 @@ function GroupDetails() {
         };
         
         fetchGroupDetails();
-    }, [group.members]);
+    }, [group.members, group.userRequests]);
 
     const isLeader = () => {
         return group.leader === userEmail;
@@ -66,6 +73,10 @@ function GroupDetails() {
         return group.groupStatus === 'Private';
     };
 
+    const isRequested = () => {
+        return group.userRequests.includes(userEmail);
+    }
+
     const goToEditGroup = () => {
         navigate('/editgroup');
     };
@@ -74,12 +85,23 @@ function GroupDetails() {
         navigate('/groupchat');
     };
 
-    //ATTENTION!
+    const showGroupFunction = () => {
+        console.log(groupFunction);
+        setGroupFunction(!groupFunction);
+    };
+
     const joinGroup = async() => {
-        const groupId = localStorage.getItem('resultId');
+        const groupId = localStorage.getItem('groupId');
         if (isPrivateGroup()) {
-            //To DO: Implement sending a join request to the leader
-            return;
+            try {
+                const data = {
+                    groupData: group,
+                    userEmail: userEmail
+                };
+                await axios.put(`${apiUrl}/group/request/${groupId}`, data);
+            } catch (err) {
+                console.error(err);
+            }
         } else {
             try {
                 const data = {
@@ -94,7 +116,7 @@ function GroupDetails() {
     };
 
     const leaveGroup = async() => {
-        const groupId = localStorage.getItem('resultId');
+        const groupId = localStorage.getItem('groupId');
         try {
             const data = {
                 groupData: group,
@@ -116,16 +138,26 @@ function GroupDetails() {
     return (
         <div className='group-details-page'>
             <div className='group-details'>
-                {(user.email === group.leader) && 
-                <button className='edit-group-button' onClick={goToEditGroup} disabled={!isLeader()}> Edit </button>}
+
                 <div className='group-intro'>
                     <h1 className='group-name'> {group.groupName} </h1>
-                    <button className={isMember() ? 'member' : 'join-group'} disabled={isMember()} onClick={joinGroup}> 
-                        {isMember() ? 'Joined' : group.groupStatus === 'Private' ? 'Request To Join' : 'Join'} 
+                    <button className={isMember() || isRequested() ? 'member-or-requested' : 'join-group'} disabled={isMember() || isRequested()} onClick={joinGroup}> 
+                        {isMember() ? 'Joined' : 
+                            isRequested() ? 'Request Sent' : 
+                            group.groupStatus === 'Private' ? 'Request To Join' 
+                            : 'Join'} 
                     </button>
-                    {isMember() && <button className='chat-button' disabled={!isMember()} onClick={goToChat}> Chat </button>}
-                    {isMember() && <button className='leave-button' disabled={!isMember()} onClick={leaveGroup}> Leave </button>}
+                    {isMember() && <AppIcon onClick={showGroupFunction}/>}
                 </div>
+
+                {groupFunction && 
+                    <div className='group-functions'> 
+                        {isLeader() && <RequestButton />}
+                        {isLeader() && <EditGroupButton />}
+                        {isMember() && <GroupChatButton />}
+                        {isMember() && <LeaveButton onClick={leaveGroup} />} 
+                    </div>}
+                    
                 <p className='group-description'> {group.groupDescription} </p>
 
                 <h2 className='group-subheaders'> Common Modules </h2>

@@ -35,3 +35,20 @@
     border: 2px solid black;
     cursor: pointer;
 }
+
+.individual-resuls-container {
+    flex-basis: 100%;
+    margin: 30px;
+    padding: 50px;
+    background-color: rgb(160, 157, 157, 0.8);
+    width: 400px;
+    height: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.individual-result-container:hover {
+    opacity: 0.8;
+}

@@ -48,10 +48,11 @@ function SearchResults() {
   const handleClickOnResults = (e, index) => {
     e.stopPropagation(); 
     const resultDetail = results[index];
-    localStorage.setItem('resultId', resultDetail._id );
     if (isDefault()) {
+      localStorage.setItem('profileId', resultDetail._id);
       navigate('/profiledetails');
     } else {
+      localStorage.setItem('groupId', resultDetail._id );
       navigate('/groupdetails');
     }
   };
@@ -77,7 +78,7 @@ function SearchResults() {
         Group
       </button>
       {(isDefault()) && results.map((result, index) => 
-        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnResults(e, index)}>
+        <div key={index} className='individual-result-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.name} </h1>
           <h2> {result.status} </h2>
           <h2> Degree: {result?.degree?.join(', ')} </h2>
@@ -85,7 +86,7 @@ function SearchResults() {
         </div>
       )}
       {(!isDefault()) && results.map((result, index) => 
-        <div key={index} className='individual-results-container' onClick={(e) => handleClickOnResults(e, index)}>
+        <div key={index} className='individual-result-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.groupName} </h1>
           <h2> {result.groupStatus} </h2>
           <h2> Description: {result?.groupDescription?.length > 20 ? result?.groupDescription?.slice(0, 20) + '...' : result?.groupDescription} </h2>

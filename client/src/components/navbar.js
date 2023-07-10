@@ -4,9 +4,8 @@ import Loading from '../pages/Loading';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { FaSearch } from 'react-icons/fa';
-import { CreateGroupIcon } from './creategroupicon';
 import { AccountIcon } from './accounticon';
-import { GroupChatIcon } from './groupchaticon';
+import { GroupChatsIcon } from './groupchatsicon';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -94,8 +93,7 @@ function Navbar() {
         {!isHomePage && (<Link to='/' className='link'> Home </Link>)}
         {user ? 
           <>
-            <CreateGroupIcon />
-            <GroupChatIcon />
+            <GroupChatsIcon />
             <AccountIcon />
           </>
           : isHomePage ? 
