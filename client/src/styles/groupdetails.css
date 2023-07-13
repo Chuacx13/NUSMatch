@@ -34,6 +34,23 @@
     right: 0px;
 }
 
+.join-group {
+    font-size: 30px;
+    padding: 10px 16px;
+    margin-left: 30px;
+    border-radius: 10px;
+    color: rgb(220, 125, 24);
+    border: 2px solid rgb(220, 125, 24);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.join-group:hover {
+    background-color: rgb(220, 125, 24, 0.8);
+    color: black;
+    border: 2px solid black;
+}
+
 .group-functions {
     display: flex;
     flex-direction: column;
@@ -106,23 +123,6 @@
 .edit-group-button:hover {
     background-color: black;
     color: white;
-}
-
-.join-group {
-    font-size: 30px;
-    padding: 10px 16px;
-    margin-left: 30px;
-    border-radius: 10px;
-    color: rgb(220, 125, 24);
-    border: 2px solid rgb(220, 125, 24);
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border 0.3s;
-}
-
-.join-group:hover {
-    background-color: rgb(220, 125, 24, 0.8);
-    color: black;
-    border: 2px solid black;
 }
 
 .leave-button {

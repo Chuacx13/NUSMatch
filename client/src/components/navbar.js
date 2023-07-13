@@ -22,10 +22,10 @@ function Navbar() {
   //Check location to determine what icons to display
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const isNoBackground = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register';
+  const isNoBackground = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgotpassword';
   const isSearching = location.pathname === '/searchresults';
 
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState(localStorage.getItem('queryId'));
   const [profile, setProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   

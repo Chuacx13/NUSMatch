@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Loading from './pages/Loading';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
 import Group from './pages/Group';
 import CreateGroup from './pages/CreateGroup';
 import GroupDetails from './pages/GroupDetails';
@@ -15,7 +16,8 @@ import ProfileDetails from './pages/ProfileDetails';
 import EditProfile from './pages/EditProfile';
 import SearchResults from './pages/SearchResults';
 import GroupChats from './pages/GroupChats';
-import ChatHistory from './pages/ChatHistory';
+import IndivGroupChat from './pages/IndivGroupChat';
+import Schedule from './pages/Schedule';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
 import EditProfileRoute from './utils/EditProfileRoute';
@@ -40,6 +42,7 @@ function App() {
           <Route element={<PublicRoutes />}>
             <Route path='/login' exact element={<Login/>}/>
             <Route path='/register' exact element={<Register/>}/>
+            <Route path='/forgotpassword' exact element={<ForgotPassword/>}/>
           </Route>
           <Route element={<PrivateRoutes />}>
             <Route path='/profile' element={<Profile/>}/>
@@ -51,7 +54,8 @@ function App() {
             <Route path='/requests' element={<GroupRequests/>}/>
             <Route path='/searchresults' element={<SearchResults/>}/>
             <Route path='/groupchats' element={<GroupChats/>}/>
-            <Route path='/chathistory' element={<ChatHistory/>}/>
+            <Route path='/individualgroupchat' element={<IndivGroupChat/>}/>
+            <Route path='/schedule' element={<Schedule/>}/>
           </Route>
           <Route element={<EditProfileRoute />}>
             <Route path='/editprofile' element={<EditProfile/>}/>

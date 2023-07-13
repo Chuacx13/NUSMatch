@@ -119,7 +119,7 @@ function EditGroup() {
           setCreateGroupStatus('Check your members. You might have added yourself or duplicated your friends!');
           window.scrollTo(0, 0);
         } else if (response.data.message === 'Members may not wish to be added') {
-          setCreateGroupStatus(`Check that ${response.data.name} have set their account\'s status to \'Active\'`);
+          setCreateGroupStatus(`Check that ${response.data.name} have set their account's status to 'Active'`);
           window.scrollTo(0, 0);
         } else {
           navigate('/groupdetails');
@@ -205,7 +205,7 @@ function EditGroup() {
         <button className='modify-list-button' type="button" name='members' onClick={handleAdd}>
           Add Member
         </button>
-        <button className='save-button' onClick={updateGroup}>Save</button>
+        <button className='save-button'>Save</button>
       </form>
     </div>
   )

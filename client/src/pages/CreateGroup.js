@@ -95,7 +95,7 @@ function CreateGroup() {
           setCreateGroupStatus('Check that your friends have set their account\'s status to \'Active\' before adding them');
           window.scrollTo(0, 0);
         } else {
-          localStorage.setItem('resultId', response.data._id);
+          localStorage.setItem('groupId', response.data._id);
           navigate('/groupDetails');
         } 
       } else if (!membersRegistered) {
@@ -168,7 +168,7 @@ function CreateGroup() {
         <button className='modify-list-button' type="button" name='members' onClick={handleAdd}>
           Add Member
         </button>
-        <button className='save-button' onClick={saveGroup}>Create</button>
+        <button className='save-button'>Create</button>
       </form>
     </div>
   )

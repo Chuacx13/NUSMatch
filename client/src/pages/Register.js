@@ -22,7 +22,8 @@ function Register() {
         await createUserWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         sendEmailVerification(auth.currentUser);
         signOut(auth);
-        setRegisterStatus('Email verification sent! Verify your email before logging in.');
+        navigate('/');
+        alert('Email verification sent! Verify your email before logging in.');
       } else {
         setPassword('');
         setConfirmPassword('');
@@ -35,6 +36,10 @@ function Register() {
           setPassword('');
           setConfirmPassword('');
           setRegisterStatus('Account already exist.');
+        } else if (err.code === 'auth/weak-password') {
+          setPassword('');
+          setConfirmPassword('');
+          setRegisterStatus('Password should at least be 6 characters long');
         }
     }
   };
@@ -45,7 +50,7 @@ function Register() {
       <form className='register-form' onSubmit={register}>
         {registerStatus && 
           (<p 
-          className={registerStatus==='Account successfully created. Verify your email before logging in.' ? 'success' : 'failure'}> {registerStatus} 
+          className='register-status'> {registerStatus} 
           </p>)}
         <h1> Join the NUS Community Now! </h1>
         <input 
@@ -68,7 +73,7 @@ function Register() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button onClick={register}> Register </button>
+        <button> Register </button>
         <p> Already have an account? <Link to='/login'> Get Connected Now! </Link> </p>
       </form>
     </div>

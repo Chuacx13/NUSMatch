@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { AppIcon } from '../components/appicon';
 import { RequestButton } from '../components/requestbutton';
 import { EditGroupButton } from '../components/editgroupbutton';
-import { GroupChatButton } from '../components/groupchatbutton';
+import { IndivGroupChatButton } from '../components/indivgroupchatbutton';
 import { LeaveButton } from '../components/leavebutton';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -31,7 +31,7 @@ function GroupDetails() {
     });
     const [nameList, setNameList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [groupFunction, setGroupFunction] = useState(false);
+    const [groupFunctions, setGroupFunctions] = useState(false);
     
     useEffect(() => {
         const groupId = localStorage.getItem('groupId');
@@ -77,17 +77,8 @@ function GroupDetails() {
         return group.userRequests.includes(userEmail);
     }
 
-    const goToEditGroup = () => {
-        navigate('/editgroup');
-    };
-
-    const goToChat = () => {
-        navigate('/groupchat');
-    };
-
-    const showGroupFunction = () => {
-        console.log(groupFunction);
-        setGroupFunction(!groupFunction);
+    const showGroupFunctions = () => {
+        setGroupFunctions(!groupFunctions);
     };
 
     const joinGroup = async() => {
@@ -147,14 +138,14 @@ function GroupDetails() {
                             group.groupStatus === 'Private' ? 'Request To Join' 
                             : 'Join'} 
                     </button>
-                    {isMember() && <AppIcon onClick={showGroupFunction}/>}
+                    {isMember() && <AppIcon onClick={showGroupFunctions}/>}
                 </div>
 
-                {groupFunction && 
+                {groupFunctions && isMember() && 
                     <div className='group-functions'> 
                         {isLeader() && <RequestButton />}
                         {isLeader() && <EditGroupButton />}
-                        {isMember() && <GroupChatButton />}
+                        {isMember() && <IndivGroupChatButton />}
                         {isMember() && <LeaveButton onClick={leaveGroup} />} 
                     </div>}
                     
