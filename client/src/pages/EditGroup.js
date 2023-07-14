@@ -21,7 +21,8 @@ function EditGroup() {
     leader: userEmail,
     modules: [],
     members: [],
-    userRequests: []
+    userRequests: [],
+    scheduleId: null
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
   const [isLoading, setIsLoading] = useState(true);

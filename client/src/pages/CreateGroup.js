@@ -20,7 +20,8 @@ function CreateGroup() {
     leader: userEmail,
     modules: [],
     members: [],
-    userRequests: []
+    userRequests: [],
+    scheduleId: null
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
 
@@ -95,6 +96,8 @@ function CreateGroup() {
           setCreateGroupStatus('Check that your friends have set their account\'s status to \'Active\' before adding them');
           window.scrollTo(0, 0);
         } else {
+          const schedule = await axios.post(`${apiUrl}/schedule`);
+          await axios.put(`${apiUrl}/group/scheduleId/${response.data._id}`, {scheduleId: schedule.data._id});
           localStorage.setItem('groupId', response.data._id);
           navigate('/groupDetails');
         } 

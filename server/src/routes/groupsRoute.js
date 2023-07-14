@@ -1,6 +1,7 @@
 const express = require('express');
 const GroupModel = require('../models/Groups.js');
 const ProfileModel = require('../models/Profiles.js');
+const ScheduleModel = require('../models/Schedules.js');
 
 const groupRouter = express.Router();
 
@@ -93,6 +94,19 @@ groupRouter.get('/requests/:groupId', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+//GOOD
+//Get group's schedule
+groupRouter.get('/schedule/:groupId', async (req, res) => {
+    try {
+        const group = await GroupModel.findById(req.params.groupId);
+        const scheduleId = group.scheduleId;
+        const schedule = await ScheduleModel.findById(scheduleId);
+        res.json(schedule.events);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+})
 
 //GOOD
 //User create group
@@ -215,6 +229,7 @@ groupRouter.put('/leave/:groupId', async (req, res) => {
         if (updatedLeader === null || updatedLeader === undefined) {
 
             await GroupModel.findOneAndDelete({ _id: req.params.groupId });
+            await ScheduleModel.findOneAndDelete({ _id: groupData.scheduleId });
             res.json({ message: 'Group deleted successfully' });
 
         } else {
@@ -268,7 +283,7 @@ groupRouter.put('/request/:groupId', async (req, res) => {
         const response = await GroupModel.findOneAndUpdate({_id: req.params.groupId}, finalGroup, { new: true });
         res.json(response);
     } catch (err) {
-        res.status(500).json({ error: err.mesasge });
+        res.status(500).json({ error: err.message });
     }
 });
 
@@ -285,12 +300,12 @@ groupRouter.put('/accept/:groupId', async (req, res) => {
 
         res.json(updatedGroup);
     } catch (err) {
-        res.status(500).json({ error: err.mesasge });
+        res.status(500).json({ error: err.message });
     }
 })
 
 //GOOD
-//Accept request to the group
+//Reject request to the group
 groupRouter.put('/reject/:groupId', async (req, res) => {
     try {
         const groupId = req.params.groupId;
@@ -302,8 +317,26 @@ groupRouter.put('/reject/:groupId', async (req, res) => {
 
         res.json(updatedGroup);
     } catch (err) {
-        res.status(500).json({ error: err.mesasge });
+        res.status(500).json({ error: err.message });
     }
 })
+
+//GOOD
+//Update scheduleId of the group
+groupRouter.put('/scheduleId/:groupId', async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+        const scheduleId = req.body.scheduleId;
+
+        const updatedGroup = await GroupModel.findByIdAndUpdate(groupId, 
+            { scheduleId: scheduleId }, 
+            { new: true });
+
+        res.json(updatedGroup);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+})
+
 
 module.exports = groupRouter;

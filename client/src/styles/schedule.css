@@ -1,0 +1,116 @@
+.schedule-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schedule-form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-top: 250px;
+    padding: 30px 50px;
+    font-size: 40px;
+}
+
+.schedule-form h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}
+
+.schedule-form input, .start-datepicker, .end-datepicker{
+    width: 200px;
+    padding: 8px;
+    border: 1px solid black;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.schedule-form textarea {
+    width: 500px;
+    height: 100px;
+    max-height: 200px;
+    min-height: 50px;
+    resize: vertical;
+    font-size: 15px;
+    border: 1px solid rgb(160, 157, 157, 0.8);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.save-event-button {
+    font-size: 15px;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.save-event-button:hover {
+    color: white;
+    background-color: black;
+}
+
+.selected-event-details {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgb(160, 157, 157, 0.8);
+    border-radius: 10px;
+    background-color: rgb(160, 157, 157, 0.8);
+    margin: 50px;
+    padding: 30px 50px;
+}
+
+.close-event-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer; 
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.close-event-button:hover {
+    color: red;
+    border-color: red;
+}
+
+.delete-event-button {
+    cursor: pointer; 
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.selected-event-details p {
+    margin-bottom: 10px;
+    margin-top: 0px;
+    font-size: 18px;
+}
+
+.selected-event-details h1 {
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.event-details { 
+    background-color: rgb(220, 125, 24);
+    border-radius: 6px;
+    font-size: 18px;
+}
+
+.date-cell {
+    border: 1px solid black;
+    border-radius: 10px;
+}

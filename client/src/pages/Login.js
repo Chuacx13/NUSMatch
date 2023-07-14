@@ -19,10 +19,10 @@ function Login() {
   const [loginStatus, setLoginStatus] = useState('');
 
   const login = async (e) => {
+    e.preventDefault();
+    setEmail('');
+    setPassword('');
     try {
-      e.preventDefault();
-      setEmail('');
-      setPassword('');
       const userEmail = email + '@u.nus.edu';
       const response = await axios.get(`${apiUrl}/auth/${userEmail}`);
       if (response.data) {

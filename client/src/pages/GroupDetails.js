@@ -8,6 +8,7 @@ import { AppIcon } from '../components/appicon';
 import { RequestButton } from '../components/requestbutton';
 import { EditGroupButton } from '../components/editgroupbutton';
 import { IndivGroupChatButton } from '../components/indivgroupchatbutton';
+import { ScheduleButton } from '../components/schedulebutton';
 import { LeaveButton } from '../components/leavebutton';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -27,7 +28,8 @@ function GroupDetails() {
         leader: userEmail,
         modules: [],
         members: [],
-        userRequests: []
+        userRequests: [],
+        scheduleId: null
     });
     const [nameList, setNameList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,8 @@ function GroupDetails() {
                 console.error(err);
             } finally {
                 setIsLoading(false);
-            }
+                console.log(group)
+            } 
         }
 
         const fetchNameList = async(emailList) => {
@@ -146,6 +149,7 @@ function GroupDetails() {
                         {isLeader() && <RequestButton />}
                         {isLeader() && <EditGroupButton />}
                         {isMember() && <IndivGroupChatButton />}
+                        {isMember() && <ScheduleButton />}
                         {isMember() && <LeaveButton onClick={leaveGroup} />} 
                     </div>}
                     

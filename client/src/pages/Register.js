@@ -16,8 +16,8 @@ function Register() {
   const navigate = useNavigate();
 
   const register = async (e) => {  
+    e.preventDefault();
     try {
-      e.preventDefault();
       if (password === confirmPassword) {
         await createUserWithEmailAndPassword(auth, email + '@u.nus.edu', password);
         sendEmailVerification(auth.currentUser);

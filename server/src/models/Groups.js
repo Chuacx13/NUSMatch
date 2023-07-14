@@ -7,7 +7,8 @@ const GroupSchema = new mongoose.Schema({
     leader: { type: String, ref: 'users', required: true },
     modules: [{ type: String, required: true }],
     members: [{ type: String, ref: 'users', required: true }],
-    userRequests: [{ type: String, required: true }]
+    userRequests: [{ type: String, required: true }],
+    scheduleId: { type: mongoose.Schema.ObjectId, ref: 'schedules'}
 });
 
 const GroupModel = mongoose.model('groups', GroupSchema);
