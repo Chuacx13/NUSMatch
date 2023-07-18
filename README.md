@@ -125,12 +125,12 @@ Users would be able to update their **Profile** with information such as:
 - Degree (degree)
 - Current Modules Taken (currentModuleS)
 - Academic Goals (academicGoals)
- - Dean’s List
- - First Class
- - Second Class Upper 
- - Second Class Lower 
- - Third Class
-- Chill 
+  - Dean’s List
+  - First Class
+  - Second Class Upper
+  - Second Class Lower
+  - Third Class
+  - Chill 
 - Status  (status)
 - Active (Looking for new groups)
 - Snooze (Not looking for new groups at the moment)
@@ -401,15 +401,15 @@ NUS. (2022). NUS Bulletin AY2022/23. Retrieved March 12, 2023, from https://www.
 
 Dependencies: 
 - React Libraries used:
- - npm install @mui/material @emotion/react @emotion/styled
+  - npm install @mui/material @emotion/react @emotion/styled
 
-- Javascript Libraries used: 
- - npm install axios
- - npm react-router-dom
+- Javascript Libraries used:
+  - npm install axios
+  - npm react-router-dom
 
-- Firebase: 
- - npm install firebase
- - npm install react-firebase-hooks
+- Firebase:
+  - npm install firebase
+  - npm install react-firebase-hooks
 
 
 Milestone 1: 
