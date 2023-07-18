@@ -10,7 +10,7 @@ Artemis
 
 Our main target audience is students who do not have residence in NUS as they face the challenge of forming both study groups and project groups.
 
-The current NUS community is large, with more than 43,000 students making up the bulk of it (NUS, 2022). Despite attracting an increasing number of students annually, its accommodations (6 halls, 5 residential colleges, 2 houses and 2 student residences) are only able to house 11,000 students (Teng A., 2022). This highlights that approximately only 26% of NUS students are able to secure a place to stay on campus. Without such accommodation, it is harder for students to meet others.
+The current NUS community is large, with more than 43,000 students making up the bulk of it (NUS, 2022). Despite attracting an increasing number of students annually, its accommodations (6 halls, 5 residential colleges, 2 houses, and 2 student residences) are only able to house 11,000 students (Teng A., 2022). This highlights that approximately only 26% of NUS students are able to secure a place to stay on campus. Without such accommodation, it is harder for students to meet others.
 
 Entering NUS, we knew that projects and group collaborations are an integral part of our learning journey. We anticipated that forming study or project groups would be an easy and smooth process. However, it was difficult to form a group that we are comfortable working with. Classes do not provide students with sufficient opportunities to interact with one another, and coupled with the hectic student life of NUS students, it creates an unfavorable environment to forge meaningful friendships. More importantly, it makes the process of forming project and study groups inconvenient. The problem is exacerbated for international students due to cultural barriers.
 
@@ -46,118 +46,131 @@ Aim 2: Allow people who already have existing groups to expand their social circ
 
 We intend to create a web application that allows students to find project mates and form study groups.
 
-## 5.1. Authentication Interface (Completed)
+Milestone 1 features
 
-An Authentication Interface that allows only users with NUS email to login and sign-up.
+- Authentication without verification
+- Basic website navigation
 
-During sign-ups, users would be prompted to fill up their personal details for their profile.
+Milestone 2 features
+
+- Updates on Authentication
+- Verification of NUSNET ID to ensure that users are from NUS
+- Private and Public Routes
+- Prevent access to certain pages based on the user’s authentication status
+- Profile
+  - Users can view and edit their own profiles
+  - Created a 'Profiles' database using MongoDB
+- Group
+  - Users can create, view, edit, and join/request to join groups
+  - Created a 'Groups' database using MongoDB
+- Search
+  - Users can find other users and groups based on keywords
+  - Profile and Group tabs for categorizing search results
+  
+  Milestone 3 features
+
+- Improve benefits of web applications
+- Groups
+  - Request to Join function
+- Chat (if time permits)
+- Algorithm (if time permits)
+- Schedule (if time permits)
+- Enhance user experience:
+  - Responsive page design for use with mobile phones and tablets
+  - Authentication feature: Forgot password function
+  - Profile feature: Upload profile picture function
+  - Search feature: Implement filters
+- Application Testing
+  - Unit and Integration testing using Jest and React Testing Library
+  - System testing to verify the web application's functionality using Selenium
+  - Acceptance testing to simulate user interaction with the web application
+
+# 5.1. Completed Features
+
+## 5.1.1. Authentication
+
+An Authentication feature that allows only users with NUS email to login and register. We made use of Firebase SDK Authentication to create users and authenticate users. 
+
+___Register Form___
+Users are prompted to fill up their NUSNET ID and password for their profile. Additionally, users would need to confirm their password again.
+
+Upon successful verification, a verification link would be sent to their email.  
+
+___Login Form___
+
+Users are prompted to fill in their NUSNET ID and password for authentication. 
+
+Test Cases: 
+1. User not verified
+2. Prompt: 'Email not verified. Verify before logging in'
+3. User not registered
+4. Prompt: ‘User does not exist. Sign up first!'
+5. User and password does not match
+6. Prompt: ‘NUSNET ID and Password does not match.’
+7. User verified, registered, password match
+	Navigate to ‘./pages/Home.js’
+Purpose:
+1. To ensure that users are from NUS
+2. To allow every user to have an account that is only accessible to themselves
+3. To prevent user’s information from being accessed by other parties
+4. To ensure that website can access user’s authentication details to display the right buttons and functions 
+
+
+## 5.1.2. Profile
+
+Users would be able to update their **Profile** with information such as:
+- Name (name)
+- Current Year of Study (year)
+- Degree (degree)
+- Current Modules Taken (currentModuleS)
+- Academic Goals (academicGoals)
+ - Dean’s List
+ - First Class
+ - Second Class Upper 
+ - Second Class Lower 
+ - Third Class
+- Chill 
+- Status  (status)
+- Active (Looking for new groups)
+- Snooze (Not looking for new groups at the moment)
+   Personal Interest (personalInterest)
+___View___ 
+Users can view any profile that is found in the ‘Profiles’ Database
+
+___Edit___
+Users can edit their own profiles exclusively. Ensure that any changes made by users are transmitted to the database. Checks are conducted to validate that the correct profile entry is being updated.
+
+The ‘Profiles’ database was created using MongoDB for users to access the aforementioned functions.
 
 Purpose:
+To indicate personal information which is of interest to other users who are looking for project or study mates
 
-- To ensure that users are from NUS
-- To allow every user to have an account that is only accessible to themselves
-- To prevent user’s information from being accessed by other parties
+...
 
-## 5.2. Profile (Not Done)
+## 5.1.3. Groups
 
-Users would be able to update their Profile with information such as:
+As the creator of Groups, the user is able to determine group settings such as:
+- Group Name (groupName)
+- Group Status (groupStatus)
+- Public
+- Private
+- ... (continue with other properties)
 
-- Name
-- Current year of study
-- Degree
-- Current Modules
-- Academic goals
-- Status
-  - Active (Looking for new groups)
-  - Snooze (Not looking for new groups at the moment)
-- Current Project and/or Study Groups
-- Past Project and/or Study Groups(Optional to show)
-- GPA (Optional to show)
-- Personal Interest
-- Ratings (Peer Review)
+...
 
-Purpose:
+## 5.1.4. Search
 
-- To indicate personal information which are of interest to other users who are looking for project or study mates
+Users can use the Search function to find other users and groups that match the keywords used. There will be tabs to swap between a profile or a group that categorizes the results respectively.
 
-## 5.3. Groups (Not Done)
+Profile Tab (default):
+...
 
-Users can create Groups and will be appointed as the admin. As the admin, they are able to determine group settings such as:
+Group Tab:
+...
 
-- Group Status
-  - Open
-  - Private
-- Group Name
-- Module Description
-  - Indicates some modules that the group focuses on (eg. BT4508)
-- Group Description
-  - Indicate group’s dynamic (eg. Chill Study Group)
+Purpose: 
+To allow users to find other users and groups that fit their criteria of interest
 
-Additionally, admins are able to send invitations to other students. Students can also request to join an existing project/study group that is open.
-
-Purpose:
-
-- To allow users to create groups to invite others that share common academic goals/modules
-- To allow users to join groups that fit their academic goals
-
-## 5.4. Search Function (Not Done)
-
-Users can use the Search Function to find other users and groups that match to the keywords used. There will be tabs to swap between a person or a group that categorizes the results respectively. Users can search for either a name or a module.
-
-Under the ‘Users’ tab, the system would recommend a list of students that matches with the keywords searched. The words used in the search bar would be matched to:
-
-- Other users’ Names
-- Other users’ Current Modules
-
-Moreover, users can swap to the ‘Group’ tab where the system would recommend a list of groups that matches with the keywords searched. The words used in the search bar would be matched to:
-
-- Other groups’ Names
-- Other groups’ Module Description
-- Other groups’ Group Description
-
-Purpose:
-
-- To allow users to find other users and groups that fit their criteria of interest
-
-## 5.5. Chat Function (Not Done)
-
-A Chat Function would be implemented for multiple uses within the website.
-
-Purpose:
-
-- To allow users to reach out and connect with other users
-- To allow users within groups to communicate with one another
-
-## 5.6. Algorithm (Not Done)
-
-Moreover, based on the user's current groups as well as the user's search history, the website makes use of an Algorithm to recommend new users and groups to connect with.
-
-Purpose:
-
-- To connect users with new people outside of their usual social circle
-- To allow users to develop soft skills such as communication skills and teamwork which will benefit them in the long run as they enter the workforce
-
-## 5.7. Scheduling Interface (Not Done)
-
-A Scheduling Interface (Calendar) that allows groups to plan their meetups and set deadlines. Reminders can also be sent out to the user’s email to remind them of upcoming deadlines and meetups.
-
-Purpose:
-
-- To allow easy scheduling of meet-ups for groups
-- To ensure that users in the same group are kept on task
-
-## 5.8. Database (Not Done)
-
-A Database will be created using mySQL to store:
-
-- Users’ login details
-- User’s profile information
-- Groups’ information
-
-Purpose:
-
-- To allow the search function to look up our database and find users/groups of their interest
-- To support our authentication function by checking that input username/email and input password matches the ones in our database
 
 # 6. Timeline
 
