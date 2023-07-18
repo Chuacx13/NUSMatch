@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ScheduleSchema = new mongoose.Schema({
+    groupId: { type: mongoose.Schema.ObjectId, ref: 'groups', required: true, unique: true },
     events: [{ 
         title: { type: String, required: true},
         start: { type: Date, required: true},

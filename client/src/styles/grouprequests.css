@@ -12,7 +12,7 @@
 .individual-request-container {
     position: relative;
     flex-basis: 100%;
-    margin: 30px;
+    margin: 30px 30px 10px 30px;
     width: 400px;
     height: 60px;
 }

@@ -16,6 +16,7 @@ function Home() {
           localStorage.removeItem('queryId');
           localStorage.removeItem('groupId');
           localStorage.removeItem('profileId');
+          localStorage.removeItem('groupChatId');
       } catch (err) {
         console.error(err);
       }

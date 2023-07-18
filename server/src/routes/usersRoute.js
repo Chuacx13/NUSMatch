@@ -45,5 +45,19 @@ userRouter.get('/users/:emails', async (req, res) => {
   }
 });
 
+//Set test account emailVerified to true
+//For users to test 
+userRouter.post('/', async (req, res) => {
+  try {
+    await admin.auth().updateUser(req.body.uid, {
+      emailVerified: true
+    })
+    
+    res.sendStatus(200);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = userRouter;
 

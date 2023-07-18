@@ -16,11 +16,12 @@ import ProfileDetails from './pages/ProfileDetails';
 import EditProfile from './pages/EditProfile';
 import SearchResults from './pages/SearchResults';
 import GroupChats from './pages/GroupChats';
-import IndivGroupChat from './pages/IndivGroupChat';
 import Schedule from './pages/Schedule';
 import PrivateRoutes from './utils/PrivateRoutes';
 import PublicRoutes from './utils/PublicRoutes';
 import EditProfileRoute from './utils/EditProfileRoute';
+import GroupMemberRoutes from './utils/GroupMemberRoutes';
+import GroupLeaderRoutes from './utils/GroupLeaderRoutes';
 import { auth } from './config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -49,13 +50,16 @@ function App() {
             <Route path='/profiledetails' element={<ProfileDetails/>}/>
             <Route path='/group' element={<Group/>}/>
             <Route path='/creategroup' element={<CreateGroup/>}/>
-            <Route path='/groupdetails' element={<GroupDetails/>}/>
-            <Route path='/editgroup' element={<EditGroup/>}/>
-            <Route path='/requests' element={<GroupRequests/>}/>
-            <Route path='/searchresults' element={<SearchResults/>}/>
             <Route path='/groupchats' element={<GroupChats/>}/>
-            <Route path='/individualgroupchat' element={<IndivGroupChat/>}/>
-            <Route path='/schedule' element={<Schedule/>}/>
+            <Route path='/groupdetails' element={<GroupDetails/>}/>
+            <Route element={<GroupLeaderRoutes/>}>
+              <Route path='/editgroup' element={<EditGroup/>}/>
+              <Route path='/requests' element={<GroupRequests/>}/>
+            </Route>
+            <Route element={<GroupMemberRoutes/>}>
+              <Route path='/schedule' element={<Schedule/>}/>
+            </Route>
+            <Route path='/searchresults' element={<SearchResults/>}/>
           </Route>
           <Route element={<EditProfileRoute />}>
             <Route path='/editprofile' element={<EditProfile/>}/>

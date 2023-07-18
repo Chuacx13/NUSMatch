@@ -15,14 +15,14 @@ function EditGroup() {
   const [user] = useAuthState(auth);
   const userEmail = user.email;
   const [group, setGroup] = useState({
+    _id: null,
     groupName: '',
     groupStatus: '',
     groupDescription: '',
     leader: userEmail,
     modules: [],
     members: [],
-    userRequests: [],
-    scheduleId: null
+    userRequests: []
   });
   const [createGroupStatus, setCreateGroupStatus] = useState('');
   const [isLoading, setIsLoading] = useState(true);

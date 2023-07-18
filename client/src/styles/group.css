@@ -9,6 +9,27 @@
     width: 100%;
 }
 
+.no-groups-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 180px;
+    text-align: center;
+    height: calc(100vh - 200px);
+}
+
+.no-groups-page h1 {
+    font-size: 40px;
+    margin: 0px 0px 20px 0px;
+}
+
+.no-groups-page p {
+    font-size: 30px;
+    margin: 0px;
+}
+
 .create-group-container {
     position: fixed;
     right: 135px;
@@ -54,7 +75,7 @@
 
 .individual-group-container {
     flex-basis: 100%;
-    margin: 30px;
+    margin: 30px 30px 10px 30px;
     padding: 50px;
     background-color: rgb(160, 157, 157, 0.8);
     width: 400px;
@@ -72,3 +93,4 @@
 .modules-description { 
     font-size: 20px;
 }
+

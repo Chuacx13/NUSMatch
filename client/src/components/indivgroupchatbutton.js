@@ -3,7 +3,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-export const IndivGroupChatButton = () => {
+export const IndivGroupChatButton = ({ groupChatId }) => {
 
   const navigate = useNavigate();
 
@@ -21,12 +21,13 @@ export const IndivGroupChatButton = () => {
       backgroundColor: 'transparent' }
   };
 
-  const goToIndivGroupChat = () => {
-    navigate('/individualgroupchat');
+  const goToGroupChat = () => {
+    localStorage.setItem('groupChatId', groupChatId);
+    navigate('/groupchats');
   };
 
   return (
-    <Button variant='text' sx={buttonStyles} startIcon={<ChatIcon style={chatButtonStyles}/>} onClick={goToIndivGroupChat}>
+    <Button variant='text' sx={buttonStyles} startIcon={<ChatIcon style={chatButtonStyles}/>} onClick={goToGroupChat}>
       Group Chat
     </Button>
   )

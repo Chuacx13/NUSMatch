@@ -70,14 +70,20 @@ function SearchResults() {
   }
 
   return (
-    <div className='search-results-page'>
+    <div className={results.length === 0 ? 'no-results-page' : 'search-results-page'}>
       <button className={isDefault() ? 'active-button' : 'inactive-button'} disabled={isDefault()} onClick={handleToggle}>
         Profile
       </button>
       <button className={isDefault() ? 'inactive-button' : 'active-button'} disabled={!isDefault()} onClick={handleToggle}>
         Group
       </button>
-      {(isDefault()) && results.map((result, index) => 
+      {results.length === 0 &&
+        <div className='no-result-details'> 
+          <h1> No results found </h1> 
+          <p> Try another search criteria </p>
+        </div>
+      } 
+      {(isDefault() && results.length > 0) && results.map((result, index) => 
         <div key={index} className='individual-result-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.name} </h1>
           <h2> {result.status} </h2>
@@ -85,7 +91,7 @@ function SearchResults() {
           <p className='modules-description'> Modules: {result?.currentModules?.join(', ')} </p>
         </div>
       )}
-      {(!isDefault()) && results.map((result, index) => 
+      {(!isDefault() && results.length > 0) && results.map((result, index) => 
         <div key={index} className='individual-result-container' onClick={(e) => handleClickOnResults(e, index)}>
           <h1> {result.groupName} </h1>
           <h2> {result.groupStatus} </h2>

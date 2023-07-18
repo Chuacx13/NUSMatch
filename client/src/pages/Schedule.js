@@ -6,7 +6,6 @@ import Loading from './Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,20 +14,9 @@ import '../styles/schedule.css';
 function Schedule() {
 
   const apiUrl = useApiUrl();
-  //const navigate = useNavigate();
   const [user] = useAuthState(auth);
   const userEmail = user.email;
   const [isLoading, setIsLoading] = useState(true);
-  const [group, setGroup] = useState({
-    groupName: '',
-    groupStatus: '',
-    groupDescription: '',
-    leader: userEmail,
-    modules: [],
-    members: [],
-    userRequests: [], 
-    scheduleId: null
-  });
 
   const localizer = momentLocalizer(moment);
   const dateTimeFormat = 'yyyy-MM-dd HH:mm:ss'; 
@@ -42,21 +30,21 @@ function Schedule() {
   const [description, setDescription] = useState('');
 
   const [events, setEvents] = useState([]);
+  const [scheduleId, setScheduleId] = useState(null);
 
   useEffect(() => {
 
     const fetchGroupEventsAndDetails = async() => {
       const groupId = localStorage.getItem('groupId');
       try {
-        const schedule = await axios.get(`${apiUrl}/group/schedule/${groupId}`);
-        const groupDetails = await axios.get(`${apiUrl}/group/other/${groupId}`);
-        setGroup(groupDetails.data);
-        setEvents(schedule.data.map(({ title, start, end, description }) => ({
+        const schedule = await axios.get(`${apiUrl}/schedule/${groupId}`);
+        setEvents(schedule.data.events.map(({ title, start, end, description }) => ({
           title: title,
           start: new Date(Date.parse(start)),
           end: new Date(Date.parse(end)),
           description: description,
         })));
+        setScheduleId(schedule.data._id);
       } catch (err) {
         console.error(err);
       } finally {
@@ -67,10 +55,6 @@ function Schedule() {
     fetchGroupEventsAndDetails();
   }, [events]);
 
-  const isMember = () => {
-    return group.members.includes(userEmail);
-  };
-
   const saveEvent = async (e) => {
     e.preventDefault();
     const eventDetails = {
@@ -79,7 +63,6 @@ function Schedule() {
       end: endDate,
       description: description
     }; 
-    const scheduleId = group.scheduleId;
     try {
       await axios.put(`${apiUrl}/schedule/addevent/${scheduleId}`, eventDetails);
     } catch (err) {
@@ -92,7 +75,6 @@ function Schedule() {
   };
 
   const deleteEvent = async () => {
-    const scheduleId = group.scheduleId;
     try {
       await axios.put(`${apiUrl}/schedule/deleteevent/${scheduleId}`, selectedEvent);
       setSelectedEvent('');
@@ -104,10 +86,6 @@ function Schedule() {
   if (isLoading) {
     return <Loading />
   }
-
-  /*if (!isMember()) {
-    navigate('/groupdetails');
-  }*/
 
   return (
     <div className='schedule-page'>

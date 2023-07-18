@@ -1,6 +1,4 @@
 import React from 'react';
-import axios from 'axios';
-import Loading from '../pages/Loading';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { FaSearch } from 'react-icons/fa';
@@ -26,32 +24,12 @@ function Navbar() {
   const isSearching = location.pathname === '/searchresults';
 
   const [query, setQuery] = useState(localStorage.getItem('queryId'));
-  const [profile, setProfile] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  
   useEffect(() => {
 
     const queryId = localStorage.getItem('queryId');
     setQuery(queryId);
 
-    const fetchUserProfile = async() => {
-      try {
-        const userEmail = user?.email;
-        if (userEmail) {
-          const response = await axios.get(`${apiUrl}/profile/${userEmail}`);
-          if (response.data) {
-            setProfile(true);
-          }
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchUserProfile();
-  }, []);
+  }, [localStorage.getItem('queryId')]);
 
   const handleInputChange = (event) => {
     setQuery(event.target.value);
@@ -65,10 +43,6 @@ function Navbar() {
   const goToLogin = () => {
     navigate('/login');
   };
-  
-  if (isLoading) {
-    return <Loading />
-  }
 
   return (
     <div className='navbar' style={isNoBackground ? null : { backgroundImage: `url(${Wallpaper})`}}>
@@ -77,7 +51,7 @@ function Navbar() {
       <div className='middle'>
         {isSearching && 
         <form className='search-form' onSubmit={queryResults}>
-          <button className='search-button' disabled={!profile}>
+          <button className='search-button'>
             <FaSearch className='search-icon'/>
           </button>
           <input

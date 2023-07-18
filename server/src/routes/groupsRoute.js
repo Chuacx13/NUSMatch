@@ -2,6 +2,7 @@ const express = require('express');
 const GroupModel = require('../models/Groups.js');
 const ProfileModel = require('../models/Profiles.js');
 const ScheduleModel = require('../models/Schedules.js');
+const MessageModel = require('../models/Messages.js');
 
 const groupRouter = express.Router();
 
@@ -94,19 +95,6 @@ groupRouter.get('/requests/:groupId', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-//GOOD
-//Get group's schedule
-groupRouter.get('/schedule/:groupId', async (req, res) => {
-    try {
-        const group = await GroupModel.findById(req.params.groupId);
-        const scheduleId = group.scheduleId;
-        const schedule = await ScheduleModel.findById(scheduleId);
-        res.json(schedule.events);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-})
 
 //GOOD
 //User create group
@@ -229,7 +217,8 @@ groupRouter.put('/leave/:groupId', async (req, res) => {
         if (updatedLeader === null || updatedLeader === undefined) {
 
             await GroupModel.findOneAndDelete({ _id: req.params.groupId });
-            await ScheduleModel.findOneAndDelete({ _id: groupData.scheduleId });
+            await ScheduleModel.findOneAndDelete({ groupId: req.params.groupId });
+            await MessageModel.deleteMany({ groupId: req.params.groupId });
             res.json({ message: 'Group deleted successfully' });
 
         } else {
@@ -320,23 +309,5 @@ groupRouter.put('/reject/:groupId', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 })
-
-//GOOD
-//Update scheduleId of the group
-groupRouter.put('/scheduleId/:groupId', async (req, res) => {
-    try {
-        const groupId = req.params.groupId;
-        const scheduleId = req.body.scheduleId;
-
-        const updatedGroup = await GroupModel.findByIdAndUpdate(groupId, 
-            { scheduleId: scheduleId }, 
-            { new: true });
-
-        res.json(updatedGroup);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-})
-
 
 module.exports = groupRouter;

@@ -7,6 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../config/firebase';
 import { useEffect, useState } from 'react';
 
+//Check that user is authenticated and has set up their profile before they can gain access to NUSMatch's full features
 function PrivateRoutes() {
 
     const [user, loading] = useAuthState(auth);
@@ -38,11 +39,11 @@ function PrivateRoutes() {
     };
 
     return (
-        user ? (
-            profile ? <Outlet /> : <Navigate to="/editprofile" />
-          ) : (
-            <Navigate to="/login" />
-          )
+      user ? (
+          profile ? <Outlet /> : <Navigate to="/editprofile" />
+        ) : (
+          <Navigate to="/login" />
+        )
     )
 };
 

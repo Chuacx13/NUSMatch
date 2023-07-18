@@ -22,6 +22,7 @@ function GroupDetails() {
     const userEmail = user.email;
 
     const [group, setGroup] = useState({
+        _id: null,
         groupName: '',
         groupStatus: '',
         groupDescription: '',
@@ -47,7 +48,6 @@ function GroupDetails() {
                 console.error(err);
             } finally {
                 setIsLoading(false);
-                console.log(group)
             } 
         }
 
@@ -148,7 +148,7 @@ function GroupDetails() {
                     <div className='group-functions'> 
                         {isLeader() && <RequestButton />}
                         {isLeader() && <EditGroupButton />}
-                        {isMember() && <IndivGroupChatButton />}
+                        {isMember() && <IndivGroupChatButton groupChatId={group._id}/>}
                         {isMember() && <ScheduleButton />}
                         {isMember() && <LeaveButton onClick={leaveGroup} />} 
                     </div>}

@@ -9,6 +9,35 @@
     width: 100%;
 }
 
+.no-results-page {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 200px;
+}
+
+.no-result-details {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 300px;
+    bottom: 300px;
+    right: 300px;
+    left: 300px;
+}
+
+.no-result-details h1 {
+    font-size: 40px;
+    margin: 0px 0px 20px 0px;
+}
+
+.no-result-details p {
+    font-size: 30px;
+    margin: 0px;
+}
+
 .inactive-button {
     position: relative;
     top: 30px;
@@ -38,7 +67,7 @@
 
 .individual-result-container {
     flex-basis: 100%;
-    margin: 30px;
+    margin: 30px 30px 10px 30px;
     padding: 50px;
     background-color: rgb(160, 157, 157, 0.8);
     width: 400px;
