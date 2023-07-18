@@ -91,13 +91,13 @@ Milestone 2 features
 
 An Authentication feature that allows only users with NUS email to login and register. We made use of Firebase SDK Authentication to create users and authenticate users. 
 
-___Register Form___
+<u>Register Form</u>
 
 Users are prompted to fill up their NUSNET ID and password for their profile. Additionally, users would need to confirm their password again.
 
 Upon successful verification, a verification link would be sent to their email.  
 
-___Login Form___
+<u>Login Form</u>
 
 Users are prompted to fill in their NUSNET ID and password for authentication. 
 
@@ -136,77 +136,118 @@ Users would be able to update their **Profile** with information such as:
 - Snooze (Not looking for new groups at the moment)
    Personal Interest (personalInterest)
   
-___View___ 
+<u>View</u> 
 
 Users can view any profile that is found in the ‘Profiles’ Database
 
-___Edit___
+<u>Edit</u>
 
 Users can edit their own profiles exclusively. Ensure that any changes made by users are transmitted to the database. Checks are conducted to validate that the correct profile entry is being updated.
 
 The ‘Profiles’ database was created using MongoDB for users to access the aforementioned functions.
 
 Purpose:
-To indicate personal information which is of interest to other users who are looking for project or study mates
-
-...
+ 1. To indicate personal information which is of interest to other users who are looking for project or study mates
 
 ## 5.1.3. Groups
 
 As the creator of Groups, the user is able to determine group settings such as:
 - Group Name (groupName)
 - Group Status (groupStatus)
-- Public
-- Private
-- ... (continue with other properties)
+ - Public
+ - Private
+- Group Description (groupDescription)
+- Common Modules (modules)
+- Members (members)
 
-...
+<u>Create</u>
+Allow users to create groups and be appointed as the owner of the group.
 
+<u>Edit</u>
+Allow only the owner of the group to edit the group settings and remove members. Checks conducted on ‘leader’ property to ensure the user is allowed to make changes to the group settings. 
+
+<u>View</u>
+Allow users to view details of all groups. 
+
+<u>Join, Request to Join and Leave</u>
+Users can then decide to join or request to join groups that they are interested in. Joining or requesting to join buttons would be determined based on ‘groupStatus’. Join for public status and Request to Join for private status. Users who successfully join/leave the group are immediately added/removed from the list of ‘members’ for the particular group. 
+
+Note: Request to Join feature has yet to be implemented. 
+
+‘Groups’ database created using MongoDB for users to access the aforementioned functions.
+
+Purpose:
+ 1. To allow users to create groups to invite others that share common academic goals/modules
+ 2. To allow users to join groups that fit their academic goals
+ 3. 
 ## 5.1.4. Search
 
-Users can use the Search function to find other users and groups that match the keywords used. There will be tabs to swap between a profile or a group that categorizes the results respectively.
+Users can use the **Search** function to find other users and groups that match to the keywords used. There will be tabs to swap between a profile or a group that categorizes the results respectively. 
 
-Profile Tab (default):
-...
+The search functionality is restricted for users who have not set up their profiles. To determine if a user has set up their profile, a query is performed on the 'Profiles' database.
+
+Profile Tab (default): 
+
 
 Group Tab:
-...
+
+Under the ‘Profile’ tab, the system would recommend a list of students that matches with the keywords searched. The words used in the search bar would be matched to:
+- email, 
+- name,
+- degree,
+- currentModules,
+- academicGoals
+- and personalInterest
+- property of each profile found in the ‘Profiles’ Database.
+
+Moreover, users can swap to the ‘Group’ tab where the system would display a list of groups that matches with the keywords searched. The words used in the search bar would be matched to:
+- groupName,
+- groupDescription
+- and modules
+- property of each group found in the ‘Groups’ Database.
 
 Purpose: 
-To allow users to find other users and groups that fit their criteria of interest
+ 1. To allow users to find other users and groups that fit their criteria of interest
 
 
 # 6. Timeline
 
-| MS  | Deadline/Date   | In-Charge | Description of Task                                                                |
-| --- | --------------- | --------- | ---------------------------------------------------------------------------------- |
-| 1   | 20th May        | Ben CX    | Familiarize with tech stack                                                        |
-|     | 29th May, 2pm   | Ben CX    | Milestone 1 (Complete user authentication with an integrated frontend and backend) |
-| 2   | 1st June - 15th | CX        | Creating a profile for each user and their personal information                    |
-|     | June            | Ben       | Create groups function. Users will be able to join these groups                    |
-|     | 15th June       |           | First Prototype (With essential functions)                                         |
-|     |                 |           | Authentication Interface                                                           |
-|     |                 |           | Profile                                                                            |
-|     |                 |           | Groups                                                                             |
-|     | 20th June       | Ben CX    | Create Search Function                                                             |
-|     | 23rd June       | Ben CX    | Testing and debugging                                                              |
-|     | 26th June, 2pm  | Ben CX    | Evaluation Milestone 2: First Working Prototype                                    |
-|     |                 |           | Authentication Interface                                                           |
-|     |                 |           | Profile                                                                            |
-|     |                 |           | Groups                                                                             |
-|     |                 |           | Search Function                                                                    |
-| 3   | 1st July        | Ben       | Create a scheduling interface                                                      |
-|     |                 | CX        | Create a chat function                                                             |
-|     | 10th July       | Ben CX    | Creation of an algorithm to recommend new users and groups to connect with         |
-|     | 16th July       |           | Second Prototype (With enhanced functions)                                         |
-|     |                 |           | Chat Function                                                                      |
-|     |                 |           | Algorithm                                                                          |
-|     |                 |           | Scheduling Interface                                                               |
-|     | 20th July       | Ben CX    | Testing of Second Prototype                                                        |
-|     | 24th July, 2pm  | Ben CX    | Evaluation Milestone 3: Final Website                                              |
-|     |                 |           | Chat Function                                                                      |
-|     |                 |           | Algorithm                                                                          |
-|     |                 |           | Scheduling Interface                                                               |
+| MS | Deadline/Date | In-Charge   | Description of Task                                               |
+|----|---------------|-------------|-------------------------------------------------------------------|
+| 1  | 20th May      | Ben, Cx     | Familiarise with tech stack                                       |
+|    | 29th May, 2pm | Ben, CX     | Milestone 1 (Complete user authentication with an integrated     |
+|    |               |             | frontend and backend)                                            |
+| 2  | 1st June      | CX          | Creating a profile for each user and their personal information   |
+|    |               | Ben         | Create groups function. Users will be able to join these groups   |
+|    | 15th June    | -           | First Prototype (With basic functions)                            |
+|    |               |             | Authentication Feature                                            |
+|    |               |             | Profile Feature                                                   |
+|    |               |             | Groups Feature                                                    |
+|    | 20th June    | Ben, Cx     | Create search function                                            |
+|    | 24th June    | Ben, Cx     | Familiarise with Jest and React Testing Library                   |
+|    | 25th June    | Ben, Cx     | Preparation of README, poster, project log and video              |
+|    | 26th June, 2pm | Ben, Cx   | Evaluation Milestone 2: First Working Prototype                  |
+|    |               |             | Authentication Feature                                            |
+|    |               |             | Profile Feature                                                   |
+|    |               |             | Groups Feature                                                    |
+|    |               |             | Search Feature                                                    |
+| 3  | 27th June    | Ben, Cx     | Unit and Integration Testing of Authentication, Profile, Groups, |
+|    |               |             | and Search feature (related buttons, forms, and API calls)        |
+|    | 30th June    | Ben         | Features that enhance user experience (mentioned under 5. Features) |
+|    |               | CX          | Create Group Chat feature                                         |
+|    | 3rd July     | Ben, Cx     | Create Algorithm feature                                          |
+|    | 8th July     | CX          | Create Scheduling feature                                         |
+|    | 11th July    | Ben, Cx     | Refinement of code and file organisation                          |
+|    | 13th July    | -           | Second Prototype (With enhanced functions)                        |
+|    |               |             | Group Chat Feature                                                |
+|    |               |             | Algorithm Feature                                                 |
+|    |               |             | Scheduling Feature                                                |
+|    | 13th July    | Ben, Cx     | Unit and Integration Testing of Group Chat, Algorithm, and       |
+|    |               |             | Scheduling Feature                                                |
+|    | 18th July    | CX          | System Testing, Acceptance Testing, Hosting Website               |
+|    |               | Ben         | Preparation of README, poster, project log, and video             |
+|    | 24th July, 2pm | Ben, Cx   | Evaluation Milestone 3: Final Website                             |
+
 
 # 7. Tech Stack
 
