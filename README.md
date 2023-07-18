@@ -179,7 +179,7 @@ Note: Request to Join feature has yet to be implemented.
 Purpose:
  1. To allow users to create groups to invite others that share common academic goals/modules
  2. To allow users to join groups that fit their academic goals
- 3. 
+    
 ## 5.1.4. Search
 
 Users can use the **Search** function to find other users and groups that match to the keywords used. There will be tabs to swap between a profile or a group that categorizes the results respectively. 
@@ -209,6 +209,35 @@ Moreover, users can swap to the ‘Group’ tab where the system would display a
 Purpose: 
  1. To allow users to find other users and groups that fit their criteria of interest
 
+## 5.2 Proposed Features (Milestone 3)
+### 5.2.1	 Group Chat 
+
+A **Group Chat** function would be implemented for multiple uses within the website. Members can communicate with one another via the group chat to plan for meetings and for study sessions. 
+
+Proposed: We will be making use of Firebase to store the chat data for each respective group. Checks would be conducted to verify that only members of the group will have access to their group chat data. 
+
+Purpose:
+ 1. To allow users within groups to communicate with one another
+
+## 5.2.2 Algorithm
+
+Based on the user's current groups as well as the user's search history, the website makes use of an Algorithm to recommend new users and groups to connect with.
+
+Proposed: Search history would be stored within MongoDB. Algorithm created using TensorFlow. 
+
+Purpose:
+ 1. To connect users with new people outside of their usual social circle
+ 2. To allow users to develop soft skills such as communication skills and teamwork which will benefit them in the long run as they enter the workforce
+
+## 5.2.3	 Scheduling Interface 
+
+A Scheduling Interface (Calendar) that allows groups to plan their meetups and set deadlines. Reminders can also be sent out to the user’s email to remind them of upcoming deadlines and meetups. 
+
+Proposed: Using Google Calendar API and create a ‘Schedules’ database using MongoDB. ‘Schedules’ database can be uniquely linked to each group found in the ‘Groups’ database through their ‘_id’ property.
+
+Purpose:
+ 1. To allow easy scheduling of meet-ups for groups 
+ 2. To ensure that users in the same group are kept on task
 
 # 6. Timeline
 
@@ -248,33 +277,142 @@ Purpose:
 |    |               | Ben         | Preparation of README, poster, project log, and video             |
 |    | 24th July, 2pm | Ben, Cx   | Evaluation Milestone 3: Final Website                             |
 
+# 7. Software Engineering Practices
 
-# 7. Tech Stack
+## 7.1 Don’t Repeat Yourself (DRY) principle
 
-- MySQL
-  - Create Database
-- Python/Pytorch/TensorFlow/Flask
-  - Handle/Process database information
-  - Create algorithm feature
+We abide by the DRY principle which ensures that our code is reusable, predictable and simple. In addition, this reduces the possibility of code errors. 
+
+## 7.2 Sprints
+
+2-week sprints are conducted to provide us with a clear agenda and deadline to work towards. Regular meetings also provided us with the opportunity to give one another feedback and also do code reviews. This ensures that we are able to collaborate well and continuously improve on our web application.
+
+## 7.3 Test
+
+We plan to conduct unit and integration testing using Jest and React Testing Library before milestone 3. For system testing, we would be using Selenium. 
+
+## 7.4 GitHub and Git Version Control 
+
+Making use of branching, merging, pulling and pushing requests, we were able to collaborate and work independently on each feature of our web application with minimal conflicts. 
+
+## 7.5 Model-View-Controller (MVC)
+
+For the Model layer, we used MongoDB to store and manipulate our data. 
+For the View layer, we used React to handle the data received from the Model and provide an interactive interface for our users.
+For the Controller layer, we used Node.js and Express.js to handle and process user inputs from the front-end, updating the Model and sending the appropriate response back to the client. 
+
+# 8. REST APIs 
+
+## 8.1 Users API
+
+/auth
+
+| REST API  | Parameter | Response                                                                                           |
+|-----------|-----------|----------------------------------------------------------------------------------------------------|
+| /emails   | {}        |   [{                                                                                               |
+|   [GET]   |           |   "uid": string,                                                                                   |
+|   Purpose: To         |           |   "email": string,                                                                                 |
+|      return list of      |           |   "emailVerified": boolean,                                                                        |
+| users, along          |           |   "disabled": boolean,                                                                             |
+|    with their       |           |   "metadata": {                                                                                    |
+|     details,       |           |     "lastSignInTime": string,                                                                      |
+|     registered       |           |     "creationTime": string,                                                                        |
+|   under Firebase        |           |     "lastRefreshTime": string                                                                      |
+|  authentication         |           |   },                                                                                               |
+|   API        |           |   "passwordHash": string,                                                                          |
+|           |           |   "passwordSalt": string,                                                                          |
+|           |           |   "tokensValidAfterTime": string,                                                                  |
+|           |           |   "providerData": [                                                                                |
+|           |           |     {                                                                                              |
+|           |           |       "uid": string,                                                                               |
+|           |           |       "email": string,                                                                             |
+|           |           |       "providerId": string                                                                         |
+|           |           |     }                                                                                              |
+|           |           |   ]                                                                                                |
+| /users    | {}        | [{                                                                                                 |
+|   [GET]   |           |   “email” : string                                                                                 |
+|           |           | }]                                                                                                 |
+| Purpose: To    |      |                                                                                                 |
+|  return list of  |           |                                                                                |
+|    emails of        |           |                                                                                                  |
+|  users,  |           |                                                                                |
+|    registered         |           |                                                                                                  |
+
+## 8.2 Profiles API
+
+/profile
+
+| REST API  | Parameter | Response                                                                                           |
+|-----------|-----------|----------------------------------------------------------------------------------------------------|
+| /emails   |  {       | {                                                                                                  |
+|   [GET]        |email: string           |   "_id": string,                                                                                   |
+|  Purpose: To get         |    }       |   "email": string,                                                                                 |
+| profile of user           |           |   "name": string,                                                                                  |
+| based on their          |           |   "year": number,                                                                                  |
+| email          |           |   "degree": array of string,                                                                       |
+|           |           |   "currentModules": array of string,                                                               |
+|           |           |   "academicGoals": string,                                                                         |
+|           |           |   "status": string,                                                                                |
+|           |           |   "personalInterest": array of string,                                                             |
+|           |           |   "__v": number                                                                                    |
+|           |           | }                                                                                                  |
+| /users    | [GET]     | {}                                                                                                 |
+|           |           | [{                                                                                                 |
+|           |           |   “email” : string                                                                                 |
+|           |           | }]                                                                                                 |
+
+
+
+
+
+## 9.Tech Stack
+
+- MERN Stack
+- MongoDB
+- Create ‘Profiles’ and ‘Groups Database
+- Express/Node
+- Server-side development 
 - HTML/CSS
-  - Web application frontend development
-- JavaScript/React
-  - Web application frontend development
+- Web application frontend development
+- JavaScript/React 
+- Web application frontend development
+- Python/Pytorch/TensorFlow/Flask 
+- Handle/Process database information
+- Create algorithm feature
 
-Potential programming language to be used
-
-- Java
-
-# 9. Proof-of-Concept
+## 10. Proof-of-Concept
 
 Refer to video demonstration:
+https://drive.google.com/file/d/14jqW6twIMvZUyyj75ySeBu5zVHdaESqB/view?usp=share_link
 
-# 10. Work Log
+
+## 11. Work Log
 
 Refer to attached spreadsheet: https://docs.google.com/spreadsheets/d/1VitgZQlVsYXzqSeAFozFl-D-umvCcVh39mg2wGk2twc/edit?usp=sharing
 
-# 11. References
 
-Teng A. (2022). Campus Life Set to Return as Covid-19 Measures Ease. Retrieved March 12, 2023, from https://nus.edu.sg/newshub/news/2022/2022-04/2022-04-18/EASE-st-18apr-pB3.pdf
+## 12.	References
+Teng A. (2022). Campus Life Set to Return as Covid-19 Measures Ease. Retrieved March 12, 2023, from https://nus.edu.sg/newshub/news/2022/2022-04/2022-04-18/EASE-st-18apr-pB3.pdf 
 
-NUS. (2022). NUS Bulletin AY2022/23. Retrieved March 12, 2023, from https://www.nus.edu.sg/nusbulletin/ay202223/#:~:text=The%20NUS%20community%20is%20large,colleges%2C%20faculties%2C%20and%20schools.
+NUS. (2022). NUS Bulletin AY2022/23. Retrieved March 12, 2023, from https://www.nus.edu.sg/nusbulletin/ay202223/#:~:text=The%20NUS%20community%20is%20large,colleges%2C%20faculties%2C%20and%20schools. 
+
+
+## 13.	Appendix
+
+Dependencies: 
+- React Libraries used:
+ - npm install @mui/material @emotion/react @emotion/styled
+
+- Javascript Libraries used: 
+ - npm install axios
+ - npm react-router-dom
+
+- Firebase: 
+ - npm install firebase
+ - npm install react-firebase-hooks
+
+
+Milestone 1: 
+https://docs.google.com/document/d/1pw3FiHsVss_XzCt4NDfvKxQOZLMyPKJg97V7RlJGwTY/edit?pli=1
+
+
