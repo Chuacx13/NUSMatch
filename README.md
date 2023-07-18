@@ -92,6 +92,7 @@ Milestone 2 features
 An Authentication feature that allows only users with NUS email to login and register. We made use of Firebase SDK Authentication to create users and authenticate users. 
 
 ___Register Form___
+
 Users are prompted to fill up their NUSNET ID and password for their profile. Additionally, users would need to confirm their password again.
 
 Upon successful verification, a verification link would be sent to their email.  
@@ -134,10 +135,13 @@ Users would be able to update their **Profile** with information such as:
 - Active (Looking for new groups)
 - Snooze (Not looking for new groups at the moment)
    Personal Interest (personalInterest)
+  
 ___View___ 
+
 Users can view any profile that is found in the ‘Profiles’ Database
 
 ___Edit___
+
 Users can edit their own profiles exclusively. Ensure that any changes made by users are transmitted to the database. Checks are conducted to validate that the correct profile entry is being updated.
 
 The ‘Profiles’ database was created using MongoDB for users to access the aforementioned functions.
