@@ -22,6 +22,7 @@ function Navbar() {
   const isHomePage = location.pathname === '/';
   const isNoBackground = location.pathname === '/' || location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/forgotpassword';
   const isSearching = location.pathname === '/searchresults';
+  const isGroupChatPage = location.pathname === '/groupchats';
 
   const [query, setQuery] = useState(localStorage.getItem('queryId'));
   useEffect(() => {
@@ -67,7 +68,7 @@ function Navbar() {
         {!isHomePage && (<Link to='/' className='link'> Home </Link>)}
         {user ? 
           <>
-            <GroupChatsIcon />
+            {!isGroupChatPage && <GroupChatsIcon />}
             <AccountIcon />
           </>
           : isHomePage ? 

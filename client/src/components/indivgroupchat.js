@@ -5,14 +5,13 @@ import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import '../styles/indivgroupchat.css';
 
-export const IndivGroupChat = ({ socket, groupId, isMember, groupName }) => {
+export const IndivGroupChat = ({ socket, groupId, isMember }) => {
 
   const [user, loading] = useAuthState(auth);
   const userEmail = user.email;
 
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageHistory, setMessageHistory] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const chatBodyRef = useRef(null);
 
   useEffect(() => {
@@ -25,7 +24,6 @@ export const IndivGroupChat = ({ socket, groupId, isMember, groupName }) => {
       socket.off('chat-history');
       socket.off('receive-message');
       setMessageHistory([]);
-      setIsLoading(true);
       joinChat();
     };
   
@@ -41,7 +39,6 @@ export const IndivGroupChat = ({ socket, groupId, isMember, groupName }) => {
       setMessageHistory((list) => [...list, data]);
     });
 
-    setIsLoading(false);
     return () => {
       socket.off('chat-history');
       socket.off('receive-message');
@@ -75,7 +72,7 @@ export const IndivGroupChat = ({ socket, groupId, isMember, groupName }) => {
     return null;
   };
   
-  if (loading || isLoading) {
+  if (loading) {
     return <Loading />
   }
 

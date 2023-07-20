@@ -30,13 +30,14 @@ function GroupChats() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchGroupDetails = async() => {
+
+    const fetchSelectedGroupDetails = async() => {
       try {
         const response = await axios.get(`${apiUrl}/group/other/${groupId}`);
         setSelectedGroup(response.data);
       } catch (err) {
         console.error(err);
-      } 
+      }
     }
 
     const fetchUserGroups = async() => {
@@ -45,14 +46,18 @@ function GroupChats() {
         setAllGroups(response.data);
       } catch (err) {
         console.error(err);
-      } 
+      } finally {
+          setIsLoading(false);
+      }
     }; 
 
-    fetchUserGroups();
     if (groupId) {
-      fetchGroupDetails();
+      fetchSelectedGroupDetails();
     }
-    setIsLoading(false);
+
+    if (allGroups.length === 0) {
+      fetchUserGroups();
+    }
   }, [groupId])
 
   const isMember = selectedGroup?.members.includes(userEmail);
@@ -85,7 +90,7 @@ function GroupChats() {
         </div>
         {selectedGroup._id && <div className='selected-chat'> 
           <h1 className='chat-header'> {selectedGroup.groupName} </h1>
-          <IndivGroupChat socket={socket} groupId={groupId} isMember={isMember} groupName={selectedGroup.groupName}/>
+          <IndivGroupChat socket={socket} groupId={groupId} isMember={isMember}/>
         </div>
         }
       </div>
