@@ -7,6 +7,7 @@
     background-position: center;
     height: 100vh;
     width: 100%;
+    overflow: hidden;
 }
 
 .info-unauthenticated {
