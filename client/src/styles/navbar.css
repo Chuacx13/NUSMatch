@@ -84,7 +84,7 @@
   border-radius: 4px;
   color: white;
   padding: 10px 20px;
-  font-size: 30px;
+  font-size: 24px;
   cursor: pointer;
   background-color: transparent;
   text-align: center;
@@ -98,4 +98,12 @@
 
 .login-button:active {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 768px) {
+    
+  .navbar .right-side {
+    padding-right: 50px;
+  }
+
 }

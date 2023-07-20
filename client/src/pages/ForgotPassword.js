@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { auth } from '../config/firebase';
-import { sendPasswordResetEmail, confirmPasswordReset } from 'firebase/auth';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import '../styles/forgotpassword.css';
 import '../styles/overlay.css';

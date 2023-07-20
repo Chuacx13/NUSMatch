@@ -14,11 +14,46 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 700px;
+    max-width: 600px;
     position: fixed;
     bottom: 80px;
-    left: 150px;
+    left: 120px;
     z-index: 2;
+}
+
+.info-unauthenticated h1 {
+    font-size: 80px;
+    font-weight: 700;
+    margin: 0px;
+}
+
+.info-unauthenticated p {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.register-button {
+    border-width: 2px;
+    border-color: white;
+    border-radius: 4px;
+    color: white;
+    padding: 10px 15px;
+    max-width: 130px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.register-button:hover {
+    background-color: white;
+    color: black;
+}
+
+.register-button:active {
+    opacity: 0.7;
 }
 
 .info-authenticated {
@@ -50,6 +85,9 @@
     background-color: white;
     padding: 10px 20px;
     border-radius: 30px;
+    max-width: 500px; 
+    width: 100%; 
+    flex-shrink: 1;
 }
 
 /*applies to home.js navbar.js*/
@@ -75,38 +113,30 @@
     background-color: transparent;
 }
 
-.home h1 {
-    font-size: 100px;
-    font-weight: 700;
-    margin: 0px;
-}
+@media screen and (max-width: 768px) {
+    
+    .info-unauthenticated {
+        width: 300px;
+        bottom: 50px;
+        left: 50px;
+    }
 
-.info-unauthenticated p {
-    font-size: 40px;
-    margin-bottom: 30px;
-    margin-top: 0px;
-}
+    .info-unauthenticated h1 {
+        font-size: 50px;
+    }
+    
+    .info-unauthenticated p {
+        font-size: 26px;
+    }
 
-.register-button {
-    border-width: 2px;
-    border-color: white;
-    border-radius: 4px;
-    color: white;
-    padding: 10px 20px;
-    width: 160px;
-    font-size: 30px;
-    cursor: pointer;
-    background-color: transparent;
-    text-align: center;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.register-button:hover {
-    background-color: white;
-    color: black;
-}
-
-.register-button:active {
-    opacity: 0.7;
+    .register-button {
+        width: 100%;
+        font-size: 20px;
+    }
+    
+    .search-bar {
+      width: 100%;
+      font-size: 16px; 
+    }
 }
 
