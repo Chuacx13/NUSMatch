@@ -2,7 +2,7 @@ import React from 'react';
 import AppsIcon from '@mui/icons-material/Apps';
 import { IconButton } from '@mui/material';
 
-export const AppIcon = ({ onClick }) => {
+export const GroupAppIcon = ({ onClick }) => {
 
   const appIconStyle = {
     color: 'black', 

@@ -4,7 +4,7 @@ import Loading from '../pages/Loading';
 import { useApiUrl } from '../hooks/useApiUrl';
 import { auth } from '../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { AppIcon } from '../components/appicon';
+import { GroupAppIcon } from '../components/groupappicon';
 import { RequestButton } from '../components/requestbutton';
 import { EditGroupButton } from '../components/editgroupbutton';
 import { IndivGroupChatButton } from '../components/indivgroupchatbutton';
@@ -141,7 +141,7 @@ function GroupDetails() {
                             group.groupStatus === 'Private' ? 'Request To Join' 
                             : 'Join'} 
                     </button>
-                    {isMember() && <AppIcon onClick={showGroupFunctions}/>}
+                    {isMember() && <GroupAppIcon onClick={showGroupFunctions}/>}
                 </div>
 
                 {groupFunctions && isMember() && 

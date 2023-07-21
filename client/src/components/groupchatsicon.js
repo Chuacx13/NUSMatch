@@ -25,7 +25,7 @@ export const GroupChatsIcon = () => {
   };
 
   return (
-    <IconButton className='link' arial-label='Chat' sx={iconButtonStyles} onClick={goToChat}>
+    <IconButton className='link' aria-label='Group Chats' sx={iconButtonStyles} onClick={goToChat}>
       <ChatIcon sx={individualButtonStyles}/>
       <div className='tooltip'> Group Chats </div>
     </IconButton>

@@ -52,6 +52,7 @@ function App() {
             <Route path='/creategroup' element={<CreateGroup/>}/>
             <Route path='/groupchats' element={<GroupChats/>}/>
             <Route path='/groupdetails' element={<GroupDetails/>}/>
+            <Route path='/searchresults' element={<SearchResults/>}/>
             <Route element={<GroupLeaderRoutes/>}>
               <Route path='/editgroup' element={<EditGroup/>}/>
               <Route path='/requests' element={<GroupRequests/>}/>
@@ -59,7 +60,6 @@ function App() {
             <Route element={<GroupMemberRoutes/>}>
               <Route path='/schedule' element={<Schedule/>}/>
             </Route>
-            <Route path='/searchresults' element={<SearchResults/>}/>
           </Route>
           <Route element={<EditProfileRoute />}>
             <Route path='/editprofile' element={<EditProfile/>}/>
