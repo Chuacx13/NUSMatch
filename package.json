@@ -8,13 +8,9 @@
     "start-server": "cd server && npm start",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
-    "start-client": "cd client && npm start",
-    "test": "jest"
+    "start-client": "cd client && npm start"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "jest": "^29.6.1"
-  }
+  "license": "ISC"
 }
