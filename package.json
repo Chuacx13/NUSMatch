@@ -8,8 +8,7 @@
     "start-server": "cd server && npm start",
     "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
-    "start-client": "cd client && npm start",
-    "test": "cd client && jest"
+    "start-client": "cd client && npm start"
   },
   "keywords": [],
   "author": "",

@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import Logout from './logout';
 import { IconButton, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import '../styles/accounticon.css';
 
 export const AccountIcon = () => {
@@ -16,23 +16,6 @@ export const AccountIcon = () => {
     const openMenu = () => {
         setIsOpen(!isOpen);
     };
-
-    let menuRef = useRef();
-
-    useEffect(() => {
-
-        let closeMenu = (e) => {
-            if(!menuRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', closeMenu);
-        
-        return () => {
-            document.removeEventListener('mousedown', closeMenu);
-        }
-    });
 
     const individualButtonStyles = {
         color: 'white', 
@@ -69,16 +52,20 @@ export const AccountIcon = () => {
 
     const goToProfile = () => {
         navigate('/profile');
+        setIsOpen(false);
     };
 
     const goToGroup = () => {
         navigate('/group');
+        setIsOpen(false);
     };
 
     return (
-        <IconButton className='link' aria-label='Account' sx={iconButtonStyles} onClick={openMenu} ref={menuRef}> 
-            <AccountCircleIcon sx={individualButtonStyles}/> 
-            <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>
+        <>
+            <IconButton className='link' aria-label='Account' sx={iconButtonStyles} onClick={openMenu}> 
+                <AccountCircleIcon sx={individualButtonStyles}/> 
+                <div className={isOpen ? 'tooltip-close' : 'tooltip'}> Account </div>
+            </IconButton>
             {isOpen && (
             <div className='dropdown-menu'>
                 <div id="dropdown-option"> 
@@ -91,9 +78,9 @@ export const AccountIcon = () => {
                         Group
                     </Button>
                 </div>
-                <Logout />
+                <Logout/>
             </div>)}
-        </IconButton>
+        </>
     )
 }
 

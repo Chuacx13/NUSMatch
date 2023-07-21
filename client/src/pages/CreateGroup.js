@@ -14,6 +14,7 @@ function CreateGroup() {
   const [user] = useAuthState(auth);
   const userEmail = user.email;
   const [group, setGroup] = useState({
+    _id: null,
     groupName: '',
     groupStatus: '',
     groupDescription: '',
