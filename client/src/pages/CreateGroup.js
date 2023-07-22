@@ -97,7 +97,7 @@ function CreateGroup() {
         } else {
           await axios.post(`${apiUrl}/schedule/${response.data._id}`);
           localStorage.setItem('groupId', response.data._id);
-          navigate('/groupDetails');
+          navigate('/groupdetails');
         } 
       } else if (!membersRegistered) {
         setCreateGroupStatus('Ensure that your friends have registered before adding them :)');
@@ -132,7 +132,7 @@ function CreateGroup() {
 
         <label className='edit-form-label' htmlFor='modules'>Indicate the modules that your group would be focussing on</label>
         {group.modules.map((modules, index) => (
-          <div key={index}>
+          <div key={index} data-testid='add-module-input'>
             <input
               type='text'
               name='modules'
@@ -152,7 +152,7 @@ function CreateGroup() {
         
         <label className='edit-form-label' htmlFor='members'>Add your friends by indicating their email addresses below!</label>
         {group.members.map((member, index) => (
-          <div key={index}>
+          <div key={index} data-testid='add-member-input'>
             <input
               type='text'
               name='members'

@@ -1,6 +1,5 @@
 import React from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
-import { useApiUrl } from '../hooks/useApiUrl';
 import { FaSearch } from 'react-icons/fa';
 import { AccountIcon } from './accounticon';
 import { GroupChatsIcon } from './groupchatsicon';
@@ -13,7 +12,6 @@ import '../styles/overlay.css';
 
 function Navbar() {
 
-  const apiUrl = useApiUrl();
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
 
@@ -61,6 +59,7 @@ function Navbar() {
             value={query}
             onChange={handleInputChange}
             placeholder='Search'
+            data-testid='search-bar'
           />
         </form>}
       </div>

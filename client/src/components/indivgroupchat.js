@@ -80,7 +80,7 @@ export const IndivGroupChat = ({ socket, groupId, isMember }) => {
     <div className='individual-group-chat'>
       <div className='chat-body'>
         {messageHistory.map((message, index) => (
-          <div key={index} className='message-data' id={user.email === message.creatorEmail ? 'creator' : 'other'}>
+          <div key={index} data-testid='message-container' className='message-data' id={user.email === message.creatorEmail ? 'creator' : 'other'}>
             <p className='message-creator'>{user.email !== message.creatorEmail && message.creatorName}</p>
             <p className='message-content'>{message.content}</p>
             <p className='message-time'>{message.time}</p>

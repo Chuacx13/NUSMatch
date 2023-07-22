@@ -4,18 +4,23 @@ import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import Logout from './logout';
 import { IconButton, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import '../styles/accounticon.css';
 
 export const AccountIcon = () => {
 
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const openMenu = () => {
         setIsOpen(!isOpen);
     };
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [location])
 
     const individualButtonStyles = {
         color: 'white', 

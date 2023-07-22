@@ -70,14 +70,13 @@ export const AuthInfo = () => {
 
   return (
     <div className='info-authenticated'>
-      {!profile ?
+      {!profile &&
       <>
         <p> Finish setting up your profile before you can gain access to our features! </p>
         <Button variant='text' sx={profileIconStyle} startIcon={<PersonIcon />} onClick={goToEditProfile}>
           Set Up Profile  
         </Button>
-      </>
-      : null}
+      </>}
       <p> Start Connecting! </p>
       <form className='search-form' onSubmit={queryResults}>
         <button className='search-button' disabled={!profile}>
