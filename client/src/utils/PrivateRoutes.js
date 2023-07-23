@@ -16,25 +16,23 @@ function PrivateRoutes() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const response = await axios.get(`${apiUrl}/profile/${user.email}`);
-                setProfile(response.data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-              if (!loading) {
-                setIsLoading(false);
-              }
-            }
-        };
-
-        if (user.email) {
-            fetchProfile(user.email);
+      const fetchProfile = async () => {
+        try {
+          const response = await axios.get(`${apiUrl}/profile/${user?.email}`);
+          setProfile(response.data);
+        } catch (error) {
+          console.error(error);
+        } finally {
+          if (!loading) {
+            setIsLoading(false);
+          }
         }
+      };
+
+      fetchProfile();
     }, [loading]);
 
-    if (isLoading) {
+    if (loading || isLoading) {
       return <Loading />
     };
 

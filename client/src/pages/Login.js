@@ -43,7 +43,7 @@ function Login() {
   };
 
   return (
-    <div className='login-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
+    <div className='login-page' data-testid='login-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
       <form className='login-form' onSubmit={login}>
         {loginStatus && (<p className='login-status'> {loginStatus} </p>)}

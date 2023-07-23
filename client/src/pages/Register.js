@@ -45,7 +45,7 @@ function Register() {
   };
 
   return (
-    <div className='register-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
+    <div className='register-page' data-testid='register-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
       <form className='register-form' onSubmit={register}>
         {registerStatus && 

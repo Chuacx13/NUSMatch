@@ -70,7 +70,7 @@ function SearchResults() {
   }
 
   return (
-    <div className={results.length === 0 ? 'no-results-page' : 'search-results-page'}>
+    <div className={results.length === 0 ? 'no-results-page' : 'search-results-page'} data-testid='searchresults-page'>
       <button className={isDefault() ? 'active-button' : 'inactive-button'} disabled={isDefault()} onClick={handleToggle}>
         Profile
       </button>

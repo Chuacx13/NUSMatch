@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { AuthInfo, UnauthInfo } from '../components/homeinfo';
 import { auth } from '../config/firebase';
@@ -26,7 +26,7 @@ function Home() {
   }, []);
 
   return (
-      <div className='home' style={{ backgroundImage: `url(${Wallpaper})`}}>
+      <div className='home' data-testid='home-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
         <div className='overlay' />
         {user ? 
           <AuthInfo />

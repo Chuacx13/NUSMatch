@@ -13,7 +13,7 @@ function GroupLeaderRoutes() {
 
     const [user, loading] = useAuthState(auth);
     const apiUrl = useApiUrl();
-    const [isMember, setIsMember] = useState(false);
+    const [isLeader, setIsLeader] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function GroupLeaderRoutes() {
         const fetchIsGroupMember = async () => {
             try {
                 const response = await axios.get(`${apiUrl}/group/other/${groupId}`);
-                setIsMember(response.data.leader === user.email);
+                setIsLeader(response.data.leader === user?.email);
             } catch (error) {
                 console.error(error);
             } finally {
@@ -32,9 +32,7 @@ function GroupLeaderRoutes() {
             }
         };
 
-        if (user.email) {
-            fetchIsGroupMember(user.email);
-        }
+        fetchIsGroupMember();
     }, [loading]);
 
     if (isLoading) {
@@ -42,7 +40,7 @@ function GroupLeaderRoutes() {
     };
 
     return (
-        isMember ? <Outlet /> : <Navigate to='/groupdetails' />
+        isLeader ? <Outlet /> : <Navigate to='/groupdetails' />
     )
 }
 

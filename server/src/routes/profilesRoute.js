@@ -29,6 +29,7 @@ profileRouter.get('/names/:emails', async (req, res) => {
     }
 });
 
+//GOOD
 //Check if users have set up their profile
 profileRouter.get('/users/:emails', async (req, res) => {
   try {

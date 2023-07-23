@@ -74,7 +74,7 @@ function GroupRequests() {
   }
 
   return (
-    <div className='group-requests-page'>
+    <div className='group-requests-page' data-testid='requests-page'>
         {requests.map((request, index) => 
         <div key={index} className='individual-request-container'>
           <div className='profile-container' onClick={(e) => handleClickOnProfile(e, index)}>

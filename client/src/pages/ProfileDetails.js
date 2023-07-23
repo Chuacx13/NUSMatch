@@ -37,7 +37,7 @@ function ProfileDetails() {
   }
   
   return (
-    <div className='profile-page'>
+    <div className='profile-page' data-testid='profiledetails-page'>
       {!profile ? navigate('/editprofile') :
       <>
         <img src={DefaultProfileImage} alt='defaultProfileImage' className='profile-image'/>

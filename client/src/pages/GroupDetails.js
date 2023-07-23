@@ -53,7 +53,7 @@ function GroupDetails() {
 
         const fetchNameList = async(emailList) => {
             try {
-                const emails = emailList.join(',');
+                const emails = emailList?.join(',');
                 const response = await axios.get(`${apiUrl}/profile/names/${emails}`);
                 setNameList(response.data);
             } catch (err) {
@@ -69,7 +69,7 @@ function GroupDetails() {
     };
 
     const isMember = () => {
-        return group.members.includes(userEmail);
+        return group.members?.includes(userEmail);
     };
 
     const isPrivateGroup = () => {
@@ -77,7 +77,7 @@ function GroupDetails() {
     };
 
     const isRequested = () => {
-        return group.userRequests.includes(userEmail);
+        return group.userRequests?.includes(userEmail);
     }
 
     const showGroupFunctions = () => {
@@ -130,7 +130,7 @@ function GroupDetails() {
     }
 
     return (
-        <div className='group-details-page'>
+        <div className='group-details-page' data-testid='groupdetails-page'>
             <div className='group-details'>
 
                 <div className='group-intro'>

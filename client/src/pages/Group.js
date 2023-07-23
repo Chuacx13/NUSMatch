@@ -49,7 +49,7 @@ function Group() {
 
   return (
     <>
-      <div className='create-group-container'>
+      <div className='create-group-container' data-testid='group-page'>
         <button className='create-group-button' onClick={goToCreateGroup}> + </button>
         <div className='create-group-tooltip'> Create Group </div>
       </div>
@@ -59,7 +59,7 @@ function Group() {
         <p>Create one by hitting the + icon or search for one at the home page!</p>
       </div> : 
       <div className='group-page'>
-        {groups.map((group, index) => 
+        {groups?.map((group, index) => 
           <div key={index} className='individual-group-container' onClick={(e) => handleClickOnGroup(e, index)}>
             <h1> {group.groupName} </h1>
             <h2> {group.groupStatus} </h2>

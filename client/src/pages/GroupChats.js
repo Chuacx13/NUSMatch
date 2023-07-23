@@ -75,13 +75,13 @@ function GroupChats() {
   return (
     <>
       {allGroups.length === 0 ? 
-      <div className='no-group-chats-page'> 
+      <div className='no-group-chats-page' data-testid='groupchats-page'> 
         <h1>Ready to Connect?</h1>
         <p>Join or create a group and start chatting with your friends!</p>
       </div> :
-      <div className='group-chats-page'>
+      <div className='group-chats-page' data-testid='groupchats-page'>
         <div className='all-chats'>
-          {allGroups.map((group, index) => 
+          {allGroups?.map((group, index) => 
           (
             <div key={index} className='individual-group-chat-container' onClick={(e) => changeGroupChat(e, index)}>  
               <h1> {group.groupName} </h1>

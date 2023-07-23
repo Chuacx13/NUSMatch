@@ -146,7 +146,7 @@ function EditGroup() {
   }
   
   return (
-    <div className='edit-form-page'>
+    <div className='edit-form-page' data-testid='editgroup-page'>
       <form className='edit-form' onSubmit={updateGroup}>
         <div className='edit-form-header-container'> 
           <h1 className='edit-form-header'> Edit &lt; {group.groupName} &gt; </h1>
@@ -168,7 +168,7 @@ function EditGroup() {
         <textarea className='edit-form-inputs edit-form-text-area' type='text' id='groupDescription' name='groupDescription' value={group.groupDescription} onChange={handleChange} required />
 
         <label className='edit-form-label' htmlFor='modules'>Indicate the modules that your group would be focussing on</label>
-        {group.modules.map((modules, index) => (
+        {group.modules?.map((modules, index) => (
           <div key={index}>
             <input
               type='text'
@@ -188,7 +188,7 @@ function EditGroup() {
         </button>
         
         <label className='edit-form-label' htmlFor='members'>Add your friends by indicating their email addresses below!</label>
-        {group.members.map((member, index) => (
+        {group.members?.map((member, index) => (
           <div key={index}>
             <input
               type='text'

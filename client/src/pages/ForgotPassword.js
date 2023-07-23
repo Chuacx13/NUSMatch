@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Wallpaper from '../assets/wallpaper.jpg';
 import { auth } from '../config/firebase';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/forgotpassword.css';
 import '../styles/overlay.css';
 
@@ -10,8 +10,6 @@ function ForgotPassword() {
 
   const [email, setEmail] = useState('');
   const [passwordResetStatus, setPasswordResetStatus] = useState('');
-
-  const navigate = useNavigate();
 
   const passwordReset = async (e) => { 
     e.preventDefault();
@@ -28,7 +26,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className='forgot-password-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
+    <div className='forgot-password-page' data-testid='forgotpassword-page' style={{ backgroundImage: `url(${Wallpaper})`}}>
       <div className='overlay' />
       <form className='forgot-password-form' onSubmit={passwordReset}>
         {passwordResetStatus && 

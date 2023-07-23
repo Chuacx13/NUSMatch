@@ -112,7 +112,7 @@ function CreateGroup() {
   };
 
   return (
-    <div className='edit-form-page'>
+    <div className='edit-form-page' data-testid='creategroup-page'>
       <form className='edit-form' onSubmit={saveGroup}>
         <h1 className='edit-form-header'> Create Your Very Own Group! </h1>
         {createGroupStatus && <p className='create-group-status'>{createGroupStatus}</p>}

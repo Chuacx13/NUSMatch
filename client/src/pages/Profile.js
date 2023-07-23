@@ -43,7 +43,7 @@ function Profile() {
   }
 
   return (
-    <div className='profile-page'>
+    <div className='profile-page' data-testid='profile-page'>
       {!profile ? navigate('/editprofile') :
       <>
         <button className='edit-profile-button' onClick={goToEditProfile}> Edit </button>

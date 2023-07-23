@@ -98,7 +98,7 @@ function EditProfile() {
   }
   
   return (
-    <div className='edit-form-page'>
+    <div className='edit-form-page' data-testid='editprofile-page'>
       <form className='edit-form' onSubmit={saveProfile}>
         <div className='edit-form-header-container'> 
           <h1 className='edit-form-header'> Edit Profile </h1>
@@ -129,7 +129,7 @@ function EditProfile() {
         </select>
         
         <label className='edit-form-label' htmlFor='degree'>Degree</label>
-        {profile.degree.map((degree, index) => (
+        {profile.degree?.map((degree, index) => (
           <div key={index}>
             <input
               type='text'
@@ -149,7 +149,7 @@ function EditProfile() {
         </button>
 
         <label className='edit-form-label' htmlFor='currentModules'>Current Modules</label>
-        {profile.currentModules.map((currentModule, index) => (
+        {profile.currentModules?.map((currentModule, index) => (
           <div key={index}>
             <input
               type='text'
@@ -169,7 +169,7 @@ function EditProfile() {
         </button>
 
         <label className='edit-form-label' htmlFor='personalInterest'>Personal Interest</label>
-        {profile.personalInterest.map((personalInterest, index) => (
+        {profile.personalInterest?.map((personalInterest, index) => (
           <div key={index}>
             <input
               key={index}

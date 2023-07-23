@@ -88,7 +88,7 @@ function Schedule() {
   }
 
   return (
-    <div className='schedule-page'>
+    <div className='schedule-page' data-testid='schedule-page'>
 
       <form className='schedule-form' onSubmit={saveEvent}> 
         <h1> Schedule an event here! </h1>
