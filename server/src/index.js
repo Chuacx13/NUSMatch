@@ -8,7 +8,6 @@ const userRouter = require('./routes/usersRoute.js');
 const profileRouter = require('./routes/profilesRoute.js');
 const groupRouter = require('./routes/groupsRoute.js');
 const scheduleRouter = require('./routes/schedulesRoute.js');
-const messageRouter = require('./routes/messagesRoute.js');
 
 const app = express();
 app.use(cors());
@@ -17,7 +16,6 @@ app.use('/auth', userRouter);
 app.use('/profile', profileRouter);
 app.use('/group', groupRouter);
 app.use('/schedule', scheduleRouter);
-app.use('/message', messageRouter);
 
 mongoose.connect( process.env.MONGODB_API_KEY );
 
