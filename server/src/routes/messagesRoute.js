@@ -23,16 +23,3 @@ messageRouter.get('/mostrecent', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-const fetchUserGroups = async() => {
-    try {
-      const groupList = await axios.get(`${apiUrl}/group/${userEmail}`);
-      const groups = encodeURIComponent(JSON.stringify(groupList.data));
-      const response = await axios.get(`${apiUrl}/message/mostrecent?groupList=${groups}`)
-      setAllGroups(response.data);
-    } catch (err) {
-      console.error(err);
-    } 
-}; 
-
-module.exports = messageRouter;
