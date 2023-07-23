@@ -33,7 +33,7 @@ function Login() {
       }
     } catch (err) {
       if (err.code === 'auth/wrong-password') {
-        setLoginStatus('NUSNET ID and Password does not match.');
+        setLoginStatus('NUSNET ID and Password do not match.');
       } else if (err.code === 'auth/user-not-found' || err.response.status === 404) {
         setLoginStatus('User does not exist. Sign up first!');
       } else {
