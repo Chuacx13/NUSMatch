@@ -46,7 +46,7 @@ userRouter.get('/users/:emails', async (req, res) => {
 });
 
 //Set test account emailVerified to true
-//For users to test 
+//Usability test purposes
 userRouter.post('/', async (req, res) => {
   try {
     await admin.auth().updateUser(req.body.uid, {
