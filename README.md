@@ -2,6 +2,12 @@
 
 NUS Orbital 2023
 
+# Most Updated README (as of 2 November 2023)
+https://docs.google.com/document/d/1nyk-zSIlUnVhecmBKrgl9FVUUZpAEjcBtdsSRQ4SUcw/edit
+
+# Website Link
+https://nusmatch.onrender.com (upcoming UI improvements)
+
 # 1. Proposed Level of Achievement
 
 Artemis
