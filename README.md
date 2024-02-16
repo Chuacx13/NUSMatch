@@ -10,13 +10,13 @@ https://nusmatch.onrender.com (Deployed using render's free plan. Hence, startin
 
 ## Clone and Run
 
-git clone git@github.com:Chuacx13/NUSMatch.git (run on terminal)
-fill in parameters defined in file named ".env.example" (found in both client and server folders) and rename to ".env"
-cd client
-npm i
-npm start
-cd server
-npm i
+git clone git@github.com:Chuacx13/NUSMatch.git (run on terminal)  
+fill in parameters defined in file named ".env.example" (found in both client and server folders) and rename to ".env"  
+cd client  
+npm i  
+npm start  
+cd server  
+npm i  
 npm start
 
 ## 1. Motivation
@@ -138,7 +138,7 @@ Can be found in detailed README under Section 10) REST APIs
 ### 9.2 DevDependencies:
 
 - Client-Side:
-  @babel/plugin-proposal-private-property-in-object
+  @babel/plugin-proposal-private-property-in-object  
   babel-jest
   history
   setimmediate
