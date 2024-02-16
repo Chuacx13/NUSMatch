@@ -70,21 +70,19 @@ Jest/React Testing Library
 cd client  
 npm test
 
-### 5.1 Type of Test Conducted
-
 1. Unit Testing
 
-- Conducted on buttons using react testing library and jest.
+Conducted on buttons using react testing library and jest.
 
 2. API Testing
 
-- Conducted using Thunder Client.
+Conducted using Thunder Client.
 
 3. End to End Testing
 
-- Conducted on access control routes to ensure that depending on the status of the user (eg. authenticated vs not authenticated), they can only access certain pages/services.
+Conducted on access control routes to ensure that depending on the status of the user (eg. authenticated vs not authenticated), they can only access certain pages/services.
 
-4. User Acceptance Testing (Test Account)
+4. User Acceptance Testing (Test Account)  
    NUSNET ID: test  
    Password: testpassword
 
