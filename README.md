@@ -8,10 +8,15 @@ https://docs.google.com/document/d/1nyk-zSIlUnVhecmBKrgl9FVUUZpAEjcBtdsSRQ4SUcw/
 
 https://nusmatch.onrender.com (Deployed using render's free plan. Hence, starting up of initial page and backend may take up to 2min)
 
-## How to run this project?
+## To Clone
 
-git clone git@github.com:Chuacx13/NUSMatch.git (run on terminal)  
-fill in parameters defined in file named ".env.example" (found in both client and server folders) and rename to ".env"  
+### Before running on Terminal
+
+Fill in parameters in file named ".env.example" (found in both client and server folders) and rename to ".env"
+
+### To run on Terminal
+
+git clone git@github.com:Chuacx13/NUSMatch.git
 cd client  
 npm i  
 npm start  
