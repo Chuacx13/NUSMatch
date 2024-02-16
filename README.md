@@ -12,11 +12,11 @@ https://nusmatch.onrender.com (Deployed using render's free plan. Hence, startin
 
 ### Before running on Terminal
 
-Fill in parameters in file named ".env.example" (found in both client and server folders) and rename to ".env"
+Fill in parameters in files named ".env.example" (found in both client and server folders) and rename to ".env"
 
 ### To run on Terminal
 
-git clone git@github.com:Chuacx13/NUSMatch.git
+git clone git@github.com:Chuacx13/NUSMatch.git  
 cd client  
 npm i  
 npm start  
